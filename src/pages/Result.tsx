@@ -125,10 +125,10 @@ function Fact({
         <span className="text-muted">{icon}</span>
         {label}
       </div>
-      <div className="num mt-1.5 truncate text-[17px] font-semibold text-ink sm:text-xl">
+      <div className="num mt-1.5 text-[18px] font-semibold text-ink sm:text-xl">
         {value}
         {sub && (
-          <span className="ml-1 text-[11px] font-normal text-muted sm:text-xs">{sub}</span>
+          <span className="ml-1 text-[11.5px] font-normal text-muted sm:text-xs">{sub}</span>
         )}
       </div>
     </div>

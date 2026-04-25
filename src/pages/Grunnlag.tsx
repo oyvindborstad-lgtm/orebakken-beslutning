@@ -338,17 +338,17 @@ function Row({
     : `text-right num ${header ? "" : "font-medium"} text-[12.5px] sm:text-[13.5px]`;
   return (
     <div
-      className={`grid grid-cols-[1.4fr_1fr_1fr] items-baseline gap-2 border-b border-line/50 px-3.5 py-2.5 last:border-b-0 sm:gap-3 sm:px-5 sm:py-3 ${cls} ${muted}`}
+      className={`grid grid-cols-[1.3fr_1fr_1fr] items-baseline gap-2 border-b border-line/50 px-3.5 py-3 last:border-b-0 sm:grid-cols-[1.4fr_1fr_1fr] sm:gap-3 sm:px-5 ${cls} ${muted}`}
     >
-      <div className={`text-[12.5px] sm:text-[13.5px] ${header ? "uppercase tracking-wide !text-[10.5px] sm:!text-[11px] font-semibold" : ""}`}>
+      <div className={`text-[13px] sm:text-[13.5px] ${header ? "uppercase tracking-wide !text-[10.5px] sm:!text-[11px] font-semibold" : ""}`}>
         {label}
       </div>
       <div
-        className={`text-right num text-[12.5px] sm:text-[13.5px] ${header ? "uppercase tracking-wide !text-[10.5px] sm:!text-[11px] font-semibold" : "font-medium"}`}
+        className={`text-right num text-[13px] sm:text-[13.5px] ${header ? "uppercase tracking-wide !text-[10.5px] sm:!text-[11px] font-semibold" : total ? "font-bold" : "font-semibold"}`}
       >
         {v1}
       </div>
-      <div className={v2Cls}>{v2}</div>
+      <div className={v2Cls.replace("text-[12.5px] sm:text-[13px]", "text-[12px] sm:text-[13px]").replace("text-[12.5px] sm:text-[13.5px]", "text-[13px] sm:text-[13.5px]")}>{v2}</div>
     </div>
   );
 }
@@ -367,7 +367,10 @@ function FkTabell({
   const cols = ["Type / areal", "I dag", headerNyFu, "Brutto økning", "Strøm-besp.", "Skattefradrag", "Netto økning", headerNetto];
   return (
     <div className="mt-3 overflow-x-auto rounded-2xl border border-line/70">
-      <table className="w-full min-w-[680px] text-[12.5px]">
+      <div className="px-4 pt-3 text-[11px] text-muted sm:hidden">
+        ← sveip for å se alle kolonner →
+      </div>
+      <table className="w-full min-w-[680px] text-[13px]">
         <thead>
           <tr className="bg-brand text-white">
             {cols.map((c, i) => (

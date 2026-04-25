@@ -86,26 +86,31 @@ export default function ComparisonTable({ andel }: { andel: Andel }) {
       <div className="space-y-3 sm:hidden">
         <div className="rounded-2xl border border-line/70 bg-paper p-4 shadow-card">
           <div className="label">Sammenligning</div>
-          <div className="mt-1 text-[13px] text-muted">
-            Dagens FK:{" "}
-            <span className="num font-semibold text-ink">
+          <div className="mt-2 flex items-baseline justify-between gap-2 rounded-xl bg-surface/60 px-3 py-2.5">
+            <span className="text-[12.5px] font-medium text-muted">
+              Dagens fellesk.
+            </span>
+            <span className="num text-base font-bold text-ink">
               {kr(andel.dagensFu)}
+              <span className="ml-1 text-[11px] font-normal text-muted">
+                / mnd
+              </span>
             </span>
           </div>
           <div className="mt-3 grid grid-cols-2 gap-2">
-            <div className="rounded-xl bg-brand-50/60 p-3 text-center">
+            <div className="rounded-xl bg-brand-50/70 p-3 text-center">
               <div className="label">Pakke 1</div>
-              <div className="num mt-1 display text-[18px] font-semibold leading-none text-brand">
+              <div className="num mt-1 display text-[20px] font-semibold leading-none text-brand">
                 {kr(andel.p1.nyFu)}
               </div>
-              <div className="mt-1 text-[10px] text-muted">/ mnd brutto</div>
+              <div className="mt-1 text-[10.5px] text-muted">/ mnd brutto</div>
             </div>
-            <div className="rounded-xl bg-warm-bg/70 p-3 text-center">
+            <div className="rounded-xl bg-warm-bg/80 p-3 text-center">
               <div className="label">Pakke 1+2</div>
-              <div className="num mt-1 display text-[18px] font-semibold leading-none text-warm-deep">
+              <div className="num mt-1 display text-[20px] font-semibold leading-none text-warm-deep">
                 {kr(andel.p2.nyFu)}
               </div>
-              <div className="mt-1 text-[10px] text-muted">/ mnd brutto</div>
+              <div className="mt-1 text-[10.5px] text-muted">/ mnd brutto</div>
             </div>
           </div>
         </div>
@@ -194,27 +199,27 @@ function MobileRow({ row }: { row: Row }) {
       return v > 0 ? "text-ink font-bold" : "text-save font-bold";
     return "text-ink";
   };
-  const bg = row.accent === "net" ? "bg-tax-bg/40" : "bg-paper";
+  const bg = row.accent === "net" ? "bg-tax-bg/50" : "bg-paper";
   return (
-    <div className={`rounded-2xl border border-line/70 p-3.5 ${bg}`}>
-      <div className="flex items-center justify-between gap-2 text-[13px] font-medium text-ink/80">
+    <div className={`rounded-2xl border border-line/70 p-4 ${bg}`}>
+      <div className="flex items-center justify-between gap-2 text-[13.5px] font-medium text-ink/85">
         <span>{row.label}</span>
         {row.info && <InfoTip>{row.info}</InfoTip>}
       </div>
-      <div className="num mt-2 grid grid-cols-2 gap-2">
-        <div className="rounded-lg border border-line/60 bg-paper px-3 py-2">
-          <div className="text-[10px] uppercase tracking-wide text-muted">
-            P1
+      <div className="num mt-2.5 grid grid-cols-2 gap-2">
+        <div className="rounded-lg border border-line/60 bg-paper px-3 py-2.5">
+          <div className="text-[10.5px] font-semibold uppercase tracking-wide text-muted">
+            Pakke 1
           </div>
-          <div className={`mt-0.5 text-[15px] font-semibold ${colorFor(row.p1)}`}>
+          <div className={`mt-1 text-[16px] font-semibold ${colorFor(row.p1)}`}>
             {fmt(row.p1)}
           </div>
         </div>
-        <div className="rounded-lg border border-line/60 bg-paper px-3 py-2">
-          <div className="text-[10px] uppercase tracking-wide text-muted">
-            P1+2
+        <div className="rounded-lg border border-line/60 bg-paper px-3 py-2.5">
+          <div className="text-[10.5px] font-semibold uppercase tracking-wide text-muted">
+            Pakke 1+2
           </div>
-          <div className={`mt-0.5 text-[15px] font-semibold ${colorFor(row.p2)}`}>
+          <div className={`mt-1 text-[16px] font-semibold ${colorFor(row.p2)}`}>
             {fmt(row.p2)}
           </div>
         </div>

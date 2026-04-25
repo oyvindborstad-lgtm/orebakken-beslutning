@@ -134,7 +134,10 @@ export default function EnergiChart() {
           Vis full månedstabell
         </summary>
         <div className="mt-3 overflow-x-auto rounded-2xl border border-line/70">
-          <table className="w-full min-w-[640px] text-[12.5px]">
+          <div className="px-4 pt-3 text-[11px] text-muted sm:hidden">
+            ← sveip for å se alle kolonner →
+          </div>
+          <table className="w-full min-w-[700px] text-[13px]">
             <thead>
               <tr className="bg-brand text-white">
                 {["Måned", "Solprod.", "Bergvarme", "Øvrig", "Totalt forbruk", "Sol brukt", "Overskudd", "Dekning"].map(
