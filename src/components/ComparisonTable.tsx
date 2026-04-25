@@ -19,12 +19,14 @@ export default function ComparisonTable({ andel }: { andel: Andel }) {
       sign: true,
     },
     {
-      label: "Strømbesparelse",
+      label: "Strømbesparelse (areal-fordelt)",
       info: (
         <>
-          Pakke 1 sparer ca. 500 000 kWh/år (bedre isolering). Pakke 1+2 sparer
-          3,725 mill kWh/år (også bergvarme + solceller). Fordeles per leilighet
-          etter areal.
+          Pakke 1 sparer 500 000 kWh/år (bedre fasadeisolasjon). Pakke 1+2
+          sparer 3 725 000 kWh/år netto (bergvarme + solceller, der bergvarmens
+          eget strømforbruk på 1 128 018 kWh/år allerede er trukket fra).
+          Solcelleproduksjonen på 978 180 kWh/år er inkludert i nettotallet.
+          Fordeles per leilighet etter areal.
         </>
       ),
       p1: andel.p1.stromBesp,
@@ -50,8 +52,9 @@ export default function ComparisonTable({ andel }: { andel: Andel }) {
       label: "Netto reell endring / mnd (år 1)",
       info: (
         <>
-          Det faktiske beløpet du merker på pengeboken: bruttoøkning − strømbesparelse −
-          skattefradrag. Dette er tallet som teller i privatøkonomien din.
+          Det faktiske beløpet du merker på pengeboken: bruttoøkning −
+          strømbesparelse − skattefradrag. Dette er tallet som teller i
+          privatøkonomien din.
         </>
       ),
       p1: andel.p1.nettoAr1,
@@ -63,8 +66,10 @@ export default function ComparisonTable({ andel }: { andel: Andel }) {
       label: "Netto snitt (over hele lånetid)",
       info: (
         <>
-          Som over, men med gjennomsnittlig rentekostnad fordelt over hele
-          nedbetalingstiden — et mer representativt langtidsbudsjett.
+          Renten — og dermed skattefradraget på 22 % — er høyest år 1 og synker
+          gradvis etter hvert som lånet nedbetales. «Snitt» er gjennomsnittet
+          over hele lånetiden (30 år for P1, 40 år for P1+2) og er det mest
+          representative langtidsbudsjettet for husstanden din.
         </>
       ),
       p1: andel.p1.nettoSnitt,
@@ -74,21 +79,30 @@ export default function ComparisonTable({ andel }: { andel: Andel }) {
   ];
 
   return (
-    <div className="card overflow-hidden p-0">
-      <div className="grid grid-cols-[1.6fr_1fr_1fr] items-stretch border-b border-black/5">
-        <div className="px-6 py-4 sm:px-8">
+    <div className="rounded-2xl border border-line/70 bg-paper shadow-card">
+      <div className="grid grid-cols-[1.6fr_1fr_1fr] items-stretch border-b border-line/70">
+        <div className="px-6 py-5 sm:px-8">
           <div className="label">Sammenligning</div>
-          <div className="mt-1 text-sm text-muted">
-            Dagens FK: <span className="num font-semibold text-ink">{kr(andel.dagensFu)}</span>
+          <div className="mt-1 text-[13px] text-muted">
+            Dagens FK:{" "}
+            <span className="num font-semibold text-ink">
+              {kr(andel.dagensFu)}
+            </span>
           </div>
         </div>
-        <div className="bg-brand-50/60 px-4 py-4 text-center">
+        <div className="border-l border-line/70 bg-brand-50/50 px-4 py-5 text-center">
           <div className="label">Pakke 1</div>
-          <div className="num mt-1 text-base font-semibold text-brand">{kr(andel.p1.nyFu)}</div>
+          <div className="num mt-1 display text-[22px] font-semibold leading-none text-brand">
+            {kr(andel.p1.nyFu)}
+          </div>
+          <div className="mt-1 text-[10.5px] text-muted">/ mnd brutto</div>
         </div>
-        <div className="bg-warm/10 px-4 py-4 text-center">
+        <div className="border-l border-line/70 bg-warm-bg/60 px-4 py-5 text-center">
           <div className="label">Pakke 1+2</div>
-          <div className="num mt-1 text-base font-semibold text-warm">{kr(andel.p2.nyFu)}</div>
+          <div className="num mt-1 display text-[22px] font-semibold leading-none text-warm-deep">
+            {kr(andel.p2.nyFu)}
+          </div>
+          <div className="mt-1 text-[10.5px] text-muted">/ mnd brutto</div>
         </div>
       </div>
 
@@ -108,17 +122,21 @@ export default function ComparisonTable({ andel }: { andel: Andel }) {
               key={r.label}
               role="row"
               className={`grid grid-cols-[1.6fr_1fr_1fr] items-center ${
-                last ? "" : "border-b border-black/5"
+                last ? "" : "border-b border-line/40"
               } ${r.accent === "net" ? "bg-tax-bg/40" : ""}`}
             >
-              <div className="px-6 py-3.5 text-left text-sm font-medium text-ink/80 sm:px-8">
+              <div className="px-6 py-3.5 text-left text-[14px] font-medium text-ink/80 sm:px-8">
                 {r.label}
                 {r.info && <InfoTip>{r.info}</InfoTip>}
               </div>
-              <div className={`px-4 py-3.5 text-right text-sm ${colorFor(r.p1)}`}>
+              <div
+                className={`px-4 py-3.5 text-right text-[14px] ${colorFor(r.p1)}`}
+              >
                 {fmt(r.p1)}
               </div>
-              <div className={`px-4 py-3.5 text-right text-sm ${colorFor(r.p2)}`}>
+              <div
+                className={`px-4 py-3.5 text-right text-[14px] ${colorFor(r.p2)}`}
+              >
                 {fmt(r.p2)}
               </div>
             </div>

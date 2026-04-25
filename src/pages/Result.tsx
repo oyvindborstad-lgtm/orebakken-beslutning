@@ -1,6 +1,7 @@
 import { Link, useRoute } from "wouter";
-import { ArrowLeft, Printer, Home, Ruler, Percent, Wallet } from "lucide-react";
+import { ArrowLeft, Printer, Ruler, Percent, Wallet, Hash } from "lucide-react";
 import { getAndelByNr } from "../lib/findAndel";
+import { forventetKWhForAreal } from "../lib/calc";
 import { kr, m2, pct } from "../lib/format";
 import ComparisonTable from "../components/ComparisonTable";
 import StromCalculator from "../components/StromCalculator";
@@ -15,7 +16,9 @@ export default function Result() {
     return (
       <div className="mx-auto max-w-xl">
         <div className="card">
-          <h1 className="text-xl font-semibold">Fant ikke andelsnummer {params?.nr}</h1>
+          <h1 className="display text-xl font-semibold">
+            Fant ikke andelsnummer {params?.nr}
+          </h1>
           <p className="mt-2 text-sm text-muted">
             Andelsnummer skal være mellom 1 og 430.
           </p>
@@ -26,6 +29,8 @@ export default function Result() {
       </div>
     );
   }
+
+  const baseline = forventetKWhForAreal(andel.areal);
 
   return (
     <div className="space-y-6">
@@ -45,46 +50,53 @@ export default function Result() {
         </button>
       </div>
 
-      <header className="card">
-        <div className="label">Din leilighet</div>
-        <h1 className="mt-1 text-2xl font-semibold text-ink sm:text-3xl">
-          {andel.adresse} · Leil. {andel.leilNr}
-        </h1>
-        <p className="mt-1 text-sm text-muted">
-          Andelsnr {andel.andelsnr}
-        </p>
+      <header className="relative overflow-hidden rounded-3xl border border-line/70 bg-paper p-7 shadow-card sm:p-10">
+        <div className="absolute inset-0 bg-hero-fade" aria-hidden />
+        <div className="relative">
+          <div className="label">Din leilighet</div>
+          <h1 className="display mt-2 text-[34px] font-semibold leading-[1.05] tracking-tightest text-ink sm:text-[44px]">
+            {andel.adresse}
+            <span className="text-muted/60"> · </span>
+            <span className="num text-brand">Leil. {andel.leilNr}</span>
+          </h1>
 
-        <dl className="mt-6 grid grid-cols-2 gap-y-5 gap-x-4 sm:grid-cols-4">
-          <Fact
-            icon={<Ruler size={16} />}
-            label="Areal"
-            value={m2(andel.areal)}
-          />
-          <Fact
-            icon={<Percent size={16} />}
-            label={
-              <>
-                Brøk
-                <InfoTip>
-                  Eierbrøken fra borettslagets stiftelse — bestemmer hvordan
-                  felleskostnader og lån fordeles. Sum av alle brøker = 1,000.
-                </InfoTip>
-              </>
-            }
-            value={pct(andel.brok, 4)}
-          />
-          <Fact
-            icon={<Wallet size={16} />}
-            label="Dagens fellesk."
-            value={kr(andel.dagensFu)}
-            sub="/ mnd"
-          />
-          <Fact
-            icon={<Home size={16} />}
-            label="Adresse"
-            value={andel.adresse}
-          />
-        </dl>
+          <dl className="mt-8 grid grid-cols-2 gap-y-6 gap-x-4 sm:grid-cols-4">
+            <Fact icon={<Hash size={14} />} label="Andelsnr" value={String(andel.andelsnr)} />
+            <Fact icon={<Ruler size={14} />} label="Areal" value={m2(andel.areal)} />
+            <Fact
+              icon={<Percent size={14} />}
+              label={
+                <>
+                  Brøk
+                  <InfoTip>
+                    Eierbrøken fra borettslagets stiftelse — bestemmer hvordan
+                    felleskostnader og lån fordeles. Sum av alle brøker = 1,000.
+                  </InfoTip>
+                </>
+              }
+              value={pct(andel.brok, 4)}
+            />
+            <Fact
+              icon={<Wallet size={14} />}
+              label="Dagens fellesk."
+              value={kr(andel.dagensFu)}
+              sub="/ mnd"
+            />
+          </dl>
+
+          <div className="mt-7 flex flex-wrap gap-2">
+            <span className="chip">
+              <span className="h-1.5 w-1.5 rounded-full bg-warm-deep" />
+              Kalkulert strømforbruk:{" "}
+              <span className="num font-semibold text-ink">
+                {baseline.toLocaleString("nb-NO")} kWh / år
+              </span>
+            </span>
+            <span className="chip">
+              Areal-fordelt av borettslagets totalforbruk
+            </span>
+          </div>
+        </div>
       </header>
 
       <ComparisonTable andel={andel} />
@@ -111,9 +123,11 @@ function Fact({
         <span className="text-muted">{icon}</span>
         {label}
       </div>
-      <div className="num mt-1.5 text-lg font-semibold text-ink">
+      <div className="num mt-2 text-xl font-semibold text-ink">
         {value}
-        {sub && <span className="ml-1 text-xs font-normal text-muted">{sub}</span>}
+        {sub && (
+          <span className="ml-1 text-xs font-normal text-muted">{sub}</span>
+        )}
       </div>
     </div>
   );

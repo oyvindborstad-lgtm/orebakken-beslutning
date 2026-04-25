@@ -7,34 +7,56 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     color-scheme: light;
+    text-rendering: optimizeLegibility;
   }
   body {
     @apply bg-surface text-ink font-sans;
-    font-feature-settings: "ss01", "cv11";
+    font-feature-settings: "ss01", "cv11", "kern";
   }
   :focus-visible {
     @apply outline-2 outline-offset-2 outline-brand;
+  }
+  ::selection {
+    background-color: rgba(15, 79, 74, 0.18);
+  }
+  .display {
+    font-family: theme("fontFamily.display");
+    font-feature-settings: "ss01", "ss02";
+    letter-spacing: -0.025em;
   }
 }
 
 @layer components {
   .card {
-    @apply rounded-2xl bg-white shadow-card border border-black/5 p-6 sm:p-8;
+    @apply rounded-2xl bg-paper shadow-card border border-line/70 p-6 sm:p-8;
+  }
+  .card-tight {
+    @apply rounded-2xl bg-paper shadow-soft border border-line/70 p-5 sm:p-6;
   }
   .label {
-    @apply text-[11px] font-semibold uppercase tracking-[0.12em] text-muted;
+    @apply text-[11px] font-semibold uppercase tracking-[0.14em] text-muted;
   }
   .num {
     font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum", "ss01";
   }
   .btn {
-    @apply inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 font-medium transition;
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-[15px] font-medium transition;
   }
   .btn-primary {
-    @apply btn bg-brand text-white hover:bg-brand-dark active:scale-[0.99];
+    @apply btn bg-brand text-white hover:bg-brand-dark active:scale-[0.99] shadow-soft;
   }
   .btn-ghost {
     @apply btn text-brand hover:bg-brand-50;
+  }
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-full border border-line bg-paper px-3 py-1 text-xs font-medium text-ink/80;
+  }
+  .pkg-stripe-1 {
+    background: linear-gradient(180deg, #0f4f4a 0%, #093733 100%);
+  }
+  .pkg-stripe-2 {
+    background: linear-gradient(180deg, #d88438 0%, #b76a24 100%);
   }
 }
 
@@ -45,8 +67,9 @@
   .no-print {
     display: none !important;
   }
-  .card {
-    @apply shadow-none border border-black/20 break-inside-avoid;
+  .card,
+  .card-tight {
+    @apply shadow-none border border-black/15 bg-white break-inside-avoid;
   }
   .print-compact {
     padding: 0 !important;
