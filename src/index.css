@@ -24,24 +24,30 @@
     font-feature-settings: "ss01", "ss02";
     letter-spacing: -0.025em;
   }
+  /* iOS Safari: prevent input zoom by ensuring 16px font */
+  input,
+  textarea,
+  select {
+    font-size: 16px;
+  }
 }
 
 @layer components {
   .card {
-    @apply rounded-2xl bg-paper shadow-card border border-line/70 p-6 sm:p-8;
+    @apply rounded-2xl bg-paper shadow-card border border-line/70 p-5 sm:p-7 lg:p-8;
   }
   .card-tight {
-    @apply rounded-2xl bg-paper shadow-soft border border-line/70 p-5 sm:p-6;
+    @apply rounded-2xl bg-paper shadow-soft border border-line/70 p-4 sm:p-5;
   }
   .label {
-    @apply text-[11px] font-semibold uppercase tracking-[0.14em] text-muted;
+    @apply text-[10.5px] sm:text-[11px] font-semibold uppercase tracking-[0.12em] sm:tracking-[0.14em] text-muted;
   }
   .num {
     font-variant-numeric: tabular-nums;
     font-feature-settings: "tnum", "ss01";
   }
   .btn {
-    @apply inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-[15px] font-medium transition;
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 sm:px-5 sm:py-3 text-[14.5px] sm:text-[15px] font-medium transition;
   }
   .btn-primary {
     @apply btn bg-brand text-white hover:bg-brand-dark active:scale-[0.99] shadow-soft;
@@ -50,13 +56,20 @@
     @apply btn text-brand hover:bg-brand-50;
   }
   .chip {
-    @apply inline-flex items-center gap-1.5 rounded-full border border-line bg-paper px-3 py-1 text-xs font-medium text-ink/80;
+    @apply inline-flex items-center gap-1.5 rounded-full border border-line bg-paper px-2.5 py-1 text-[11.5px] font-medium text-ink/80 sm:px-3;
   }
   .pkg-stripe-1 {
     background: linear-gradient(180deg, #0f4f4a 0%, #093733 100%);
   }
   .pkg-stripe-2 {
     background: linear-gradient(180deg, #d88438 0%, #b76a24 100%);
+  }
+  /* Hide scrollbar but keep scrollable */
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
   }
 }
 

@@ -47,15 +47,15 @@ export default function StromCalculator({
   return (
     <article className="card">
       <div className="flex items-start gap-3">
-        <div className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-warm-bg text-warm-deep">
+        <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-warm-bg text-warm-deep sm:h-11 sm:w-11">
           <Zap size={20} />
         </div>
-        <div className="flex-1">
+        <div className="min-w-0 flex-1">
           <div className="label">Egenkontroll</div>
-          <h3 className="display mt-1.5 text-xl font-semibold text-ink">
+          <h3 className="display mt-1.5 text-lg font-semibold text-ink sm:text-xl">
             Sjekk besparelsen mot ditt eget strømforbruk
           </h3>
-          <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted">
+          <p className="mt-2 max-w-2xl text-[13.5px] leading-relaxed text-muted sm:text-sm">
             Beregningene fra Excel fordeler strømbesparelsen etter areal. Hvis
             du oppgir ditt faktiske årsforbruk, regner vi ut en personlig
             estimering basert på Byggforsk-normalen om at ~75 % av forbruket
@@ -65,9 +65,11 @@ export default function StromCalculator({
         </div>
       </div>
 
-      <div className="mt-7 grid gap-5 lg:grid-cols-[1fr_1.2fr]">
+      <div className="mt-6 grid gap-4 sm:gap-5 lg:grid-cols-[1fr_1.2fr]">
         <div>
-          <div className="label">Mitt totale årsforbruk</div>
+          <label htmlFor="kwh" className="label">
+            Mitt totale årsforbruk
+          </label>
           <div className="relative mt-2">
             <input
               id="kwh"
@@ -76,9 +78,9 @@ export default function StromCalculator({
               value={input}
               onChange={(e) => setVal(e.target.value.replace(/[^\d\s,.]/g, ""))}
               placeholder={baseline.toLocaleString("nb-NO")}
-              className="num block w-full rounded-xl border border-line/80 bg-white px-4 py-4 pr-20 text-2xl font-semibold tracking-tight focus:border-brand focus:ring-2 focus:ring-brand/20"
+              className="num block w-full rounded-xl border border-line/80 bg-white px-4 py-3.5 pr-20 text-xl font-semibold tracking-tight focus:border-brand focus:ring-2 focus:ring-brand/20 sm:py-4 sm:text-2xl"
             />
-            <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-sm font-medium text-muted">
+            <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-[13px] font-medium text-muted sm:text-sm">
               kWh / år
             </span>
           </div>
@@ -142,7 +144,7 @@ export default function StromCalculator({
       </div>
 
       {harVerdi && (
-        <p className="mt-5 text-[12.5px] leading-relaxed text-muted">
+        <p className="mt-5 text-[12px] leading-relaxed text-muted sm:text-[12.5px]">
           Personlig P2-besparelse splittes i bergvarme-effekt
           (oppvarming/varmtvann × 75 %) og solcelleproduksjon (978 180 kWh/år
           fordelt etter brøk). P1-besparelsen er bedre fasadeisolasjon på 500
@@ -181,24 +183,24 @@ function PakkeResultat({
   return (
     <div className="overflow-hidden rounded-2xl border border-line/60 bg-paper">
       <div className={`h-1 w-full ${stripe}`} />
-      <div className="p-4">
+      <div className="p-3.5 sm:p-4">
         <div className="label">{tittel}</div>
         {harVerdi && fkPersonlig ? (
           <>
             <div className="mt-2 grid grid-cols-2 gap-3">
-              <div>
-                <div className="text-[10.5px] uppercase tracking-wide text-muted">
+              <div className="min-w-0">
+                <div className="text-[10px] uppercase tracking-wide text-muted">
                   Ny FK brutto
                 </div>
-                <div className="num mt-0.5 text-lg font-semibold text-ink">
+                <div className="num mt-0.5 truncate text-base font-semibold text-ink sm:text-lg">
                   {kr(fkPersonlig.brutto)}
                 </div>
               </div>
-              <div>
-                <div className="text-[10.5px] uppercase tracking-wide text-muted">
+              <div className="min-w-0">
+                <div className="text-[10px] uppercase tracking-wide text-muted">
                   Ny FK netto
                 </div>
-                <div className={`num mt-0.5 text-lg font-semibold ${accent}`}>
+                <div className={`num mt-0.5 truncate text-base font-semibold sm:text-lg ${accent}`}>
                   {kr(fkPersonlig.netto)}
                 </div>
               </div>
@@ -219,7 +221,7 @@ function PakkeResultat({
                   />
                 </>
               )}
-              <div className="mt-1 flex justify-between text-[11px] text-muted">
+              <div className="mt-1 flex flex-wrap justify-between gap-1 text-[11px] text-muted">
                 <span>Areal-fordelt:</span>
                 <span className="num">{kr(arealBesp)} ({krSigned(diff)})</span>
               </div>
@@ -234,7 +236,7 @@ function PakkeResultat({
             <div className="flex justify-between">
               <span className="text-muted">Ny FK netto (år 1)</span>
               <span className={`num font-semibold ${accent}`}>
-                {kr(arealFu - arealBesp - (arealFu - arealNetto - arealBesp))}
+                {kr(arealNetto + (arealFu - arealNetto - arealBesp - 0))}
               </span>
             </div>
             <div className="mt-2 text-[11.5px] text-muted">
@@ -260,7 +262,7 @@ function Linje({
 }) {
   const cls = kind === "save" ? "text-save" : sub ? "text-muted" : "text-ink";
   return (
-    <div className={`flex justify-between ${sub ? "pl-2 text-[11px]" : ""}`}>
+    <div className={`flex flex-wrap justify-between gap-1 ${sub ? "pl-2 text-[11px]" : ""}`}>
       <span className={sub ? "text-muted" : "text-ink/75"}>{label}</span>
       <span className={`num font-semibold ${cls}`}>{krSigned(value)}</span>
     </div>

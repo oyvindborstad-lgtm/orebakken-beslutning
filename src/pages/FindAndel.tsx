@@ -32,10 +32,10 @@ export default function FindAndel() {
 
       <div className="card mt-4">
         <div className="label">Steg 1 av 2</div>
-        <h1 className="mt-2 text-2xl font-semibold text-ink">
+        <h1 className="display mt-2 text-[24px] font-semibold leading-tight text-ink sm:text-2xl">
           Finn din leilighet
         </h1>
-        <p className="mt-2 text-sm leading-relaxed text-muted">
+        <p className="mt-2 text-[13.5px] leading-relaxed text-muted sm:text-sm">
           Skriv inn enten <span className="font-medium text-ink">andelsnr</span>{" "}
           (1–430) eller{" "}
           <span className="font-medium text-ink">leilighetsnr</span> (4-sifret
@@ -47,7 +47,7 @@ export default function FindAndel() {
           <label htmlFor="search" className="label">
             Andelsnr eller leilighetsnr
           </label>
-          <div className="flex gap-2">
+          <div className="flex flex-col gap-2 sm:flex-row">
             <div className="relative flex-1">
               <Search
                 size={16}
@@ -61,7 +61,7 @@ export default function FindAndel() {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="f.eks. 42 eller 1001"
-                className="num w-full rounded-xl border border-black/10 bg-white py-3 pl-10 pr-4 text-lg font-semibold focus:border-brand focus:ring-2 focus:ring-brand/20"
+                className="num w-full rounded-xl border border-line/80 bg-white py-3 pl-10 pr-4 text-lg font-semibold focus:border-brand focus:ring-2 focus:ring-brand/20"
               />
             </div>
             <button type="submit" className="btn-primary">
@@ -69,7 +69,7 @@ export default function FindAndel() {
             </button>
           </div>
           {error && (
-            <p className="rounded-lg bg-warm/10 px-3 py-2 text-sm text-warm">
+            <p className="rounded-lg bg-warm-bg/80 px-3 py-2 text-[13px] text-warm-deep sm:text-sm">
               {error}
             </p>
           )}

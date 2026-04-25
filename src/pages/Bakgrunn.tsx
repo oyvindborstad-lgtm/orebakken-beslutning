@@ -16,13 +16,13 @@ const { felles } = FORUTSETNINGER;
 
 export default function Bakgrunn() {
   return (
-    <div className="space-y-12">
+    <div className="space-y-10 sm:space-y-12">
       <section>
         <div className="label">For alle andelseiere</div>
-        <h1 className="display mt-3 max-w-3xl text-[40px] font-semibold leading-[1.05] tracking-tightest text-ink sm:text-[52px]">
+        <h1 className="display mt-3 max-w-3xl text-[30px] font-semibold leading-[1.05] tracking-tightest text-ink sm:text-[40px] lg:text-[52px]">
           Bakgrunn og spørsmål du kanskje stiller deg
         </h1>
-        <p className="mt-5 max-w-2xl text-[16.5px] leading-relaxed text-ink/75">
+        <p className="mt-4 max-w-2xl text-[15px] leading-relaxed text-ink/75 sm:mt-5 sm:text-[16.5px]">
           Her finner du forklaringen bak rehabiliteringen — uten tekniske
           faguttrykk. Hvorfor må vi gjøre noe nå, hva er bergvarme, og hva betyr
           skattefradraget? Bla gjennom seksjonene under.
@@ -31,7 +31,7 @@ export default function Bakgrunn() {
 
       {/* Hvorfor nå? */}
       <section className="card">
-        <h2 className="display text-2xl font-semibold text-ink">
+        <h2 className="display text-xl font-semibold text-ink sm:text-2xl">
           Hvorfor må vi gjøre noe nå?
         </h2>
         <p className="mt-3 leading-relaxed text-ink/80">
@@ -67,7 +67,7 @@ export default function Bakgrunn() {
 
       {/* De to alternativene */}
       <section className="card">
-        <h2 className="display text-2xl font-semibold text-ink">
+        <h2 className="display text-xl font-semibold text-ink sm:text-2xl">
           De to alternativene
         </h2>
 
@@ -112,6 +112,17 @@ export default function Bakgrunn() {
         <div className="mt-7">
           <div className="label">Tiltak som inngår</div>
           <div className="mt-3 overflow-hidden rounded-2xl border border-line/70">
+            <div className="grid grid-cols-[1fr_auto_auto] items-center gap-3 border-b border-line/50 bg-brand px-3.5 py-2.5 text-white sm:gap-4 sm:px-5">
+              <div className="text-[10.5px] font-semibold uppercase tracking-wide sm:text-[11px]">
+                Tiltak
+              </div>
+              <div className="min-w-[2.5rem] text-center text-[10.5px] font-semibold uppercase tracking-wide sm:text-[11px]">
+                Pakke 1
+              </div>
+              <div className="min-w-[2.5rem] text-center text-[10.5px] font-semibold uppercase tracking-wide sm:text-[11px]">
+                Pakke 1+2
+              </div>
+            </div>
             <Tiltak label="Nytt tak på alle blokker" p1 p2 />
             <Tiltak label="Nye fasader med bedre isolasjon" p1 p2 />
             <Tiltak
@@ -134,7 +145,7 @@ export default function Bakgrunn() {
 
       {/* Bergvarme + solceller */}
       <section className="card">
-        <h2 className="display text-2xl font-semibold text-ink">
+        <h2 className="display text-xl font-semibold text-ink sm:text-2xl">
           Bergvarme og solceller — teknisk forklaring
         </h2>
         <p className="mt-3 leading-relaxed text-ink/80">
@@ -186,19 +197,19 @@ export default function Bakgrunn() {
       </section>
 
       {/* Enova-banner */}
-      <section className="overflow-hidden rounded-3xl border border-save/30 bg-gradient-to-br from-save to-emerald-700 p-8 text-white shadow-card sm:p-10">
-        <div className="flex items-start gap-4">
-          <div className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-white/15 text-white">
+      <section className="overflow-hidden rounded-3xl border border-save/30 bg-gradient-to-br from-save to-emerald-700 p-6 text-white shadow-card sm:p-8 lg:p-10">
+        <div className="flex items-start gap-3 sm:gap-4">
+          <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-white/15 text-white sm:h-11 sm:w-11">
             <Sparkles size={20} />
           </div>
-          <div>
-            <div className="text-[11px] font-semibold uppercase tracking-[0.14em] text-white/70">
+          <div className="min-w-0">
+            <div className="text-[10.5px] font-semibold uppercase tracking-[0.14em] text-white/70">
               Enova-støtte · innvilget april 2026
             </div>
-            <h3 className="display mt-1 text-2xl font-semibold sm:text-3xl">
+            <h3 className="display mt-1 text-[22px] font-semibold leading-tight sm:text-2xl lg:text-3xl">
               {kr(felles.enovaBekreftet)} bekreftet
             </h3>
-            <p className="mt-3 max-w-3xl text-[15px] leading-relaxed text-white/85">
+            <p className="mt-3 max-w-3xl text-[14px] leading-relaxed text-white/85 sm:text-[15px]">
               Enova ga endelig tilsagn på {kr(felles.enovaBekreftet)} til
               bergvarme og solceller i 4 av 13 blokker. Beløpet er allerede
               trukket fra lånebeløpet for Pakke 1+2. Styret søker for de
@@ -211,7 +222,7 @@ export default function Bakgrunn() {
 
       {/* FAQ */}
       <section className="card">
-        <h2 className="display text-2xl font-semibold text-ink">
+        <h2 className="display text-xl font-semibold text-ink sm:text-2xl">
           Spørsmål og svar
         </h2>
         <div className="mt-5 divide-y divide-line/60">
@@ -288,7 +299,7 @@ export default function Bakgrunn() {
 
       {/* Framdrift */}
       <section className="card">
-        <h2 className="display text-2xl font-semibold text-ink">
+        <h2 className="display text-xl font-semibold text-ink sm:text-2xl">
           Framdriftsplan
         </h2>
         <div className="mt-5">
@@ -383,8 +394,10 @@ function Tiltak({
   p2Label?: string;
 }) {
   return (
-    <div className="grid grid-cols-[1fr_auto_auto] items-center gap-4 border-b border-line/50 px-5 py-3.5 last:border-b-0">
-      <div className="text-[14px] text-ink/85">{label}</div>
+    <div className="grid grid-cols-[1fr_auto_auto] items-center gap-3 border-b border-line/50 px-3.5 py-3 last:border-b-0 sm:gap-4 sm:px-5 sm:py-3.5">
+      <div className="min-w-0 text-[13px] text-ink/85 sm:text-[14px]">
+        {label}
+      </div>
       <Pill yes={p1 === true} no={p1 === false} />
       <Pill yes={p2 === true} no={p2 === false} label={p2Label} />
     </div>

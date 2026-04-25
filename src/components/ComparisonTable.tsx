@@ -2,15 +2,17 @@ import type { Andel } from "../lib/types";
 import { kr, krSigned } from "../lib/format";
 import InfoTip from "./InfoTip";
 
+type Row = {
+  label: string;
+  info?: React.ReactNode;
+  p1: number;
+  p2: number;
+  accent?: "save" | "tax" | "net";
+  sign?: boolean;
+};
+
 export default function ComparisonTable({ andel }: { andel: Andel }) {
-  const rows: {
-    label: string;
-    info?: React.ReactNode;
-    p1: number;
-    p2: number;
-    accent?: "save" | "tax" | "net";
-    sign?: boolean;
-  }[] = [
+  const rows: Row[] = [
     { label: "Ny felleskostnad / mnd", p1: andel.p1.nyFu, p2: andel.p2.nyFu },
     {
       label: "Bruttoøkning fra dagens",
@@ -79,9 +81,10 @@ export default function ComparisonTable({ andel }: { andel: Andel }) {
   ];
 
   return (
-    <div className="rounded-2xl border border-line/70 bg-paper shadow-card">
-      <div className="grid grid-cols-[1.6fr_1fr_1fr] items-stretch border-b border-line/70">
-        <div className="px-6 py-5 sm:px-8">
+    <>
+      {/* Mobile: stacked card view */}
+      <div className="space-y-3 sm:hidden">
+        <div className="rounded-2xl border border-line/70 bg-paper p-4 shadow-card">
           <div className="label">Sammenligning</div>
           <div className="mt-1 text-[13px] text-muted">
             Dagens FK:{" "}
@@ -89,59 +92,132 @@ export default function ComparisonTable({ andel }: { andel: Andel }) {
               {kr(andel.dagensFu)}
             </span>
           </div>
-        </div>
-        <div className="border-l border-line/70 bg-brand-50/50 px-4 py-5 text-center">
-          <div className="label">Pakke 1</div>
-          <div className="num mt-1 display text-[22px] font-semibold leading-none text-brand">
-            {kr(andel.p1.nyFu)}
+          <div className="mt-3 grid grid-cols-2 gap-2">
+            <div className="rounded-xl bg-brand-50/60 p-3 text-center">
+              <div className="label">Pakke 1</div>
+              <div className="num mt-1 display text-[18px] font-semibold leading-none text-brand">
+                {kr(andel.p1.nyFu)}
+              </div>
+              <div className="mt-1 text-[10px] text-muted">/ mnd brutto</div>
+            </div>
+            <div className="rounded-xl bg-warm-bg/70 p-3 text-center">
+              <div className="label">Pakke 1+2</div>
+              <div className="num mt-1 display text-[18px] font-semibold leading-none text-warm-deep">
+                {kr(andel.p2.nyFu)}
+              </div>
+              <div className="mt-1 text-[10px] text-muted">/ mnd brutto</div>
+            </div>
           </div>
-          <div className="mt-1 text-[10.5px] text-muted">/ mnd brutto</div>
         </div>
-        <div className="border-l border-line/70 bg-warm-bg/60 px-4 py-5 text-center">
-          <div className="label">Pakke 1+2</div>
-          <div className="num mt-1 display text-[22px] font-semibold leading-none text-warm-deep">
-            {kr(andel.p2.nyFu)}
-          </div>
-          <div className="mt-1 text-[10.5px] text-muted">/ mnd brutto</div>
-        </div>
+
+        {rows.map((r) => (
+          <MobileRow key={r.label} row={r} />
+        ))}
       </div>
 
-      <div className="num">
-        {rows.map((r, i) => {
-          const last = i === rows.length - 1;
-          const fmt = (v: number) => (r.sign ? krSigned(v) : kr(v));
-          const colorFor = (v: number) => {
-            if (r.accent === "save") return "text-save";
-            if (r.accent === "tax") return "text-tax-ink";
-            if (r.accent === "net")
-              return v > 0 ? "text-ink font-bold" : "text-save font-bold";
-            return "text-ink";
-          };
-          return (
-            <div
-              key={r.label}
-              role="row"
-              className={`grid grid-cols-[1.6fr_1fr_1fr] items-center ${
-                last ? "" : "border-b border-line/40"
-              } ${r.accent === "net" ? "bg-tax-bg/40" : ""}`}
-            >
-              <div className="px-6 py-3.5 text-left text-[14px] font-medium text-ink/80 sm:px-8">
-                {r.label}
-                {r.info && <InfoTip>{r.info}</InfoTip>}
-              </div>
-              <div
-                className={`px-4 py-3.5 text-right text-[14px] ${colorFor(r.p1)}`}
-              >
-                {fmt(r.p1)}
-              </div>
-              <div
-                className={`px-4 py-3.5 text-right text-[14px] ${colorFor(r.p2)}`}
-              >
-                {fmt(r.p2)}
-              </div>
+      {/* Desktop / tablet: 3-col grid */}
+      <div className="hidden rounded-2xl border border-line/70 bg-paper shadow-card sm:block">
+        <div className="grid grid-cols-[1.6fr_1fr_1fr] items-stretch border-b border-line/70">
+          <div className="px-6 py-5 sm:px-8">
+            <div className="label">Sammenligning</div>
+            <div className="mt-1 text-[13px] text-muted">
+              Dagens FK:{" "}
+              <span className="num font-semibold text-ink">
+                {kr(andel.dagensFu)}
+              </span>
             </div>
-          );
-        })}
+          </div>
+          <div className="border-l border-line/70 bg-brand-50/50 px-4 py-5 text-center">
+            <div className="label">Pakke 1</div>
+            <div className="num mt-1 display text-[22px] font-semibold leading-none text-brand">
+              {kr(andel.p1.nyFu)}
+            </div>
+            <div className="mt-1 text-[10.5px] text-muted">/ mnd brutto</div>
+          </div>
+          <div className="border-l border-line/70 bg-warm-bg/60 px-4 py-5 text-center">
+            <div className="label">Pakke 1+2</div>
+            <div className="num mt-1 display text-[22px] font-semibold leading-none text-warm-deep">
+              {kr(andel.p2.nyFu)}
+            </div>
+            <div className="mt-1 text-[10.5px] text-muted">/ mnd brutto</div>
+          </div>
+        </div>
+
+        <div className="num">
+          {rows.map((r, i) => {
+            const last = i === rows.length - 1;
+            const fmt = (v: number) => (r.sign ? krSigned(v) : kr(v));
+            const colorFor = (v: number) => {
+              if (r.accent === "save") return "text-save";
+              if (r.accent === "tax") return "text-tax-ink";
+              if (r.accent === "net")
+                return v > 0 ? "text-ink font-bold" : "text-save font-bold";
+              return "text-ink";
+            };
+            return (
+              <div
+                key={r.label}
+                role="row"
+                className={`grid grid-cols-[1.6fr_1fr_1fr] items-center ${
+                  last ? "" : "border-b border-line/40"
+                } ${r.accent === "net" ? "bg-tax-bg/40" : ""}`}
+              >
+                <div className="px-6 py-3.5 text-left text-[14px] font-medium text-ink/80 sm:px-8">
+                  {r.label}
+                  {r.info && <InfoTip>{r.info}</InfoTip>}
+                </div>
+                <div
+                  className={`px-4 py-3.5 text-right text-[14px] ${colorFor(r.p1)}`}
+                >
+                  {fmt(r.p1)}
+                </div>
+                <div
+                  className={`px-4 py-3.5 text-right text-[14px] ${colorFor(r.p2)}`}
+                >
+                  {fmt(r.p2)}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </>
+  );
+}
+
+function MobileRow({ row }: { row: Row }) {
+  const fmt = (v: number) => (row.sign ? krSigned(v) : kr(v));
+  const colorFor = (v: number) => {
+    if (row.accent === "save") return "text-save";
+    if (row.accent === "tax") return "text-tax-ink";
+    if (row.accent === "net")
+      return v > 0 ? "text-ink font-bold" : "text-save font-bold";
+    return "text-ink";
+  };
+  const bg = row.accent === "net" ? "bg-tax-bg/40" : "bg-paper";
+  return (
+    <div className={`rounded-2xl border border-line/70 p-3.5 ${bg}`}>
+      <div className="flex items-center justify-between gap-2 text-[13px] font-medium text-ink/80">
+        <span>{row.label}</span>
+        {row.info && <InfoTip>{row.info}</InfoTip>}
+      </div>
+      <div className="num mt-2 grid grid-cols-2 gap-2">
+        <div className="rounded-lg border border-line/60 bg-paper px-3 py-2">
+          <div className="text-[10px] uppercase tracking-wide text-muted">
+            P1
+          </div>
+          <div className={`mt-0.5 text-[15px] font-semibold ${colorFor(row.p1)}`}>
+            {fmt(row.p1)}
+          </div>
+        </div>
+        <div className="rounded-lg border border-line/60 bg-paper px-3 py-2">
+          <div className="text-[10px] uppercase tracking-wide text-muted">
+            P1+2
+          </div>
+          <div className={`mt-0.5 text-[15px] font-semibold ${colorFor(row.p2)}`}>
+            {fmt(row.p2)}
+          </div>
+        </div>
       </div>
     </div>
   );

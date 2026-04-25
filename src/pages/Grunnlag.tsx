@@ -8,13 +8,13 @@ const { pakke1, pakke2, felles } = FORUTSETNINGER;
 
 export default function Grunnlag() {
   return (
-    <div className="space-y-12">
+    <div className="space-y-10 sm:space-y-12">
       <section>
         <div className="label">Fullstendig grunnlag</div>
-        <h1 className="display mt-3 max-w-3xl text-[40px] font-semibold leading-[1.05] tracking-tightest text-ink sm:text-[52px]">
+        <h1 className="display mt-3 max-w-3xl text-[30px] font-semibold leading-[1.05] tracking-tightest text-ink sm:text-[40px] lg:text-[52px]">
           Investeringsoversikt og forutsetninger
         </h1>
-        <p className="mt-5 max-w-2xl text-[16.5px] leading-relaxed text-ink/75">
+        <p className="mt-4 max-w-2xl text-[15px] leading-relaxed text-ink/75 sm:mt-5 sm:text-[16.5px]">
           Styrets komplette grunnlag for vedtaket 1. juni 2026. Alle tall er
           oppdatert pr. april 2026.
         </p>
@@ -35,7 +35,7 @@ export default function Grunnlag() {
           </div>
           <div>
             <div className="label">Avsnitt 1</div>
-            <h2 className="display mt-1.5 text-2xl font-semibold text-ink">
+            <h2 className="display mt-1.5 text-xl font-semibold text-ink sm:text-2xl">
               Investeringsoversikt
             </h2>
           </div>
@@ -82,7 +82,7 @@ export default function Grunnlag() {
           </div>
           <div>
             <div className="label">Avsnitt 2</div>
-            <h2 className="display mt-1.5 text-2xl font-semibold text-ink">
+            <h2 className="display mt-1.5 text-xl font-semibold text-ink sm:text-2xl">
               Felleskostnad per leilighetstype
             </h2>
           </div>
@@ -132,7 +132,7 @@ export default function Grunnlag() {
           </div>
           <div>
             <div className="label">Avsnitt 3</div>
-            <h2 className="display mt-1.5 text-2xl font-semibold text-ink">
+            <h2 className="display mt-1.5 text-xl font-semibold text-ink sm:text-2xl">
               Enova-støtte — status og strategi
             </h2>
           </div>
@@ -166,7 +166,7 @@ export default function Grunnlag() {
         <div className="mb-3 flex items-baseline justify-between gap-3">
           <div>
             <div className="label">Avsnitt 4</div>
-            <h2 className="display mt-1.5 text-2xl font-semibold text-ink">
+            <h2 className="display mt-1.5 text-xl font-semibold text-ink sm:text-2xl">
               Energi — solceller og bergvarme
             </h2>
           </div>
@@ -193,7 +193,7 @@ export default function Grunnlag() {
           </div>
           <div>
             <div className="label">Avsnitt 5</div>
-            <h2 className="display mt-1.5 text-2xl font-semibold text-ink">
+            <h2 className="display mt-1.5 text-xl font-semibold text-ink sm:text-2xl">
               Sentrale forutsetninger
             </h2>
           </div>
@@ -247,7 +247,7 @@ export default function Grunnlag() {
           </div>
           <div>
             <div className="label">Avsnitt 6</div>
-            <h2 className="display mt-1.5 text-2xl font-semibold text-ink">
+            <h2 className="display mt-1.5 text-xl font-semibold text-ink sm:text-2xl">
               Kostnad ved å utsette beslutningen
             </h2>
           </div>
@@ -334,21 +334,21 @@ function Row({
     : "bg-paper text-ink";
   const muted = tone === "muted" ? "text-muted" : "";
   const v2Cls = rightLast
-    ? `${header ? "" : "text-[13px]"}`
-    : `text-right num ${header ? "" : "font-medium"}`;
+    ? `${header ? "" : "text-[12.5px] sm:text-[13px]"} sm:text-left text-right`
+    : `text-right num ${header ? "" : "font-medium"} text-[12.5px] sm:text-[13.5px]`;
   return (
     <div
-      className={`grid grid-cols-[1.4fr_1fr_1fr] items-baseline gap-3 border-b border-line/50 px-5 py-3 last:border-b-0 ${cls} ${muted}`}
+      className={`grid grid-cols-[1.4fr_1fr_1fr] items-baseline gap-2 border-b border-line/50 px-3.5 py-2.5 last:border-b-0 sm:gap-3 sm:px-5 sm:py-3 ${cls} ${muted}`}
     >
-      <div className={`text-[13.5px] ${header ? "uppercase tracking-wide text-[11px] font-semibold" : ""}`}>
+      <div className={`text-[12.5px] sm:text-[13.5px] ${header ? "uppercase tracking-wide !text-[10.5px] sm:!text-[11px] font-semibold" : ""}`}>
         {label}
       </div>
       <div
-        className={`text-right num text-[13.5px] ${header ? "uppercase tracking-wide text-[11px] font-semibold" : "font-medium"}`}
+        className={`text-right num text-[12.5px] sm:text-[13.5px] ${header ? "uppercase tracking-wide !text-[10.5px] sm:!text-[11px] font-semibold" : "font-medium"}`}
       >
         {v1}
       </div>
-      <div className={v2Cls + " text-[13.5px]"}>{v2}</div>
+      <div className={v2Cls}>{v2}</div>
     </div>
   );
 }
@@ -367,7 +367,7 @@ function FkTabell({
   const cols = ["Type / areal", "I dag", headerNyFu, "Brutto økning", "Strøm-besp.", "Skattefradrag", "Netto økning", headerNetto];
   return (
     <div className="mt-3 overflow-x-auto rounded-2xl border border-line/70">
-      <table className="w-full text-[12.5px]">
+      <table className="w-full min-w-[680px] text-[12.5px]">
         <thead>
           <tr className="bg-brand text-white">
             {cols.map((c, i) => (

@@ -37,15 +37,15 @@ export default function EnergiChart() {
   return (
     <article className="card">
       <div className="flex items-start gap-3">
-        <div className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-warm-bg text-warm-deep">
+        <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-warm-bg text-warm-deep sm:h-11 sm:w-11">
           <Sun size={20} />
         </div>
-        <div className="flex-1">
+        <div className="min-w-0 flex-1">
           <div className="label">Energiprofil — månedlig</div>
-          <h3 className="display mt-1.5 text-2xl font-semibold text-ink">
+          <h3 className="display mt-1.5 text-xl font-semibold text-ink sm:text-2xl">
             Solenergi vs. energiforbruk
           </h3>
-          <p className="mt-2 max-w-2xl text-[14px] leading-relaxed text-muted">
+          <p className="mt-2 max-w-2xl text-[13.5px] leading-relaxed text-muted sm:text-[14px]">
             Månedlig solproduksjon (Fusen) sammenlignet med strømforbruk til
             bergvarme (Dråpe AS) og øvrig fellesdrift. Solen produserer mest om
             sommeren, mens bergvarmen bruker mest om vinteren — sesongprofilene
@@ -54,7 +54,7 @@ export default function EnergiChart() {
         </div>
       </div>
 
-      <div className="mt-6 grid gap-3 sm:grid-cols-4">
+      <div className="mt-6 grid grid-cols-2 gap-3 lg:grid-cols-4">
         <KpiKort
           icon={<Sun size={16} />}
           tone="warm"
@@ -86,20 +86,20 @@ export default function EnergiChart() {
       </div>
 
       {/* Bar chart */}
-      <div className="mt-7 overflow-hidden rounded-2xl border border-line/70 bg-paper p-4 sm:p-6">
-        <div className="flex flex-wrap items-center justify-end gap-x-5 gap-y-1.5 text-[11.5px] text-ink/75">
+      <div className="mt-6 overflow-hidden rounded-2xl border border-line/70 bg-paper p-3 sm:p-5 lg:p-6">
+        <div className="flex flex-wrap items-center justify-start gap-x-4 gap-y-1.5 text-[10.5px] text-ink/75 sm:justify-end sm:gap-x-5 sm:text-[11.5px]">
           <Legend swatch="bg-rose-300" label="Bergvarme" />
           <Legend swatch="bg-line" label="Øvrig drift" />
           <Legend swatch="bg-warm" label="Solproduksjon" />
           <Legend swatch="border-2 border-dashed border-save/60" label="Overskudd (salg)" subtle />
         </div>
 
-        <div className="relative mt-4 h-72 sm:h-80">
+        <div className="relative mt-4 h-56 sm:h-72 lg:h-80">
           {/* Y-axis grid */}
-          <div className="absolute inset-0 flex flex-col-reverse justify-between pb-7 pt-1 pl-10 pr-2">
+          <div className="absolute inset-0 flex flex-col-reverse justify-between pb-6 pt-1 pl-8 pr-1 sm:pb-7 sm:pl-10 sm:pr-2">
             {yTicks.map((t) => (
               <div key={t} className="relative">
-                <div className="absolute -top-2 -left-10 w-9 text-right text-[10px] text-muted">
+                <div className="absolute -top-2 -left-8 w-7 text-right text-[9px] text-muted sm:-left-10 sm:w-9 sm:text-[10px]">
                   {t === 0 ? "0" : `${t / 1000}k`}
                 </div>
                 <div className="border-t border-dashed border-line/70" />
@@ -108,7 +108,7 @@ export default function EnergiChart() {
           </div>
 
           {/* Bars */}
-          <div className="absolute inset-0 flex items-end gap-1 pb-7 pl-10 pr-2 sm:gap-2">
+          <div className="absolute inset-0 flex items-end gap-0.5 pb-6 pl-8 pr-1 sm:gap-1.5 sm:pb-7 sm:pl-10 sm:pr-2 lg:gap-2">
             {enriched.map((m) => {
               const forbrukH = Y(m.forbruk);
               const bergvarmeH = Y(m.bergvarme);
@@ -116,7 +116,7 @@ export default function EnergiChart() {
               return (
                 <div
                   key={m.mnd}
-                  className="relative flex h-full flex-1 items-end gap-0.5"
+                  className="relative flex h-full flex-1 items-end gap-px sm:gap-0.5"
                 >
                   {/* Stacked: bergvarme + øvrig */}
                   <div
@@ -142,7 +142,7 @@ export default function EnergiChart() {
                       className="absolute left-0 right-0 flex flex-col items-center"
                       style={{ bottom: `${forbrukH}%` }}
                     >
-                      <div className="num text-[10px] font-semibold text-save">
+                      <div className="num text-[9px] font-semibold text-save sm:text-[10px]">
                         +{Math.round(m.overskudd / 1000)}k
                       </div>
                       <div
@@ -157,11 +157,11 @@ export default function EnergiChart() {
           </div>
 
           {/* X-axis labels */}
-          <div className="absolute bottom-0 left-10 right-2 flex gap-1 sm:gap-2">
+          <div className="absolute bottom-0 left-8 right-1 flex gap-0.5 sm:left-10 sm:right-2 sm:gap-1 lg:gap-2">
             {enriched.map((m) => (
               <div
                 key={m.mnd}
-                className="flex-1 text-center text-[10.5px] font-medium text-muted"
+                className="flex-1 text-center text-[9.5px] font-medium text-muted sm:text-[10.5px]"
               >
                 {m.mnd}
               </div>
@@ -169,12 +169,12 @@ export default function EnergiChart() {
           </div>
         </div>
 
-        <div className="mt-2 pl-10 text-[10px] text-muted">kWh / mnd</div>
+        <div className="mt-2 pl-8 text-[10px] text-muted sm:pl-10">kWh / mnd</div>
       </div>
 
       {/* Tabell */}
       <div className="mt-6 overflow-x-auto rounded-2xl border border-line/70">
-        <table className="w-full text-[12.5px]">
+        <table className="w-full min-w-[640px] text-[12.5px]">
           <thead>
             <tr className="bg-brand text-white">
               {[
