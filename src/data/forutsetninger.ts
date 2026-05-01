@@ -66,7 +66,19 @@ export const FORUTSETNINGER = {
     antallAndeler: 430,
     antallBlokker: 13,
     totaltAreal: 35_038.6,
+    /**
+     * Privat strømforbruk (sum av andelseiere, fra Elvia per 26.02.2026).
+     * Felles strøm er separat — se fellesForbrukKWh.
+     */
     totalForbrukKWh: 5_570_863,
+    /**
+     * Faktisk fellesareal-strøm 2025 fra Istad (12 mnd). Solenergi dekker
+     * den første delen (978 180 kWh); resterende ~158 000 kWh fordeles
+     * blant andelseierne etter areal.
+     */
+    fellesForbrukKWh: 1_136_201,
+    fellesKostnadKrAr: 1_363_441,
+    /** 75 % av privatforbruket regnes som oppvarming + tappevann. */
     oppvarmingTotalKWh: 4_178_147,
     stromPrisKrPerKWh: 1.2,
     skattesats: 0.22,

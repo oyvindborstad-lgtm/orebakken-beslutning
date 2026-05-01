@@ -2,7 +2,8 @@ import { useState, useMemo } from "react";
 import { Leaf, Info, RotateCcw } from "lucide-react";
 import { kr, krSigned } from "../lib/format";
 
-const DEFAULT_GRONN_RABATT_PP = 0.3; // standard grønn-rabatt: 0,3 prosentpoeng
+// Default-rabatt = 0,1 pp (matcher BRL-lånene i Excel: P1 5,0 % vs P2 4,9 %).
+const DEFAULT_GRONN_RABATT_PP = 0.1;
 const SKATTESATS = 0.22;
 
 function formatNumberInput(s: string): string {
@@ -156,7 +157,7 @@ export default function GrontLanKalkulator() {
                 </span>
               </div>
               <div className="mt-1 text-[11px] text-muted">
-                Standardrabatt: 0,3 pp lavere
+                Standardrabatt: 0,1 pp lavere (samme som BRL får)
               </div>
             </div>
           </div>

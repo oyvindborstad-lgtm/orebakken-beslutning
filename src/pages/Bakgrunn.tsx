@@ -251,24 +251,28 @@ export default function Bakgrunn() {
             låneperioden, slik at du ser hva du realistisk kan forvente over
             tid.
           </Faq>
-          <Faq q="Hva er solenergi via overskuddsdeling? Får jeg noe ut av det?">
+          <Faq q="Hvordan brukes solenergien? Får jeg noe ut av det?">
             Solcelleanlegget på takene produserer ca.{" "}
-            <strong>978 180 kWh per år</strong> — strøm som borettslaget eier.
-            Styret vil benytte ordningen <strong>overskuddsdeling</strong>{" "}
-            (Elhub) til å fordele produksjonen direkte ut på alle 430 andelers
-            private strømmålere etter eierbrøken. I praksis krediteres ca.{" "}
-            <strong>2 275 kWh/år (≈ 228 kr/mnd)</strong> i snitt rett på din
-            egen strømregning.
+            <strong>978 180 kWh per år</strong>. Faktisk fellesareal-forbruk
+            (Istad 2025) er ca. <strong>1 136 200 kWh/år</strong>. Strømmen
+            brukes først til å dekke felleskostnadene direkte — solenergien
+            dekker ca. 86 % av fellesarealets strømbruk. Reduksjonen i
+            felleskostnaden tilfaller alle andelseiere etter eierbrøk og
+            tilsvarer i snitt ca. <strong>228 kr/mnd</strong> per andel.
             <br />
             <br />
-            Solenergi-kreditten er <strong>inkludert</strong> i strømbesparelsen
-            og dermed i netto FK-økning som vises i tabellene. Effekten:
-            felleskostnaden gir en bruttoøkning på ca. 2 772 kr/mnd (snitt),
-            men oppvarmingsbesparelse fra bergvarme (845 kr/mnd) + solenergi
-            (228 kr/mnd) + skattefradrag (484 kr/mnd) reduserer netto til ca.
-            1 215 kr/mnd. Pakke 1+2 ender altså opp med å koste deg{" "}
-            <strong>ca. 334 kr/mnd mer</strong> enn Pakke 1 alene — en mye
-            mindre forskjell enn brutto-tallene antyder.
+            Solenergi-effekten er <strong>inkludert</strong> i netto FK-økning
+            som vises i tabellene. Brutto FK gir en økning på ca. 2 772 kr/mnd
+            (snitt), men oppvarmingsbesparelse fra bergvarme (845 kr/mnd) +
+            solenergi-effekt (228 kr/mnd) + skattefradrag (484 kr/mnd)
+            reduserer netto til ca. 1 215 kr/mnd. Pakke 1+2 ender altså opp
+            med å koste deg <strong>ca. 334 kr/mnd mer</strong> enn Pakke 1
+            alene — det er den marginale merkostnaden for tilleggspakken.
+            <br />
+            <br />
+            Resterende fellesareal-strøm etter solenergi (ca. 158 000 kWh/år)
+            fordeles på andelseiere etter areal (m²), siden strømforbruk
+            henger sammen med boligstørrelse.
           </Faq>
           <Faq q="Hva med de 9 blokkene som ikke har fått Enova-støtte ennå?">
             Styret har bestemt seg for å installere bergvarme og solceller i{" "}

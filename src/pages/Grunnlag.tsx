@@ -275,6 +275,81 @@ export default function Grunnlag() {
         </div>
       </section>
 
+      {/* 6b. Risiko og følsomhet */}
+      <section className="card">
+        <div className="flex items-start gap-3">
+          <div className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-warm-bg text-warm-deep">
+            <FileText size={20} />
+          </div>
+          <div>
+            <div className="label">Avsnitt 6b</div>
+            <h2 className="display mt-1.5 text-xl font-semibold text-ink sm:text-2xl">
+              Risiko og følsomhetsanalyse
+            </h2>
+          </div>
+        </div>
+        <p className="mt-3 leading-relaxed text-ink/80">
+          Modellen bygger på punkt-estimater. Tabellen under viser hvordan
+          andelseiers <strong>netto FK-økning</strong> for Pakke 1+2 kan endre
+          seg ved variasjoner i sentrale forutsetninger. Snitt-andelen ligger
+          i dag på +1 215 kr/mnd; tallene under viser endring fra dette nivået.
+        </p>
+
+        <div className="mt-5 overflow-hidden rounded-2xl border border-line/70">
+          <Row header label="Risikofaktor" v1="Endring" v2="Effekt på netto FK / mnd snitt" />
+          <Row label="Rente +1 prosentpoeng (P2 til 5,9 %)" v1="−" v2="ca. +290 kr/mnd høyere" />
+          <Row label="Rente −1 prosentpoeng (P2 til 3,9 %)" v1="−" v2="ca. −290 kr/mnd lavere" />
+          <Row label="Strømpris ned 50 % (0,60 kr/kWh)" v1="−" v2="ca. +536 kr/mnd høyere" />
+          <Row label="Strømpris opp 50 % (1,80 kr/kWh)" v1="−" v2="ca. −536 kr/mnd lavere" />
+          <Row label="Bergvarme COP 3 (vs. forutsatt 4–5)" v1="−" v2="ca. +180 kr/mnd høyere" />
+          <Row label="Byggekostnader +10 % (uforutsett)" v1="−" v2="ca. +175 kr/mnd høyere" />
+          <Row label="Enova-tilleggsstøtte 30 MNOK (lavt anslag)" v1="−" v2="ca. −359 kr/mnd lavere" />
+        </div>
+
+        <div className="mt-5 rounded-2xl border-l-4 border-warm bg-warm-bg/60 px-5 py-4 text-[14px] leading-relaxed text-ink/85">
+          <strong>Konklusjon på risiko:</strong> Netto-tallet er svært
+          følsomt for rente og strømpris. En kombinasjon av høyere rente og
+          lavere strømpris kan øke andelens netto FK-belastning med flere
+          hundre kr/mnd ut over presenterte tall. Motsatt scenarioer (lavere
+          rente, mer Enova-støtte) kan redusere belastningen betydelig.
+          Verktøyet erstatter ikke en formell økonomisk vurdering.
+        </div>
+      </section>
+
+      {/* 6c. Marginal kostnad P2 vs P1 */}
+      <section className="card">
+        <div className="flex items-start gap-3">
+          <div className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-brand-50 text-brand">
+            <FileText size={20} />
+          </div>
+          <div>
+            <div className="label">Avsnitt 6c</div>
+            <h2 className="display mt-1.5 text-xl font-semibold text-ink sm:text-2xl">
+              Marginal merkostnad: P2 over P1
+            </h2>
+          </div>
+        </div>
+        <p className="mt-3 leading-relaxed text-ink/80">
+          Pakke 1+2 forutsetter at Pakke 1 vedtas. Den{" "}
+          <strong>marginale</strong> kostnaden av å velge tilleggspakken
+          (bergvarme + solceller + ekstra prosjektering og Enova) over Pakke
+          1 alene — er forskjellen i netto FK-økning. Dette er det reelle
+          beløpet andelseiere bør vurdere når de avgjør om P2 lønner seg.
+        </p>
+        <div className="mt-5 overflow-hidden rounded-2xl border border-line/70">
+          <Row header label="Differanse P1+2 vs P1" v1="Snitt per andel" v2="Per år" />
+          <Row label="Brutto FK-økning" v1="+1 520 kr/mnd" v2="18 240 kr" />
+          <Row label="Ekstra strømbesparelse + solenergi" v1="−957 kr/mnd" v2="−11 484 kr" />
+          <Row label="Ekstra skattefradrag" v1="−229 kr/mnd" v2="−2 748 kr" />
+          <Row label="Marginal netto merkostnad" v1="+334 kr/mnd" v2="4 008 kr" total />
+        </div>
+        <div className="mt-4 text-[13.5px] leading-relaxed text-muted sm:text-[14px]">
+          For andelseiere med stort eget boliglån kan den marginale gevinsten
+          fra grønt lån (energiklasse F→B) endre regnestykket. Bruk
+          grønt lån-kalkulatoren under «Min leilighet» for personlig estimat.
+        </div>
+      </section>
+
       {/* 7. Styrets vurdering */}
       <section className="overflow-hidden rounded-3xl border border-warm/30 bg-gradient-to-br from-warm-bg to-amber-100/40 p-7 sm:p-10">
         <div className="label">Avsnitt 7</div>

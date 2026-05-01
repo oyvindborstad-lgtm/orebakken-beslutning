@@ -44,6 +44,16 @@ export default function Welcome() {
             </a>
           </div>
 
+          <div className="mt-6 max-w-3xl rounded-2xl border-l-4 border-warm bg-warm-bg/60 px-5 py-4 text-[13.5px] leading-relaxed text-ink/85 sm:text-[14px]">
+            <strong>Beslutningsstøtte — ikke beslutningsgrunnlag.</strong>{" "}
+            Dette verktøyet bygger på punkt-estimater for rente, strømpris,
+            byggekostnader og energieffekt. Det erstatter <em>ikke</em> en
+            formell økonomisk vurdering. Styret anbefaler at hver andelseier
+            konsulterer egen bank eller rådgiver før vedtak på
+            generalforsamlingen 1. juni 2026 — særlig fordi Pakke 1+2
+            innebærer betydelig økt felleslån over 40 år.
+          </div>
+
           <div className="mt-9 grid max-w-4xl gap-3 sm:gap-4 md:grid-cols-2">
             <PakkeIntro
               tone="brand"
@@ -297,7 +307,7 @@ function SnittKort({
         <div className="mt-5 space-y-2 rounded-xl bg-surface/60 p-3.5 text-[13px] sm:mt-6 sm:p-4 sm:text-sm">
           <Reduksjon label="Strømbesparelse oppvarming" value={-stromBesp} kind="save" />
           {solenergi !== undefined && solenergi > 0 && (
-            <Reduksjon label="Solenergi (overskuddsdeling)" value={-solenergi} kind="sun" />
+            <Reduksjon label="Solenergi (dekker felleskost.)" value={-solenergi} kind="sun" />
           )}
           <Reduksjon label="Skattefradrag (22 %)" value={-skfr} kind="tax" />
         </div>
