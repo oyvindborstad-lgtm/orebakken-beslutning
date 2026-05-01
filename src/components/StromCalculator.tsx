@@ -100,9 +100,10 @@ export default function StromCalculator({
               <span className="num">{baseline.toLocaleString("nb-NO")} kWh/år</span>
             </div>
             <div className="mt-1 text-muted">
-              Sum fra Elvia for din adresse, fordelt på antall andeler i blokken,
-              pluss flat tillegg for fellesareal slik at borettslagets totalforbruk
-              treffer {FORUTSETNINGER.felles.totalForbrukKWh.toLocaleString("nb-NO")} kWh/år.
+              Sum fra Elvia for din adresse (26.02.2026), fordelt på antall
+              andeler i blokken, pluss et lite tillegg slik at borettslagets
+              totalforbruk treffer {FORUTSETNINGER.felles.totalForbrukKWh.toLocaleString("nb-NO")} kWh/år
+              (faktisk Elvia-total).
             </div>
             <div className="mt-2 text-muted">
               Du finner ditt faktiske årsforbruk på{" "}

@@ -112,13 +112,13 @@ export default function Grunnlag() {
         </h3>
         <FkTabell
           rows={[
-            ["B – 54,7 m² (20 and.)", "3 935", "6 077", "+2 142", "−781", "−570", "+791", "4 726"],
-            ["G – 74,6 m² (32 and.)", "4 876", "7 531", "+2 655", "−1 043", "−706", "+906", "5 782"],
-            ["J – 81,3 m² (105 and.)", "5 134", "7 929", "+2 795", "−1 129", "−743", "+923", "6 057"],
-            ["L – 85,5 m² (63 and.)", "5 323", "8 221", "+2 898", "−1 184", "−771", "+944", "6 267"],
-            ["M – 89,7 m² (126 and.)", "5 405", "8 348", "+2 943", "−1 239", "−783", "+921", "6 326"],
+            ["B – 54,7 m² (20 and.)", "3 935", "6 077", "+2 142", "−743", "−570", "+829", "4 764"],
+            ["G – 74,6 m² (32 and.)", "4 876", "7 531", "+2 655", "−992", "−706", "+957", "5 833"],
+            ["J – 81,3 m² (105 and.)", "5 134", "7 929", "+2 795", "−1 073", "−743", "+979", "6 113"],
+            ["L – 85,5 m² (63 and.)", "5 323", "8 221", "+2 898", "−1 125", "−771", "+1 002", "6 325"],
+            ["M – 89,7 m² (126 and.)", "5 405", "8 348", "+2 943", "−1 177", "−783", "+983", "6 388"],
           ]}
-          snitt={["Vektet snitt — 430 andeler", "5 092", "7 864", "+2 772", "−1 129", "−484", "+1 159", "6 251"]}
+          snitt={["Vektet snitt — 430 andeler", "5 092", "7 864", "+2 772", "−1 073", "−484", "+1 215", "6 307"]}
           headerNyFu="Ny FK P1+2 brutto"
           headerNetto="Ny FK P1+2 netto"
           stromCol="Strøm + sol"
@@ -156,9 +156,9 @@ export default function Grunnlag() {
 
         <div className="mt-5 overflow-hidden rounded-2xl border border-line/70">
           <Row header label="Scenario" v1="Enova totalt" v2="P1+2 netto økning/mnd" />
-          <Row label="Kun bekreftet (4 blokker, april 2026)" v1="31 375 000" v2="+1 159 kr" />
-          <Row label="+ 30 MNOK fra 9 nye søknader (lavt anslag)" v1="61 375 000" v2="ca. +800 kr" />
-          <Row label="+ 40 MNOK fra 9 nye søknader (høyt anslag)" v1="71 375 000" v2="ca. +680 kr" />
+          <Row label="Kun bekreftet (4 blokker, april 2026)" v1="31 375 000" v2="+1 215 kr" />
+          <Row label="+ 30 MNOK fra 9 nye søknader (lavt anslag)" v1="61 375 000" v2="ca. +856 kr" />
+          <Row label="+ 40 MNOK fra 9 nye søknader (høyt anslag)" v1="71 375 000" v2="ca. +736 kr" />
         </div>
       </section>
 
@@ -180,7 +180,8 @@ export default function Grunnlag() {
         <div className="mt-5 overflow-hidden rounded-2xl border border-line/70 bg-paper">
           <Row header label="Aggregerte tall" v1="Verdi" v2="Merknad" rightLast />
           <Row label="Netto strømbesparelse P1" v1="500 000 kWh/år" v2="bedre fasadeisolasjon" rightLast />
-          <Row label="Netto strømbesparelse P1+2" v1="3 875 000 kWh/år" v2="bergvarme + solceller + isolasjon" rightLast />
+          <Row label="Netto strømbesparelse P1+2 (oppvarming)" v1="3 633 610 kWh/år" v2="bergvarme + isolasjon (75 % av Elvia-total × 75 %)" rightLast />
+          <Row label="Solenergi via overskuddsdeling (i tillegg)" v1="978 180 kWh/år" v2="brøkfordelt på private målere" rightLast />
           <Row label="Reduksjon i oppvarmingsstrøm" v1="ca. 75 %" v2="bergvarme COP ≈ 4–5" rightLast />
           <Row label="Strømpris (beregningsgrunnlag)" v1="1,20 kr/kWh" v2="konservativt anslag" rightLast />
           <Row label="Solenergi via overskuddsdeling" v1="978 180 kWh/år" v2="fordelt etter brøk på private målere" rightLast />
@@ -282,11 +283,12 @@ export default function Grunnlag() {
         </h2>
         <p className="mt-4 leading-relaxed text-ink/85">
           Netto økning i felleskostnad er <strong>881 kr/mnd</strong> for Pakke
-          1 og <strong>1 159 kr/mnd</strong> for Pakke 1+2 (snitt for alle 430
+          1 og <strong>1 215 kr/mnd</strong> for Pakke 1+2 (snitt for alle 430
           andeler). Brutto økning er hhv. 1 252 og 2 772 kr/mnd. Fradragene som
-          bringer brutto ned til netto er strømbesparelse oppvarming, solenergi
-          via overskuddsdeling og skattefradrag — alle beregnet over
-          låneperiodens løpetid.
+          bringer brutto ned til netto er strømbesparelse oppvarming (845 kr/mnd
+          snitt for P2), solenergi via overskuddsdeling (228 kr/mnd snitt) og
+          skattefradrag (484 kr/mnd snitt) — alle beregnet over låneperiodens
+          løpetid og basert på Elvia-totalen 5,57 mill kWh.
         </p>
         <div className="mt-5 rounded-2xl border-l-4 border-warm bg-paper px-5 py-4 text-[14.5px] leading-relaxed text-ink/85">
           <strong>Styrets rolle:</strong> Styret fremmer begge pakker som
@@ -377,13 +379,13 @@ function FkTabell({
       <div className="px-4 pt-3 text-[11px] text-muted sm:hidden">
         ← sveip for å se alle kolonner →
       </div>
-      <table className="w-full min-w-[680px] text-[13px]">
+      <table className="w-full min-w-[860px] text-[13px]">
         <thead>
           <tr className="bg-brand text-white">
             {cols.map((c, i) => (
               <th
                 key={c}
-                className={`px-3 py-2.5 text-[10.5px] font-semibold uppercase tracking-wide ${i === 0 ? "text-left" : "text-right"}`}
+                className={`px-4 py-2.5 text-[10.5px] font-semibold uppercase tracking-wide ${i === 0 ? "text-left" : "text-right whitespace-nowrap min-w-[88px]"}`}
               >
                 {c}
               </th>
@@ -396,7 +398,7 @@ function FkTabell({
               {r.map((cell, j) => (
                 <td
                   key={j}
-                  className={`border-b border-line/40 px-3 py-2 ${j === 0 ? "text-left font-medium text-ink" : "text-right text-ink/85"} ${j === 4 ? "text-save" : ""} ${j === 5 ? "text-tax-ink" : ""}`}
+                  className={`border-b border-line/40 px-4 py-2 ${j === 0 ? "text-left font-medium text-ink" : "text-right whitespace-nowrap min-w-[88px] text-ink/85"} ${j === 4 ? "text-save" : ""} ${j === 5 ? "text-tax-ink" : ""}`}
                 >
                   {cell}
                 </td>
@@ -407,7 +409,7 @@ function FkTabell({
             {snitt.map((cell, j) => (
               <td
                 key={j}
-                className={`px-3 py-2.5 ${j === 0 ? "text-left text-ink" : "text-right text-ink"}`}
+                className={`px-4 py-2.5 ${j === 0 ? "text-left text-ink" : "text-right whitespace-nowrap min-w-[88px] text-ink"}`}
               >
                 {cell}
               </td>

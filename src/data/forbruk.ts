@@ -61,7 +61,13 @@ export const ELVIA_PER_ADRESSE: Record<string, number> = {
 /** Sum av Elvia-tallene over for matchende adresser (eks. 98A). */
 export const ELVIA_SUM_MATCHED_KWH = 5_524_243;
 
-/** Felles + 98A + estimatusikkerhet, fordelt likt på 430 andeler. */
+/** Total Elvia-forbruk (inkl. 98A) — borettslagets faktiske registrerte forbruk. */
+export const ELVIA_TOTAL_KWH = 5_570_863;
+
+/**
+ * 98A (vaktmesterleilighet/felles, 46 620 kWh) + ev. estimatusikkerhet
+ * fordelt likt på 430 andeler. Sum av (PDF/antall) + (DIFF × 430) = 5,57 mill kWh.
+ */
 export const DIFF_FLAT_KWH_PER_ANDEL = Math.round(
-  (6_000_000 - ELVIA_SUM_MATCHED_KWH) / 430,
+  (ELVIA_TOTAL_KWH - ELVIA_SUM_MATCHED_KWH) / 430,
 );

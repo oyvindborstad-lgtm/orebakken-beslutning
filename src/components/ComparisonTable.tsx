@@ -33,10 +33,9 @@ export default function ComparisonTable({ andel }: { andel: Andel }) {
       info: (
         <>
           Pakke 1 sparer 500 000 kWh/år (bedre fasadeisolasjon). Pakke 1+2
-          sparer 3 875 000 kWh/år oppvarming (P1-isolasjon + bergvarme som
-          erstatter ~75 % av oppvarmingen, der bergvarmens eget strømforbruk på
-          1 128 018 kWh/år allerede er trukket fra). Fordeles per leilighet
-          etter areal.
+          sparer 3 633 610 kWh/år oppvarming (P1-isolasjon + bergvarme som
+          erstatter ~75 % av oppvarmingen, basert på Elvia-totalen 5 570 863
+          kWh/år). Fordeles per leilighet etter areal.
         </>
       ),
       p1: andel.p1.stromBesp,

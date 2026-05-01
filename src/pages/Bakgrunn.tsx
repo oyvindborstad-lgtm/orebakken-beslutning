@@ -105,9 +105,10 @@ export default function Bakgrunn() {
             <strong>354,2 millioner kroner</strong> over 40 år til 4,90 % rente
             (grønt lån). Brutto økning i felleskostnad er{" "}
             <strong>+2 772 kr/mnd</strong> i snitt. Netto økning er{" "}
-            <strong>+1 159 kr/mnd</strong> i snitt — inkludert
+            <strong>+1 215 kr/mnd</strong> i snitt — inkludert
             strømbesparelse fra bergvarme/isolasjon, solenergi via
-            overskuddsdeling og skattefradrag.
+            overskuddsdeling og skattefradrag, basert på Elvia-totalen 5,57
+            mill kWh/år.
           </Pakke>
         </div>
 
@@ -263,10 +264,10 @@ export default function Bakgrunn() {
             Solenergi-kreditten er <strong>inkludert</strong> i strømbesparelsen
             og dermed i netto FK-økning som vises i tabellene. Effekten:
             felleskostnaden gir en bruttoøkning på ca. 2 772 kr/mnd (snitt),
-            men oppvarmingsbesparelse fra bergvarme (901 kr/mnd) + solenergi
+            men oppvarmingsbesparelse fra bergvarme (845 kr/mnd) + solenergi
             (228 kr/mnd) + skattefradrag (484 kr/mnd) reduserer netto til ca.
-            1 159 kr/mnd. Pakke 1+2 ender altså opp med å koste deg{" "}
-            <strong>ca. 278 kr/mnd mer</strong> enn Pakke 1 alene — en mye
+            1 215 kr/mnd. Pakke 1+2 ender altså opp med å koste deg{" "}
+            <strong>ca. 334 kr/mnd mer</strong> enn Pakke 1 alene — en mye
             mindre forskjell enn brutto-tallene antyder.
           </Faq>
           <Faq q="Hva med de 9 blokkene som ikke har fått Enova-støtte ennå?">
