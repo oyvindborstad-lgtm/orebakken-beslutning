@@ -44,16 +44,6 @@ export default function Welcome() {
             </a>
           </div>
 
-          <div className="mt-6 max-w-3xl rounded-2xl border-l-4 border-warm bg-warm-bg/60 px-5 py-4 text-[13.5px] leading-relaxed text-ink/85 sm:text-[14px]">
-            <strong>Beslutningsstøtte — ikke beslutningsgrunnlag.</strong>{" "}
-            Dette verktøyet bygger på punkt-estimater for rente, strømpris,
-            byggekostnader og energieffekt. Det erstatter <em>ikke</em> en
-            formell økonomisk vurdering. Styret anbefaler at hver andelseier
-            konsulterer egen bank eller rådgiver før vedtak på
-            generalforsamlingen 1. juni 2026 — særlig fordi Pakke 1+2
-            innebærer betydelig økt felleslån over 40 år.
-          </div>
-
           <div className="mt-9 grid max-w-4xl gap-3 sm:gap-4 md:grid-cols-2">
             <PakkeIntro
               tone="brand"
