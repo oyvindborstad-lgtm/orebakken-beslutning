@@ -5,6 +5,7 @@ import { forventetKWhForAndel } from "../lib/calc";
 import { kr, m2, pct } from "../lib/format";
 import ComparisonTable from "../components/ComparisonTable";
 import StromCalculator from "../components/StromCalculator";
+import GrontLanKalkulator from "../components/GrontLanKalkulator";
 import InfoTip from "../components/InfoTip";
 
 export default function Result() {
@@ -104,6 +105,8 @@ export default function Result() {
       <ComparisonTable andel={andel} />
 
       <StromCalculator andel={andel} />
+
+      <GrontLanKalkulator />
     </div>
   );
 }
