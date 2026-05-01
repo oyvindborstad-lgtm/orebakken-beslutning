@@ -1,7 +1,7 @@
 import { Link, useRoute } from "wouter";
 import { ArrowLeft, Printer, Ruler, Percent, Wallet, Hash } from "lucide-react";
 import { getAndelByNr } from "../lib/findAndel";
-import { forventetKWhForAreal } from "../lib/calc";
+import { forventetKWhForAndel } from "../lib/calc";
 import { kr, m2, pct } from "../lib/format";
 import ComparisonTable from "../components/ComparisonTable";
 import StromCalculator from "../components/StromCalculator";
@@ -30,7 +30,7 @@ export default function Result() {
     );
   }
 
-  const baseline = forventetKWhForAreal(andel.areal);
+  const baseline = forventetKWhForAndel(andel);
 
   return (
     <div className="space-y-5 sm:space-y-6">
@@ -95,7 +95,7 @@ export default function Result() {
               </span>
             </span>
             <span className="chip hidden sm:inline-flex">
-              Areal-fordelt av borettslagets totalforbruk
+              Elvia-data per adresse + flat fellestillegg
             </span>
           </div>
         </div>

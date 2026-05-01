@@ -15,7 +15,7 @@ import openpyxl
 
 DEFAULT_XLSX = (
     "/Users/oyvindborstad/Library/CloudStorage/Dropbox/Orebakken BRL/"
-    "Forslag til budsjett Rehab Orebakken 2026 pakke 1 og 2.xlsx"
+    "Forslag til budsjett Rehab Orebakken 2026 pakke 1 og 2 26.04.26.xlsx"
 )
 OUT_JSON = Path(__file__).resolve().parent.parent / "src" / "data" / "andeler.json"
 

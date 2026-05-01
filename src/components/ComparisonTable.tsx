@@ -1,5 +1,6 @@
 import type { Andel } from "../lib/types";
 import { kr, krSigned } from "../lib/format";
+import { solenergiKrMndForBrok } from "../lib/calc";
 import InfoTip from "./InfoTip";
 
 type Row = {
@@ -7,11 +8,18 @@ type Row = {
   info?: React.ReactNode;
   p1: number;
   p2: number;
-  accent?: "save" | "tax" | "net";
+  accent?: "save" | "tax" | "net" | "sun";
   sign?: boolean;
 };
 
 export default function ComparisonTable({ andel }: { andel: Andel }) {
+  // Solenergi via overskuddsdeling: andelens andel av solproduksjonen,
+  // fordelt etter brøk og kreditert direkte på private strømregningen.
+  // Inngår nå i strømbesparelsen og dermed i netto reell endring.
+  const solenergi = solenergiKrMndForBrok(andel.brok); // positivt tall = besparelse
+  const p2NettoAr1MedSol = andel.p2.nettoAr1 - solenergi;
+  const p2NettoSnittMedSol = andel.p2.nettoSnitt - solenergi;
+
   const rows: Row[] = [
     { label: "Ny felleskostnad / mnd", p1: andel.p1.nyFu, p2: andel.p2.nyFu },
     {
@@ -21,19 +29,35 @@ export default function ComparisonTable({ andel }: { andel: Andel }) {
       sign: true,
     },
     {
-      label: "Strømbesparelse (areal-fordelt)",
+      label: "Strømbesparelse oppvarming (areal-fordelt)",
       info: (
         <>
           Pakke 1 sparer 500 000 kWh/år (bedre fasadeisolasjon). Pakke 1+2
-          sparer 3 725 000 kWh/år netto (bergvarme + solceller, der bergvarmens
-          eget strømforbruk på 1 128 018 kWh/år allerede er trukket fra).
-          Solcelleproduksjonen på 978 180 kWh/år er inkludert i nettotallet.
-          Fordeles per leilighet etter areal.
+          sparer 3 875 000 kWh/år oppvarming (P1-isolasjon + bergvarme som
+          erstatter ~75 % av oppvarmingen, der bergvarmens eget strømforbruk på
+          1 128 018 kWh/år allerede er trukket fra). Fordeles per leilighet
+          etter areal.
         </>
       ),
       p1: andel.p1.stromBesp,
       p2: andel.p2.stromBesp,
       accent: "save",
+      sign: true,
+    },
+    {
+      label: "Solenergi via overskuddsdeling (brøk-fordelt)",
+      info: (
+        <>
+          Solcelleanlegget produserer 978 180 kWh/år. Borettslaget vil bruke
+          overskuddsdelingsordningen til å fordele produksjonen direkte på
+          hver andels private strømmåler via Elhub, etter eierbrøk. Kreditten
+          reduserer din private strømregning og er nå inkludert i netto reell
+          endring.
+        </>
+      ),
+      p1: 0,
+      p2: -solenergi,
+      accent: "sun",
       sign: true,
     },
     {
@@ -55,12 +79,12 @@ export default function ComparisonTable({ andel }: { andel: Andel }) {
       info: (
         <>
           Det faktiske beløpet du merker på pengeboken: bruttoøkning −
-          strømbesparelse − skattefradrag. Dette er tallet som teller i
-          privatøkonomien din.
+          strømbesparelse oppvarming − solenergi-kreditt − skattefradrag.
+          Solenergi via overskuddsdeling er inkludert.
         </>
       ),
       p1: andel.p1.nettoAr1,
-      p2: andel.p2.nettoAr1,
+      p2: p2NettoAr1MedSol,
       accent: "net",
       sign: true,
     },
@@ -71,11 +95,12 @@ export default function ComparisonTable({ andel }: { andel: Andel }) {
           Renten — og dermed skattefradraget på 22 % — er høyest år 1 og synker
           gradvis etter hvert som lånet nedbetales. «Snitt» er gjennomsnittet
           over hele lånetiden (30 år for P1, 40 år for P1+2) og er det mest
-          representative langtidsbudsjettet for husstanden din.
+          representative langtidsbudsjettet for husstanden din. Solenergi via
+          overskuddsdeling er inkludert.
         </>
       ),
       p1: andel.p1.nettoSnitt,
-      p2: andel.p2.nettoSnitt,
+      p2: p2NettoSnittMedSol,
       sign: true,
     },
   ];
@@ -154,6 +179,7 @@ export default function ComparisonTable({ andel }: { andel: Andel }) {
             const fmt = (v: number) => (r.sign ? krSigned(v) : kr(v));
             const colorFor = (v: number) => {
               if (r.accent === "save") return "text-save";
+              if (r.accent === "sun") return "text-warm-deep";
               if (r.accent === "tax") return "text-tax-ink";
               if (r.accent === "net")
                 return v > 0 ? "text-ink font-bold" : "text-save font-bold";
@@ -194,6 +220,7 @@ function MobileRow({ row }: { row: Row }) {
   const fmt = (v: number) => (row.sign ? krSigned(v) : kr(v));
   const colorFor = (v: number) => {
     if (row.accent === "save") return "text-save";
+    if (row.accent === "sun") return "text-warm-deep";
     if (row.accent === "tax") return "text-tax-ink";
     if (row.accent === "net")
       return v > 0 ? "text-ink font-bold" : "text-save font-bold";

@@ -59,8 +59,8 @@ export default function Bakgrunn() {
         </ul>
         <div className="mt-5 rounded-2xl border-l-4 border-warm bg-warm-bg/60 px-5 py-4 text-[14.5px] leading-relaxed text-ink/85">
           Hvert år vi venter, stiger byggeprisene med ca. 4 %. Utsetter vi tre
-          år, koster det samme arbeidet om lag <strong>46 millioner kroner mer</strong>{" "}
-          enn det gjør nå — det tilsvarer nesten 2 950 kr ekstra per andel per
+          år, koster det samme arbeidet om lag <strong>44 millioner kroner mer</strong>{" "}
+          enn det gjør nå — det tilsvarer nesten 2 858 kr ekstra per andel per
           måned over låneperioden.
         </div>
       </section>
@@ -84,10 +84,10 @@ export default function Bakgrunn() {
             flertall.
             <br />
             <br />
-            Borettslaget tar opp <strong>190 millioner kroner</strong> i lån over
-            30 år til 5,70 % rente. Brutto økning i felleskostnad er{" "}
-            <strong>+1 034 kr/mnd</strong> i snitt. Netto økning, etter
-            strømbesparelse og skattefradrag, er <strong>+624 kr/mnd</strong> i
+            Borettslaget tar opp <strong>192 millioner kroner</strong> i lån over
+            30 år til 5,00 % rente. Brutto økning i felleskostnad er{" "}
+            <strong>+1 252 kr/mnd</strong> i snitt. Netto økning, etter
+            strømbesparelse og skattefradrag, er <strong>+881 kr/mnd</strong> i
             snitt.
           </Pakke>
 
@@ -102,10 +102,12 @@ export default function Bakgrunn() {
             <br />
             <br />
             Borettslaget tar opp totalt{" "}
-            <strong>349,6 millioner kroner</strong> over 40 år til 5,20 % rente
+            <strong>354,2 millioner kroner</strong> over 40 år til 4,90 % rente
             (grønt lån). Brutto økning i felleskostnad er{" "}
-            <strong>+2 499 kr/mnd</strong> i snitt. Netto økning er{" "}
-            <strong>+1 119 kr/mnd</strong> i snitt.
+            <strong>+2 772 kr/mnd</strong> i snitt. Netto økning er{" "}
+            <strong>+1 159 kr/mnd</strong> i snitt — inkludert
+            strømbesparelse fra bergvarme/isolasjon, solenergi via
+            overskuddsdeling og skattefradrag.
           </Pakke>
         </div>
 
@@ -248,6 +250,25 @@ export default function Bakgrunn() {
             låneperioden, slik at du ser hva du realistisk kan forvente over
             tid.
           </Faq>
+          <Faq q="Hva er solenergi via overskuddsdeling? Får jeg noe ut av det?">
+            Solcelleanlegget på takene produserer ca.{" "}
+            <strong>978 180 kWh per år</strong> — strøm som borettslaget eier.
+            Styret vil benytte ordningen <strong>overskuddsdeling</strong>{" "}
+            (Elhub) til å fordele produksjonen direkte ut på alle 430 andelers
+            private strømmålere etter eierbrøken. I praksis krediteres ca.{" "}
+            <strong>2 275 kWh/år (≈ 228 kr/mnd)</strong> i snitt rett på din
+            egen strømregning.
+            <br />
+            <br />
+            Solenergi-kreditten er <strong>inkludert</strong> i strømbesparelsen
+            og dermed i netto FK-økning som vises i tabellene. Effekten:
+            felleskostnaden gir en bruttoøkning på ca. 2 772 kr/mnd (snitt),
+            men oppvarmingsbesparelse fra bergvarme (901 kr/mnd) + solenergi
+            (228 kr/mnd) + skattefradrag (484 kr/mnd) reduserer netto til ca.
+            1 159 kr/mnd. Pakke 1+2 ender altså opp med å koste deg{" "}
+            <strong>ca. 278 kr/mnd mer</strong> enn Pakke 1 alene — en mye
+            mindre forskjell enn brutto-tallene antyder.
+          </Faq>
           <Faq q="Hva med de 9 blokkene som ikke har fått Enova-støtte ennå?">
             Styret har bestemt seg for å installere bergvarme og solceller i{" "}
             <strong>alle 13 blokker</strong>. Vi søker Enova om støtte for de
@@ -260,7 +281,7 @@ export default function Bakgrunn() {
             Borettslaget vil sannsynligvis ta opp lån med flytende rente. Det
             betyr at rentekostnaden kan endre seg over tid, akkurat som med et
             boliglån. Beregningene i dette dokumentet er basert på dagens
-            rentenivå: 5,70 % for Pakke 1 og 5,20 % for Pakke 1+2 (grønt lån).
+            rentenivå: 5,00 % for Pakke 1 og 4,90 % for Pakke 1+2 (grønt lån).
             <br />
             <br />
             Stiger renten, øker felleskostnadene noe. Faller renten, reduseres
@@ -272,10 +293,10 @@ export default function Bakgrunn() {
             betyr det at det samme arbeidet koster rundt 12,5 % mer.
             <br />
             <br />
-            For Pakke 1 alene (190 MNOK) betyr tre år med utsettelse en
-            merkostnad på ca. 23,7 millioner kroner. For hele prosjektet (Pakke
-            1+2, 366 MNOK) er merkostnaden ca. 45,7 millioner kroner. Det
-            tilsvarer om lag 2 950 kr mer per andel per måned over
+            For Pakke 1 alene (192 MNOK) betyr tre år med utsettelse en
+            merkostnad på ca. 24 millioner kroner. For hele prosjektet (Pakke
+            1+2, 354 MNOK) er merkostnaden ca. 44,3 millioner kroner. Det
+            tilsvarer om lag 2 858 kr mer per andel per måned over
             låneperioden.
           </Faq>
           <Faq q="Hva betyr dette for verdien på leiligheten min?">

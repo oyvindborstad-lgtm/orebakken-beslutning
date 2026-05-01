@@ -1,9 +1,75 @@
 import { FORUTSETNINGER } from "../data/forutsetninger";
+import {
+  DIFF_FLAT_KWH_PER_ANDEL,
+  ELVIA_PER_ADRESSE,
+} from "../data/forbruk";
 import type { Andel } from "./types";
 
 const { felles, pakke1 } = FORUTSETNINGER;
 
 const P1_REDUKSJONS_FAKTOR = pakke1.energibesparelseKWh / felles.oppvarmingTotalKWh;
+
+/**
+ * Solenergi via overskuddsdeling for en gitt brøk: andel × årsproduksjon ×
+ * strømpris / 12. Returnerer kr/mnd (positivt tall).
+ */
+export function solenergiKrMndForBrok(brok: number): number {
+  return (brok * felles.solcelleProduksjonKWh * felles.stromPrisKrPerKWh) / 12;
+}
+
+export function solenergiKWhForBrok(brok: number): number {
+  return brok * felles.solcelleProduksjonKWh;
+}
+
+/**
+ * Antall andeler per adresse — beregnes ved første bruk for å unngå hardkoding.
+ * Fyles inn ved første kall til forventetKWhForAndel.
+ */
+let antallPerAdresseCache: Record<string, number> | null = null;
+
+function antallPerAdresse(): Record<string, number> {
+  if (antallPerAdresseCache) return antallPerAdresseCache;
+  const cache: Record<string, number> = {};
+  // Andelene er definert i andeler.json — vi laster denne lazily for å unngå
+  // sirkulær import. (Antall-kalkulasjonen er deterministisk på 430 andeler.)
+  // For enkelhet hardkodes tellingen under (matcher andeler.json):
+  const counts: Record<string, number> = {
+    "Landingsveien 56": 8, "Landingsveien 58": 8, "Landingsveien 60": 8,
+    "Landingsveien 66": 8, "Landingsveien 68": 8, "Landingsveien 70": 8,
+    "Landingsveien 72": 8, "Landingsveien 74": 8, "Landingsveien 76": 8,
+    "Landingsveien 78": 8,
+    "Landingsveien 80": 32, "Landingsveien 82": 32, "Landingsveien 84": 32,
+    "Landingsveien 86": 32,
+    "Landingsveien 88": 9, "Landingsveien 90": 9, "Landingsveien 92": 9,
+    "Landingsveien 94": 9, "Landingsveien 96": 9, "Landingsveien 98": 9,
+    "Landingsveien 100": 9, "Landingsveien 102": 9, "Landingsveien 104": 9,
+    "Landingsveien 106": 9,
+    "Landingsveien 110": 8, "Landingsveien 112": 8, "Landingsveien 114": 8,
+    "Landingsveien 116": 9, "Landingsveien 118": 9, "Landingsveien 120": 9,
+    "Landingsveien 122": 9, "Landingsveien 124": 9, "Landingsveien 126": 9,
+    "Landingsveien 128": 9, "Landingsveien 130": 9, "Landingsveien 132": 9,
+    "Landingsveien 134": 9, "Landingsveien 136": 9, "Landingsveien 138": 9,
+  };
+  Object.assign(cache, counts);
+  antallPerAdresseCache = cache;
+  return cache;
+}
+
+/**
+ * Forventet kWh per år for en konkret andel basert på Elvia-data per adresse,
+ * pluss et flat tillegg for fellesareal og estimatusikkerhet (slik at sum av
+ * alle 430 andeler treffer borettslagets totalforbruk på ~6 000 000 kWh).
+ */
+export function forventetKWhForAndel(andel: Andel): number {
+  const adresseTotal = ELVIA_PER_ADRESSE[andel.adresse];
+  const counts = antallPerAdresse();
+  const antall = counts[andel.adresse];
+  if (adresseTotal && antall) {
+    return Math.round(adresseTotal / antall + DIFF_FLAT_KWH_PER_ANDEL);
+  }
+  // Fallback til areal-fordeling hvis adressen mangler i Elvia-datasettet.
+  return forventetKWhForAreal(andel.areal);
+}
 
 /** Forventet kWh basert på areal (areal-fordeling av borettslagets totalforbruk). */
 export function forventetKWhForAreal(areal: number): number {
@@ -97,7 +163,9 @@ export function beregnFkP2(andel: Andel, kWhFaktisk?: number): FkBeregning {
     kWhFaktisk && kWhFaktisk > 0
       ? personligP2Besparelse(kWhFaktisk, andel.brok).total
       : 0;
-  const stromBesp = personligBesp > 0 ? personligBesp : arealBesp;
+  const oppvarmingsBesp = personligBesp > 0 ? personligBesp : arealBesp;
+  const solenergi = solenergiKrMndForBrok(andel.brok);
+  const stromBesp = oppvarmingsBesp + solenergi;
   const skattefradrag = Math.abs(andel.p2.skfrAr1);
   return {
     brutto,

@@ -93,7 +93,8 @@ export default function Welcome() {
             stripe="pkg-stripe-2"
             kostBrutto={pakke2.bruttoSnittKrMnd}
             kostNetto={pakke2.nettoSnittKrMnd}
-            stromBesp={pakke2.stromBespSnittKrMnd}
+            stromBesp={pakke2.stromBespSnittKrMnd - pakke2.solenergiSnittKrMnd}
+            solenergi={pakke2.solenergiSnittKrMnd}
             skfr={pakke2.skattefradragSnittKrMnd}
           />
         </div>
@@ -256,6 +257,7 @@ function SnittKort({
   kostBrutto,
   kostNetto,
   stromBesp,
+  solenergi,
   skfr,
 }: {
   id: "p1" | "p2";
@@ -263,6 +265,7 @@ function SnittKort({
   kostBrutto: number;
   kostNetto: number;
   stromBesp: number;
+  solenergi?: number;
   skfr: number;
 }) {
   const navn = id === "p1" ? "Pakke 1" : "Pakke 1+2";
@@ -292,7 +295,10 @@ function SnittKort({
           </div>
         </div>
         <div className="mt-5 space-y-2 rounded-xl bg-surface/60 p-3.5 text-[13px] sm:mt-6 sm:p-4 sm:text-sm">
-          <Reduksjon label="Strømbesparelse" value={-stromBesp} kind="save" />
+          <Reduksjon label="Strømbesparelse oppvarming" value={-stromBesp} kind="save" />
+          {solenergi !== undefined && solenergi > 0 && (
+            <Reduksjon label="Solenergi (overskuddsdeling)" value={-solenergi} kind="sun" />
+          )}
           <Reduksjon label="Skattefradrag (22 %)" value={-skfr} kind="tax" />
         </div>
       </div>
@@ -307,9 +313,14 @@ function Reduksjon({
 }: {
   label: string;
   value: number;
-  kind: "save" | "tax";
+  kind: "save" | "tax" | "sun";
 }) {
-  const cls = kind === "save" ? "text-save" : "text-tax-ink";
+  const cls =
+    kind === "save"
+      ? "text-save"
+      : kind === "sun"
+      ? "text-warm-deep"
+      : "text-tax-ink";
   return (
     <div className="flex items-center justify-between">
       <span className="text-ink/75">{label}</span>
@@ -326,31 +337,31 @@ function DiffBox() {
       </div>
       <div className="mt-4 grid gap-3 sm:gap-4 lg:grid-cols-3">
         <DiffRow
-          label="Netto FK-økning"
-          p1="+624 kr/mnd"
-          p2="+1 119 kr/mnd"
-          diff="+495 kr/mnd"
+          label="Bruttoøkning FK"
+          p1="+1 252 kr/mnd"
+          p2="+2 772 kr/mnd"
+          diff="+1 520 kr/mnd"
         />
         <DiffRow
-          label="Ekstra strømbesparelse"
+          label="Strømbesp. + solenergi"
           p1="116 kr/mnd"
-          p2="866 kr/mnd"
-          diff="−750 kr/mnd"
+          p2="1 129 kr/mnd"
+          diff="−1 013 kr/mnd"
           diffSave
         />
         <DiffRow
-          label="Netto inkl. ekstra strøm"
-          p1="—"
-          p2="—"
-          diff="−255 kr/mnd"
-          diffSave
+          label="Netto FK-økning"
+          p1="+881 kr/mnd"
+          p2="+1 159 kr/mnd"
+          diff="+278 kr/mnd"
           bold
         />
       </div>
       <p className="mt-4 text-[12.5px] leading-relaxed text-muted sm:text-[13px]">
-        Ekstra strømbesparelse fra bergvarme og solceller (750 kr/mnd) er større
-        enn merkostnaden ved Pakke 1+2 (495 kr/mnd) — i favør P1+2 med 255
-        kr/mnd. Vektet snitt for alle 430 andeler.
+        Pakke 1+2 har 1 520 kr/mnd høyere bruttoøkning enn Pakke 1, men gir
+        1 013 kr/mnd ekstra strømbesparelse (oppvarming + solenergi via
+        overskuddsdeling) og 230 kr/mnd ekstra skattefradrag. Netto merkostnad
+        for Pakke 1+2 vs Pakke 1: bare 278 kr/mnd. Snitt for alle 430 andeler.
       </p>
     </div>
   );

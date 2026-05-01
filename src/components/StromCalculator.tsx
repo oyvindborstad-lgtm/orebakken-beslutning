@@ -3,7 +3,7 @@ import { Zap, ExternalLink, RotateCcw } from "lucide-react";
 import type { Andel } from "../lib/types";
 import { kr, krSigned } from "../lib/format";
 import {
-  forventetKWhForAreal,
+  forventetKWhForAndel,
   personligStromBesparelseP1,
   personligP2Besparelse,
   beregnFkP1,
@@ -18,7 +18,7 @@ export default function StromCalculator({
   andel: Andel;
   onChange?: (kWh: number | null) => void;
 }) {
-  const baseline = useMemo(() => forventetKWhForAreal(andel.areal), [andel.areal]);
+  const baseline = useMemo(() => forventetKWhForAndel(andel), [andel]);
   const [input, setInput] = useState<string>("");
 
   const kWh = Number(input.replace(/\s/g, "").replace(",", "."));
@@ -56,11 +56,12 @@ export default function StromCalculator({
             Sjekk besparelsen mot ditt eget strømforbruk
           </h3>
           <p className="mt-2 max-w-2xl text-[13.5px] leading-relaxed text-muted sm:text-sm">
-            Beregningene fra Excel fordeler strømbesparelsen etter areal. Hvis
-            du oppgir ditt faktiske årsforbruk, regner vi ut en personlig
-            estimering basert på Byggforsk-normalen om at ~75 % av forbruket
-            går til oppvarming og varmtvann — og oppdaterer din nye
-            felleskostnad både brutto og netto.
+            Det kalkulerte forbruket bygger på Elvia sitt estimat per adresse
+            pluss et flat fellesareal-tillegg. Hvis du oppgir ditt faktiske
+            årsforbruk, regner vi ut en personlig estimering basert på
+            Byggforsk-normalen om at ~75 % av forbruket går til oppvarming og
+            varmtvann — og oppdaterer din nye felleskostnad både brutto og
+            netto.
           </p>
         </div>
       </div>
@@ -90,7 +91,7 @@ export default function StromCalculator({
               onClick={reset}
               className="mt-2 inline-flex items-center gap-1 text-xs text-muted hover:text-brand"
             >
-              <RotateCcw size={12} /> Tilbakestill til areal-fordeling
+              <RotateCcw size={12} /> Tilbakestill til Elvia-estimat
             </button>
           )}
           <div className="mt-3 rounded-xl border border-line/60 bg-surface/50 p-3 text-[12.5px] leading-relaxed text-ink/80">
@@ -99,9 +100,9 @@ export default function StromCalculator({
               <span className="num">{baseline.toLocaleString("nb-NO")} kWh/år</span>
             </div>
             <div className="mt-1 text-muted">
-              Estimat basert på areal-fordeling av borettslagets totalforbruk på{" "}
-              {FORUTSETNINGER.felles.totalForbrukKWh.toLocaleString("nb-NO")} kWh/år
-              fordelt på {FORUTSETNINGER.felles.totaltAreal.toLocaleString("nb-NO")} m².
+              Sum fra Elvia for din adresse, fordelt på antall andeler i blokken,
+              pluss flat tillegg for fellesareal slik at borettslagets totalforbruk
+              treffer {FORUTSETNINGER.felles.totalForbrukKWh.toLocaleString("nb-NO")} kWh/år.
             </div>
             <div className="mt-2 text-muted">
               Du finner ditt faktiske årsforbruk på{" "}
