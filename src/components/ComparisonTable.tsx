@@ -1,6 +1,6 @@
 import type { Andel } from "../lib/types";
 import { kr, krSigned } from "../lib/format";
-import { solenergiKrMndForBrok } from "../lib/calc";
+import { solenergiKrMndForAndel } from "../lib/calc";
 import InfoTip from "./InfoTip";
 
 type Row = {
@@ -16,7 +16,7 @@ export default function ComparisonTable({ andel }: { andel: Andel }) {
   // Solenergi via overskuddsdeling: andelens andel av solproduksjonen,
   // fordelt etter brøk og kreditert direkte på private strømregningen.
   // Inngår nå i strømbesparelsen og dermed i netto reell endring.
-  const solenergi = solenergiKrMndForBrok(andel.brok); // positivt tall = besparelse
+  const solenergi = solenergiKrMndForAndel(andel.brok, andel.areal); // positivt tall = besparelse
   const p2NettoAr1MedSol = andel.p2.nettoAr1 - solenergi;
   const p2NettoSnittMedSol = andel.p2.nettoSnitt - solenergi;
 
@@ -44,15 +44,14 @@ export default function ComparisonTable({ andel }: { andel: Andel }) {
       sign: true,
     },
     {
-      label: "Solenergi dekker felleskostnader (brøk-fordelt)",
+      label: "Solenergi (FK-reduksjon + overskuddsdeling)",
       info: (
         <>
           Solcelleanlegget produserer 978 180 kWh/år. Strømmen brukes først til
-          å dekke borettslagets fellesareal-strøm (1 136 201 kWh/år, faktisk
-          forbruk fra Istad 2025). Solenergien dekker ca. 86 % av fellesarealet
-          og reduserer felleskostnaden direkte før lån. Den forholdsmessige
-          gevinsten på din andel fordeles etter eierbrøk og er inkludert i
-          netto reell endring.
+          å dekke fellesareal-strøm fra Istad (492 329 kWh) — denne delen
+          reduserer felleskostnaden og fordeles etter brøk. Resterende solar
+          (485 851 kWh) er overskudd om sommeren (mai–sep) som fordeles til
+          andelseiere etter areal (m²) som privat strømkreditt.
         </>
       ),
       p1: 0,

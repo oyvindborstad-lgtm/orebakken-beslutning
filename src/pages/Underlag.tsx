@@ -39,21 +39,38 @@ export default function Underlag() {
         <ManedligTabell />
       </Section>
 
-      <Section icon={<Calculator size={20} />} avsnitt="Avsnitt 2" tittel="Solenergi — to-pris-modell">
+      <Section icon={<Calculator size={20} />} avsnitt="Avsnitt 2" tittel="Solenergi — todelt fordeling">
         <p className="text-[14.5px] leading-relaxed text-ink/80">
-          Solcelleproduksjonen brukes først til å dekke fellesareal-strøm til
-          forbrukspris (1,20 kr/kWh, samme som BRL i dag betaler). Det som
-          overstiger fellesforbruket om sommeren selges til spot-pris (anslått
-          0,50 kr/kWh — konservativt, kan være høyere ved gunstig markedsbilde).
+          Solcelleproduksjonen (978 180 kWh/år) sammenlignes mot Istad
+          fellesforbruk per måned. Solar dekker Istad direkte (492 329 kWh,
+          mest av året); resterende 485 851 kWh er sommer-overskudd (mai–sep).
         </p>
-        <div className="mt-4 grid gap-3 sm:grid-cols-3">
-          <Stat label="Solar produksjon" value={`${felles.solcelleProduksjonKWh.toLocaleString("nb-NO")} kWh/år`} />
-          <Stat label="Brukt til felles" value={`${felles.solcelleBruktTilFellesKWh.toLocaleString("nb-NO")} kWh/år`} sub={`${kr(felles.solcelleBruktTilFellesKWh * felles.stromPrisKrPerKWh)}/år`} />
-          <Stat label="Overskudd selges" value={`${felles.solcelleOverskuddSommerKWh.toLocaleString("nb-NO")} kWh/år`} sub={`${kr(felles.solcelleOverskuddSommerKWh * felles.salgsprisKrPerKWh)}/år (spot 0,50)`} />
-        </div>
+        <ul className="mt-3 space-y-2 text-[14px] leading-relaxed text-ink/85">
+          <li className="flex gap-2.5">
+            <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-save" />
+            <span>
+              <strong>Solar dekker Istad-felles:</strong>{" "}
+              {felles.solcelleBruktTilFellesKWh.toLocaleString("nb-NO")} kWh ×
+              1,20 kr/kWh = <strong>{kr(felles.solcelleBruktTilFellesKWh * felles.stromPrisKrPerKWh)}/år</strong>.
+              Reduserer felleskostnaden direkte og fordeles på andelseiere
+              etter eierbrøk (samme som FK-fordeling).
+            </span>
+          </li>
+          <li className="flex gap-2.5">
+            <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-warm-deep" />
+            <span>
+              <strong>Solar overskudd til andelseiere via m²:</strong>{" "}
+              {felles.solcelleOverskuddSommerKWh.toLocaleString("nb-NO")} kWh ×
+              1,20 kr/kWh = <strong>{kr(felles.solcelleOverskuddSommerKWh * felles.stromPrisKrPerKWh)}/år</strong>.
+              Krediteres direkte på andelseiers strømregning fordelt etter
+              areal (m²), siden strømforbruk korrelerer med boligstørrelse.
+            </span>
+          </li>
+        </ul>
         <div className="mt-4 rounded-xl bg-save-bg/60 px-5 py-4 text-[14px]">
-          <strong>Total solar-verdi for BRL:</strong> {kr(TOTAL_SOLAR_VERDI_KR_AR)}/år
-          → fordelt på 430 andeler etter brøk = ca. {kr(TOTAL_SOLAR_VERDI_KR_AR / 430 / 12)}/mnd snitt per andel.
+          <strong>Total solar-verdi:</strong> {kr(TOTAL_SOLAR_VERDI_KR_AR)}/år
+          → snitt per andel ca. {kr(TOTAL_SOLAR_VERDI_KR_AR / 430 / 12)}/mnd
+          (ca. 114 kr brøk-FK-reduksjon + 113 kr areal-overskudd).
         </div>
       </Section>
 
@@ -188,29 +205,30 @@ function Tabell({ headers, rows, sumRow }: { headers: string[]; rows: string[][]
 }
 
 function ManedligTabell() {
+  // Solar overskudd beregnes mot ISTAD-forbruk alene (per modell-spec):
+  // - Solar dekker Istad direkte (FK-reduksjon, brøk-fordelt)
+  // - Solar overskudd (sol > Istad) → fordeles til andelseiere via m²
   const monthly = manedlig.map((m) => {
-    const fellesPostP2 = m.bergvarme + m.ovrig;
-    const solBrukt = Math.min(m.sol, fellesPostP2);
-    const solOverskudd = Math.max(0, m.sol - fellesPostP2);
-    return { ...m, fellesPostP2, solBrukt, solOverskudd };
+    const solBruktIstad = Math.min(m.sol, m.ovrig);
+    const solOverskudd = Math.max(0, m.sol - m.ovrig);
+    return { ...m, solBruktIstad, solOverskudd };
   });
   const sum = monthly.reduce(
     (acc, m) => ({
       sol: acc.sol + m.sol,
       bergvarme: acc.bergvarme + m.bergvarme,
       ovrig: acc.ovrig + m.ovrig,
-      fellesPostP2: acc.fellesPostP2 + m.fellesPostP2,
-      solBrukt: acc.solBrukt + m.solBrukt,
+      solBruktIstad: acc.solBruktIstad + m.solBruktIstad,
       solOverskudd: acc.solOverskudd + m.solOverskudd,
     }),
-    { sol: 0, bergvarme: 0, ovrig: 0, fellesPostP2: 0, solBrukt: 0, solOverskudd: 0 },
+    { sol: 0, bergvarme: 0, ovrig: 0, solBruktIstad: 0, solOverskudd: 0 },
   );
   return (
     <div className="mt-4 overflow-x-auto rounded-2xl border border-line/70">
       <table className="w-full min-w-[760px] text-[13px]">
         <thead>
           <tr className="bg-brand text-white">
-            {["Mnd", "Sol prod.", "Bergvarme", "Øvrig (Istad)", "Felles post-P2", "Sol brukt", "Sol overskudd"].map((h, i) => (
+            {["Mnd", "Sol prod.", "Istad felles", "Bergvarme", "Sol dekker Istad", "Sol overskudd (m²)"].map((h, i) => (
               <th key={h} className={`px-3 py-2.5 text-[10.5px] font-semibold uppercase tracking-wide whitespace-nowrap ${i === 0 ? "text-left" : "text-right"}`}>
                 {h}
               </th>
@@ -222,24 +240,27 @@ function ManedligTabell() {
             <tr key={m.mnd} className={i % 2 ? "bg-surface/40" : "bg-paper"}>
               <td className="border-b border-line/40 px-3 py-2 font-medium text-ink">{m.mnd}</td>
               <td className="border-b border-line/40 px-3 py-2 text-right whitespace-nowrap">{m.sol.toLocaleString("nb-NO")}</td>
-              <td className="border-b border-line/40 px-3 py-2 text-right whitespace-nowrap">{m.bergvarme.toLocaleString("nb-NO")}</td>
               <td className="border-b border-line/40 px-3 py-2 text-right whitespace-nowrap">{m.ovrig.toLocaleString("nb-NO")}</td>
-              <td className="border-b border-line/40 px-3 py-2 text-right whitespace-nowrap text-ink/70">{m.fellesPostP2.toLocaleString("nb-NO")}</td>
-              <td className="border-b border-line/40 px-3 py-2 text-right whitespace-nowrap text-save">{m.solBrukt.toLocaleString("nb-NO")}</td>
+              <td className="border-b border-line/40 px-3 py-2 text-right whitespace-nowrap text-ink/60">{m.bergvarme.toLocaleString("nb-NO")}</td>
+              <td className="border-b border-line/40 px-3 py-2 text-right whitespace-nowrap text-save">{m.solBruktIstad.toLocaleString("nb-NO")}</td>
               <td className="border-b border-line/40 px-3 py-2 text-right whitespace-nowrap text-warm-deep font-semibold">{m.solOverskudd.toLocaleString("nb-NO")}</td>
             </tr>
           ))}
           <tr className="bg-brand-50 font-bold">
             <td className="px-3 py-2.5 text-left text-ink">Sum</td>
             <td className="px-3 py-2.5 text-right whitespace-nowrap">{sum.sol.toLocaleString("nb-NO")}</td>
-            <td className="px-3 py-2.5 text-right whitespace-nowrap">{sum.bergvarme.toLocaleString("nb-NO")}</td>
             <td className="px-3 py-2.5 text-right whitespace-nowrap">{sum.ovrig.toLocaleString("nb-NO")}</td>
-            <td className="px-3 py-2.5 text-right whitespace-nowrap text-ink/70">{sum.fellesPostP2.toLocaleString("nb-NO")}</td>
-            <td className="px-3 py-2.5 text-right whitespace-nowrap text-save">{sum.solBrukt.toLocaleString("nb-NO")}</td>
+            <td className="px-3 py-2.5 text-right whitespace-nowrap text-ink/60">{sum.bergvarme.toLocaleString("nb-NO")}</td>
+            <td className="px-3 py-2.5 text-right whitespace-nowrap text-save">{sum.solBruktIstad.toLocaleString("nb-NO")}</td>
             <td className="px-3 py-2.5 text-right whitespace-nowrap text-warm-deep">{sum.solOverskudd.toLocaleString("nb-NO")}</td>
           </tr>
         </tbody>
       </table>
+      <div className="border-t border-line/40 bg-surface/30 px-4 py-3 text-[12.5px] text-muted">
+        Bergvarme er vist som referanse (post-P2 felles tilleggslast), men er
+        ikke trukket fra solar-overskuddet — overskuddet beregnes mot Istad alene
+        per beslutningsmodellen.
+      </div>
     </div>
   );
 }

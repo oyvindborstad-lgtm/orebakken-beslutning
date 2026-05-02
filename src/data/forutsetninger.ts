@@ -38,12 +38,18 @@ export const FORUTSETNINGER = {
     ],
     energibesparelseKWh: 3_633_610,
     bruttoSnittKrMnd: 2_772,
-    /** Netto FK-økning inkl. ny solar-modell (1,20 forbruk + 0,50 spot for salg). */
-    nettoSnittKrMnd: 1_257,
-    /** Oppvarmingsbesparelse (845) + solar dekker felles + salg (186) = 1 031 snitt. */
-    stromBespSnittKrMnd: 1_031,
-    /** Total solar-verdi snitt: forbruksverdi 803 849 + salgsinntekt 154 153 = 958 002 / 430 / 12. */
-    solenergiSnittKrMnd: 186,
+    /**
+     * Netto FK-økning snitt. Solar-modell:
+     *  - Solar dekker Istad felles direkte (492 329 kWh × 1,20 = 590 795 kr/år)
+     *    → reduserer FK, fordelt etter brøk
+     *  - Solar overskudd (485 851 kWh × 1,20 = 583 021 kr/år) til andelseiere
+     *    via m² (overskuddsdeling). Total: 1 173 816 kr/år.
+     */
+    nettoSnittKrMnd: 1_216,
+    /** Oppvarmingsbesparelse (845) + solar total (227) = 1 072 snitt. */
+    stromBespSnittKrMnd: 1_072,
+    /** Solar snitt: 114 (brøk-FK-reduksjon) + 113 (areal-overskudd) = 227 kr/mnd. */
+    solenergiSnittKrMnd: 227,
     skattefradragSnittKrMnd: 484,
   },
   /**
@@ -88,10 +94,13 @@ export const FORUTSETNINGER = {
     bergvarmeReduserer: 0.75,
     solcelleProduksjonKWh: 978_180,
     bergvarmeEgetForbrukKWh: 1_128_018,
-    /** Solar dekker felles direkte (når sol ≤ felles, mest av året). */
-    solcelleBruktTilFellesKWh: 669_874,
-    /** Solar overskudd som selges til nettet (mai–aug, der sol > felles). */
-    solcelleOverskuddSommerKWh: 308_306,
+    /** Solar dekker Istad-fellesforbruket direkte (sum av min(sol, istad) per mnd). */
+    solcelleBruktTilFellesKWh: 492_329,
+    /**
+     * Solar overskudd (sol > Istad i mai–sep) → fordeles til andelseiere
+     * etter m² som privat strømkreditt (overskuddsdeling).
+     */
+    solcelleOverskuddSommerKWh: 485_851,
     enovaBekreftet: 31_375_000,
     enovaSokerFor: 9,
     enovaInnvilgetFor: 4,

@@ -105,10 +105,10 @@ export default function Bakgrunn() {
             <strong>354,2 millioner kroner</strong> over 40 år til 4,90 % rente
             (grønt lån). Brutto økning i felleskostnad er{" "}
             <strong>+2 772 kr/mnd</strong> i snitt. Netto økning er{" "}
-            <strong>+1 257 kr/mnd</strong> i snitt — inkludert
+            <strong>+1 216 kr/mnd</strong> i snitt — inkludert
             strømbesparelse fra bergvarme/isolasjon, solenergi som dekker
-            felles strøm + selger sommer-overskudd, og skattefradrag, basert
-            på Elvia-totalen 5,57 mill kWh/år og Istad-data 2025.
+            Istad-felles + overskudd til andelseiere via m², og skattefradrag,
+            basert på Elvia-totalen 5,57 mill kWh/år og Istad-data 2025.
           </Pakke>
         </div>
 
@@ -253,27 +253,28 @@ export default function Bakgrunn() {
           </Faq>
           <Faq q="Hvordan brukes solenergien? Får jeg noe ut av det?">
             Solcelleanlegget på takene produserer ca.{" "}
-            <strong>978 180 kWh per år</strong>. Faktisk fellesareal-forbruk
-            (Istad 2025) er ca. <strong>1 136 200 kWh/år</strong>. Strømmen
-            brukes først til å dekke felleskostnadene direkte — solenergien
-            dekker ca. 86 % av fellesarealets strømbruk. Reduksjonen i
-            felleskostnaden tilfaller alle andelseiere etter eierbrøk og
-            tilsvarer i snitt ca. <strong>228 kr/mnd</strong> per andel.
+            <strong>978 180 kWh per år</strong>. Modellen er todelt:
             <br />
             <br />
-            Solenergi-effekten er <strong>inkludert</strong> i netto FK-økning
-            som vises i tabellene. Brutto FK gir en økning på ca. 2 772 kr/mnd
-            (snitt), men oppvarmingsbesparelse fra bergvarme (845 kr/mnd) +
-            solenergi som dekker felles + salg av sommer-overskudd (186 kr/mnd)
-            + skattefradrag (484 kr/mnd) reduserer netto til ca. 1 257 kr/mnd.
-            Pakke 1+2 ender altså opp med å koste deg{" "}
-            <strong>ca. 376 kr/mnd mer</strong> enn Pakke 1 alene — det er den
-            marginale merkostnaden for tilleggspakken.
+            <strong>1) Solar dekker Istad-felles direkte</strong> (492 329 kWh
+            × 1,20 kr = 590 795 kr/år). Reduserer felleskostnaden og fordeles
+            på andelseiere etter eierbrøk — ca. 114 kr/mnd snitt.
             <br />
             <br />
-            Resterende fellesareal-strøm etter solenergi (ca. 158 000 kWh/år)
-            fordeles på andelseiere etter areal (m²), siden strømforbruk
-            henger sammen med boligstørrelse.
+            <strong>2) Solar overskudd om sommeren til andelseiere via m²</strong>
+            {" "}(485 851 kWh × 1,20 kr = 583 021 kr/år). Krediteres direkte på
+            din private strømregning fordelt etter areal — ca. 113 kr/mnd
+            snitt for 81,5 m².
+            <br />
+            <br />
+            Total solar-effekt for andelseier-snittet: ca.{" "}
+            <strong>227 kr/mnd</strong>, fordelt på de to fordelingene over.
+            Begge er inkludert i netto FK-økning som vises i tabellene. Brutto
+            FK gir en økning på ca. 2 772 kr/mnd (snitt), men
+            oppvarmingsbesparelse fra bergvarme (845 kr/mnd) + solenergi (227
+            kr/mnd) + skattefradrag (484 kr/mnd) reduserer netto til ca.{" "}
+            <strong>1 216 kr/mnd</strong>. Pakke 1+2 ender altså opp med å
+            koste deg <strong>ca. 335 kr/mnd mer</strong> enn Pakke 1 alene.
           </Faq>
           <Faq q="Hva med de 9 blokkene som ikke har fått Enova-støtte ennå?">
             Styret har bestemt seg for å installere bergvarme og solceller i{" "}

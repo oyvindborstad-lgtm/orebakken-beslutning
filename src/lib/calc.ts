@@ -10,21 +10,42 @@ const { felles, pakke1 } = FORUTSETNINGER;
 const P1_REDUKSJONS_FAKTOR = pakke1.energibesparelseKWh / felles.oppvarmingTotalKWh;
 
 /**
- * Total solenergi-verdi (kr/år) basert på to-pris-modellen:
- * - Solar som dekker felles direkte: forbrukspris (1,20 kr/kWh)
- * - Solar overskudd som selges til nettet: spot-pris (0,50 kr/kWh)
+ * Verdi av solar som dekker Istad-fellesforbruket (kr/år).
+ * Reduserer FK-budsjettet → fordelt etter brøk.
  */
-export const TOTAL_SOLAR_VERDI_KR_AR =
-  felles.solcelleBruktTilFellesKWh * felles.stromPrisKrPerKWh +
-  felles.solcelleOverskuddSommerKWh * felles.salgsprisKrPerKWh;
+export const SOLAR_DEKKER_FELLES_KR_AR =
+  felles.solcelleBruktTilFellesKWh * felles.stromPrisKrPerKWh;
 
 /**
- * Solenergi-fordel for en gitt brøk: andel × total solar-verdi / 12.
- * Modellen er at solar reduserer felleskostnaden (forbruk dekket + salg
- * inntekt) og fordelen tilfaller andelseiere etter brøk.
+ * Verdi av solar overskudd (kr/år).
+ * Fordeles til andelseiere etter m² (overskuddsdeling) ved forbrukspris.
+ */
+export const SOLAR_OVERSKUDD_KR_AR =
+  felles.solcelleOverskuddSommerKWh * felles.stromPrisKrPerKWh;
+
+/** Total solenergi-verdi (kr/år) for andelseiere samlet. */
+export const TOTAL_SOLAR_VERDI_KR_AR =
+  SOLAR_DEKKER_FELLES_KR_AR + SOLAR_OVERSKUDD_KR_AR;
+
+/**
+ * Solenergi-fordel per andel basert på todelt fordeling:
+ *  - Brøk-del: andel × solar-dekning av Istad / 12 (FK-reduksjon)
+ *  - Areal-del: (areal/totalt) × solar-overskudd / 12 (privat kreditt via m²)
+ */
+export function solenergiKrMndForAndel(brok: number, areal: number): number {
+  const brokDel = (brok * SOLAR_DEKKER_FELLES_KR_AR) / 12;
+  const arealDel =
+    ((areal / felles.totaltAreal) * SOLAR_OVERSKUDD_KR_AR) / 12;
+  return brokDel + arealDel;
+}
+
+/**
+ * Backward-compat: solenergi for kun brøk (uten areal-input).
+ * Antar snitt-areal for å gi en omtrentlig verdi tilpasset 1/430.
  */
 export function solenergiKrMndForBrok(brok: number): number {
-  return (brok * TOTAL_SOLAR_VERDI_KR_AR) / 12;
+  const snittAreal = felles.totaltAreal / felles.antallAndeler;
+  return solenergiKrMndForAndel(brok, snittAreal);
 }
 
 export function solenergiKWhForBrok(brok: number): number {
