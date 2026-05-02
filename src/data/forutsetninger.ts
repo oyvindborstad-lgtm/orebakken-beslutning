@@ -38,55 +38,60 @@ export const FORUTSETNINGER = {
     ],
     energibesparelseKWh: 3_633_610,
     bruttoSnittKrMnd: 2_772,
-    nettoSnittKrMnd: 1_215,
-    stromBespSnittKrMnd: 1_073,
-    solenergiSnittKrMnd: 228,
+    /** Netto FK-økning inkl. ny solar-modell (1,20 forbruk + 0,50 spot for salg). */
+    nettoSnittKrMnd: 1_257,
+    /** Oppvarmingsbesparelse (845) + solar dekker felles + salg (186) = 1 031 snitt. */
+    stromBespSnittKrMnd: 1_031,
+    /** Total solar-verdi snitt: forbruksverdi 803 849 + salgsinntekt 154 153 = 958 002 / 430 / 12. */
+    solenergiSnittKrMnd: 186,
     skattefradragSnittKrMnd: 484,
   },
   /**
-   * Månedlig energi-balanse (kWh) — Dråpe AS (bergvarme) og Fusen (solceller).
-   * Sol = produksjon, bergvarme = pumpens eget el-forbruk, øvrig = konstant
-   * fellesareal-forbruk. Overskudd = sol som ikke trengs (kan selges).
+   * Månedlig energi-balanse (kWh).
+   * - sol = solcelleproduksjon (Fusen energirapport)
+   * - bergvarme = pumpens eget el-forbruk (Dråpe AS)
+   * - ovrig = faktisk fellesareal-strøm 2025 (Istad Kraft, full kalenderår)
+   *
+   * Felles post-P2 = bergvarme + ovrig. Solenergi dekker først felles, og
+   * det som er igjen om sommeren selges som overskudd til nettet.
    */
   manedlig: [
-    { mnd: "Jan", sol: 19_180, bergvarme: 182_323, ovrig: 99_276 },
-    { mnd: "Feb", sol: 28_770, bergvarme: 164_279, ovrig: 99_276 },
-    { mnd: "Mar", sol: 38_360, bergvarme: 122_598, ovrig: 99_276 },
-    { mnd: "Apr", sol: 67_130, bergvarme: 70_906, ovrig: 99_276 },
-    { mnd: "Mai", sol: 115_080, bergvarme: 40_283, ovrig: 99_276 },
-    { mnd: "Jun", sol: 163_030, bergvarme: 29_718, ovrig: 99_276 },
-    { mnd: "Jul", sol: 191_800, bergvarme: 28_084, ovrig: 99_276 },
-    { mnd: "Aug", sol: 182_210, bergvarme: 33_374, ovrig: 99_276 },
-    { mnd: "Sep", sol: 95_900, bergvarme: 59_117, ovrig: 99_276 },
-    { mnd: "Okt", sol: 47_950, bergvarme: 91_108, ovrig: 99_276 },
-    { mnd: "Nov", sol: 9_590, bergvarme: 134_766, ovrig: 99_276 },
-    { mnd: "Des", sol: 19_180, bergvarme: 171_462, ovrig: 99_276 },
+    { mnd: "Jan", sol: 19_180, bergvarme: 182_323, ovrig: 158_563 },
+    { mnd: "Feb", sol: 28_770, bergvarme: 164_279, ovrig: 144_242 },
+    { mnd: "Mar", sol: 38_360, bergvarme: 122_598, ovrig: 153_842 },
+    { mnd: "Apr", sol: 67_130, bergvarme: 70_906, ovrig: 117_136 },
+    { mnd: "Mai", sol: 115_080, bergvarme: 40_283, ovrig: 59_175 },
+    { mnd: "Jun", sol: 163_030, bergvarme: 29_718, ovrig: 57_076 },
+    { mnd: "Jul", sol: 191_800, bergvarme: 28_084, ovrig: 47_688 },
+    { mnd: "Aug", sol: 182_210, bergvarme: 33_374, ovrig: 48_416 },
+    { mnd: "Sep", sol: 95_900, bergvarme: 59_117, ovrig: 49_814 },
+    { mnd: "Okt", sol: 47_950, bergvarme: 91_108, ovrig: 58_745 },
+    { mnd: "Nov", sol: 9_590, bergvarme: 134_766, ovrig: 94_017 },
+    { mnd: "Des", sol: 19_180, bergvarme: 171_462, ovrig: 147_486 },
   ],
   felles: {
     antallAndeler: 430,
     antallBlokker: 13,
     totaltAreal: 35_038.6,
-    /**
-     * Privat strømforbruk (sum av andelseiere, fra Elvia per 26.02.2026).
-     * Felles strøm er separat — se fellesForbrukKWh.
-     */
+    /** Privat strømforbruk (sum av andelseiere, Elvia per 26.02.2026). */
     totalForbrukKWh: 5_570_863,
-    /**
-     * Faktisk fellesareal-strøm 2025 fra Istad (12 mnd). Solenergi dekker
-     * den første delen (978 180 kWh); resterende ~158 000 kWh fordeles
-     * blant andelseierne etter areal.
-     */
+    /** Faktisk fellesareal-strøm 2025 (Istad Kraft, 12 mnd). */
     fellesForbrukKWh: 1_136_201,
     fellesKostnadKrAr: 1_363_441,
     /** 75 % av privatforbruket regnes som oppvarming + tappevann. */
     oppvarmingTotalKWh: 4_178_147,
     stromPrisKrPerKWh: 1.2,
+    /** Spot-pris for salg av solenergi-overskudd (konservativt anslag). */
+    salgsprisKrPerKWh: 0.5,
     skattesats: 0.22,
     byggforskOppvarmingsAndel: 0.75,
     bergvarmeReduserer: 0.75,
     solcelleProduksjonKWh: 978_180,
     bergvarmeEgetForbrukKWh: 1_128_018,
-    solcelleOverskuddSommerKWh: 148_036,
+    /** Solar dekker felles direkte (når sol ≤ felles, mest av året). */
+    solcelleBruktTilFellesKWh: 669_874,
+    /** Solar overskudd som selges til nettet (mai–aug, der sol > felles). */
+    solcelleOverskuddSommerKWh: 308_306,
     enovaBekreftet: 31_375_000,
     enovaSokerFor: 9,
     enovaInnvilgetFor: 4,

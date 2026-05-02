@@ -10,11 +10,21 @@ const { felles, pakke1 } = FORUTSETNINGER;
 const P1_REDUKSJONS_FAKTOR = pakke1.energibesparelseKWh / felles.oppvarmingTotalKWh;
 
 /**
- * Solenergi via overskuddsdeling for en gitt brøk: andel × årsproduksjon ×
- * strømpris / 12. Returnerer kr/mnd (positivt tall).
+ * Total solenergi-verdi (kr/år) basert på to-pris-modellen:
+ * - Solar som dekker felles direkte: forbrukspris (1,20 kr/kWh)
+ * - Solar overskudd som selges til nettet: spot-pris (0,50 kr/kWh)
+ */
+export const TOTAL_SOLAR_VERDI_KR_AR =
+  felles.solcelleBruktTilFellesKWh * felles.stromPrisKrPerKWh +
+  felles.solcelleOverskuddSommerKWh * felles.salgsprisKrPerKWh;
+
+/**
+ * Solenergi-fordel for en gitt brøk: andel × total solar-verdi / 12.
+ * Modellen er at solar reduserer felleskostnaden (forbruk dekket + salg
+ * inntekt) og fordelen tilfaller andelseiere etter brøk.
  */
 export function solenergiKrMndForBrok(brok: number): number {
-  return (brok * felles.solcelleProduksjonKWh * felles.stromPrisKrPerKWh) / 12;
+  return (brok * TOTAL_SOLAR_VERDI_KR_AR) / 12;
 }
 
 export function solenergiKWhForBrok(brok: number): number {

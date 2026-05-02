@@ -105,10 +105,10 @@ export default function Bakgrunn() {
             <strong>354,2 millioner kroner</strong> over 40 år til 4,90 % rente
             (grønt lån). Brutto økning i felleskostnad er{" "}
             <strong>+2 772 kr/mnd</strong> i snitt. Netto økning er{" "}
-            <strong>+1 215 kr/mnd</strong> i snitt — inkludert
-            strømbesparelse fra bergvarme/isolasjon, solenergi via
-            overskuddsdeling og skattefradrag, basert på Elvia-totalen 5,57
-            mill kWh/år.
+            <strong>+1 257 kr/mnd</strong> i snitt — inkludert
+            strømbesparelse fra bergvarme/isolasjon, solenergi som dekker
+            felles strøm + selger sommer-overskudd, og skattefradrag, basert
+            på Elvia-totalen 5,57 mill kWh/år og Istad-data 2025.
           </Pakke>
         </div>
 
@@ -264,10 +264,11 @@ export default function Bakgrunn() {
             Solenergi-effekten er <strong>inkludert</strong> i netto FK-økning
             som vises i tabellene. Brutto FK gir en økning på ca. 2 772 kr/mnd
             (snitt), men oppvarmingsbesparelse fra bergvarme (845 kr/mnd) +
-            solenergi-effekt (228 kr/mnd) + skattefradrag (484 kr/mnd)
-            reduserer netto til ca. 1 215 kr/mnd. Pakke 1+2 ender altså opp
-            med å koste deg <strong>ca. 334 kr/mnd mer</strong> enn Pakke 1
-            alene — det er den marginale merkostnaden for tilleggspakken.
+            solenergi som dekker felles + salg av sommer-overskudd (186 kr/mnd)
+            + skattefradrag (484 kr/mnd) reduserer netto til ca. 1 257 kr/mnd.
+            Pakke 1+2 ender altså opp med å koste deg{" "}
+            <strong>ca. 376 kr/mnd mer</strong> enn Pakke 1 alene — det er den
+            marginale merkostnaden for tilleggspakken.
             <br />
             <br />
             Resterende fellesareal-strøm etter solenergi (ca. 158 000 kWh/år)

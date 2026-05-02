@@ -5,6 +5,7 @@ import FindAndel from "./pages/FindAndel";
 import Result from "./pages/Result";
 import Bakgrunn from "./pages/Bakgrunn";
 import Grunnlag from "./pages/Grunnlag";
+import Underlag from "./pages/Underlag";
 
 export default function App() {
   return (
@@ -13,6 +14,7 @@ export default function App() {
         <Route path="/" component={Welcome} />
         <Route path="/bakgrunn" component={Bakgrunn} />
         <Route path="/grunnlag" component={Grunnlag} />
+        <Route path="/underlag" component={Underlag} />
         <Route path="/finn" component={FindAndel} />
         <Route path="/leilighet/:nr" component={Result} />
         <Route>

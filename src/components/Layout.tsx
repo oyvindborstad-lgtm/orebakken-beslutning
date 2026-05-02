@@ -6,6 +6,7 @@ const TABS = [
   { href: "/", label: "Sammendrag" },
   { href: "/bakgrunn", label: "Bakgrunn" },
   { href: "/grunnlag", label: "Grunnlag" },
+  { href: "/underlag", label: "Underlag" },
   { href: "/finn", label: "Min leilighet" },
 ];
 
