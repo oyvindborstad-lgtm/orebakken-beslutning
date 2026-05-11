@@ -105,12 +105,13 @@ export default function Bakgrunn() {
             <strong>337,2 millioner kroner</strong> over 40 år til 4,90 % rente
             (grønt lån). Brutto økning i felleskostnad er{" "}
             <strong>+2 584 kr/mnd</strong> i snitt. Netto økning er{" "}
-            <strong>+1 342 kr/mnd</strong> i snitt — inkludert
+            <strong>+1 353 kr/mnd</strong> i snitt — inkludert
             strømbesparelse fra bergvarme/isolasjon (719 kr/mnd: bergvarme
-            reduserer 75 % av privat oppvarming), solenergi som dekker
-            Istad-felles + overskudd til andelseiere via m² (227 kr/mnd), og
-            skattefradrag snitt (296 kr/mnd). Basert på oppdatert budsjettinput
-            11.05.2026.
+            reduserer 75 % av privat oppvarming), solenergi tredelt
+            (216 kr/mnd: felles-dekning brøk + overskuddsdeling areal +
+            spot-salg av ubrukt overskytende), og skattefradrag snitt
+            (296 kr/mnd). Basert på oppdatert budsjettinput 11.05.2026 og
+            strøm-/lade-oversikt 2024–2026.
           </Pakke>
         </div>
 
@@ -260,23 +261,28 @@ export default function Bakgrunn() {
             <br />
             <strong>1) Solar dekker Istad-felles direkte</strong> (492 329 kWh
             × 1,20 kr = 590 795 kr/år). Reduserer felleskostnaden og fordeles
-            på andelseiere etter eierbrøk — ca. 114 kr/mnd snitt.
+            på andelseiere etter eierbrøk.
             <br />
             <br />
-            <strong>2) Solar overskudd om sommeren til andelseiere via m²</strong>
-            {" "}(485 851 kWh × 1,20 kr = 583 021 kr/år). Krediteres direkte på
-            din private strømregning fordelt etter areal — ca. 113 kr/mnd
-            snitt for 81,5 m².
+            <strong>2) Solar overskuddsdeling til andelseiere via m²</strong>
+            {" "}(399 819 kWh × 1,20 kr = 479 783 kr/år). Krediteres direkte på
+            din private strømregning fordelt etter areal.
+            <br />
+            <br />
+            <strong>3) Solar selges til nettet (ubrukt overskytende)</strong>
+            {" "}(86 032 kWh × 0,50 kr spot = 43 016 kr/år). Salgsinntekten går
+            til BRL og reduserer felleskostnaden (brøk-fordelt).
             <br />
             <br />
             Total solar-effekt for andelseier-snittet: ca.{" "}
-            <strong>227 kr/mnd</strong>, fordelt på de to fordelingene over.
+            <strong>216 kr/mnd</strong> (123 kr brøk-fordelt FK-reduksjon +
+            93 kr areal-fordelt privat kreditt).
             Begge er inkludert i netto FK-økning som vises i tabellene. Brutto
             FK gir en økning på ca. 2 584 kr/mnd (snitt), men
-            oppvarmingsbesparelse fra bergvarme (719 kr/mnd) + solenergi (227
+            oppvarmingsbesparelse fra bergvarme (719 kr/mnd) + solenergi (216
             kr/mnd) + skattefradrag snitt (296 kr/mnd) reduserer netto til ca.{" "}
-            <strong>1 342 kr/mnd</strong>. Pakke 1+2 ender altså opp med å
-            koste deg <strong>ca. 523 kr/mnd mer</strong> enn Pakke 1 alene.
+            <strong>1 353 kr/mnd</strong>. Pakke 1+2 ender altså opp med å
+            koste deg <strong>ca. 534 kr/mnd mer</strong> enn Pakke 1 alene.
           </Faq>
           <Faq q="Hva med de 9 blokkene som ikke har fått Enova-støtte ennå?">
             Styret har bestemt seg for å installere bergvarme og solceller i{" "}

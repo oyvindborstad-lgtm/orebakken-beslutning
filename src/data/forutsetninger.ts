@@ -45,18 +45,24 @@ export const FORUTSETNINGER = {
     energibesparelseKWh: 3_091_753,
     bruttoSnittKrMnd: 2_584,
     /**
-     * Netto FK-økning snitt etter ny Excel 11.05.26 (lavere lånebeløp 337,225 mill).
-     * Solar-modell:
+     * Netto FK-økning snitt. Solar-modell (per HTML «Alle bygg – fordeling»):
      *  - Solar dekker Istad felles direkte (492 329 kWh × 1,20 = 590 795 kr/år)
-     *    → reduserer FK, fordelt etter brøk
-     *  - Solar overskudd (485 851 kWh × 1,20 = 583 021 kr/år) til andelseiere
-     *    via m² (overskuddsdeling). Total: 1 173 816 kr/år.
+     *    → reduserer FK, brøk-fordelt
+     *  - Solar overskuddsdeling til andelseiere (399 819 kWh × 1,20 = 479 783
+     *    kr/år), areal-fordelt
+     *  - Solar selges til nettet (86 032 kWh × 0,50 spot = 43 016 kr/år),
+     *    brøk-fordelt (BRL-inntekt → FK-reduksjon)
+     *  - Total solar-verdi: 1 113 594 kr/år
      */
-    nettoSnittKrMnd: 1_342,
-    /** Oppvarmingsbesparelse (719) + solar total (227) = 946 snitt. */
-    stromBespSnittKrMnd: 946,
-    /** Solar snitt: 114 (brøk-FK-reduksjon) + 113 (areal-overskudd) = 227 kr/mnd. */
-    solenergiSnittKrMnd: 227,
+    nettoSnittKrMnd: 1_353,
+    /** Oppvarmingsbesparelse (719) + solar total (216) = 935 snitt. */
+    stromBespSnittKrMnd: 935,
+    /**
+     * Solar snitt: 123 kr brøk-fordelt (FK-reduksjon fra Istad-dekning 492 329
+     * kWh + spot-salg 86 032 kWh) + 93 kr areal-fordelt (overskuddsdeling
+     * 399 819 kWh) = 216 kr/mnd.
+     */
+    solenergiSnittKrMnd: 216,
     skattefradragSnittKrMnd: 296,
   },
   /**
@@ -108,10 +114,16 @@ export const FORUTSETNINGER = {
     /** Solar dekker Istad-fellesforbruket direkte (sum av min(sol, istad) per mnd). */
     solcelleBruktTilFellesKWh: 492_329,
     /**
-     * Solar overskudd (sol > Istad i mai–sep) → fordeles til andelseiere
-     * etter m² som privat strømkreditt (overskuddsdeling).
+     * Solar overskudd til andelseiere via overskuddsdeling (mai–sep, sol > Istad
+     * men inntil andelseiernes private forbruk på 99 276 kWh/mnd snitt).
+     * Fra strøm- og lade-oversikt "Alle bygg – fordeling".
      */
-    solcelleOverskuddSommerKWh: 485_851,
+    solcelleOverskuddSommerKWh: 399_819,
+    /**
+     * Solar overskytende — kan ikke konsumeres internt og må selges til nettet
+     * ved spot-pris (forbruksprisen er forbeholdt egetforbruk).
+     */
+    solcelleSalgKWh: 86_032,
     enovaBekreftet: 31_375_000,
     enovaSokerFor: 9,
     enovaInnvilgetFor: 4,

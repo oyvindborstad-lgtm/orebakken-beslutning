@@ -47,11 +47,12 @@ export default function ComparisonTable({ andel }: { andel: Andel }) {
       label: "Solenergi (FK-reduksjon + overskuddsdeling)",
       info: (
         <>
-          Solcelleanlegget produserer 978 180 kWh/år. Strømmen brukes først til
-          å dekke fellesareal-strøm fra Istad (492 329 kWh) — denne delen
-          reduserer felleskostnaden og fordeles etter brøk. Resterende solar
-          (485 851 kWh) er overskudd om sommeren (mai–sep) som fordeles til
-          andelseiere etter areal (m²) som privat strømkreditt.
+          Solcelleanlegget produserer 978 180 kWh/år. Tredelt fordeling
+          (per «Alle bygg»-scenario i strøm-/lade-oversikt 2024–2026):
+          492 329 kWh dekker Istad-felles (brøk-fordelt FK-reduksjon),
+          399 819 kWh går til andelseiere via overskuddsdeling (areal-
+          fordelt på private målere), 86 032 kWh selges til nettet ved
+          spot-pris og inntekten reduserer FK (brøk-fordelt).
         </>
       ),
       p1: 0,

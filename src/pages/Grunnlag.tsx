@@ -112,13 +112,13 @@ export default function Grunnlag() {
         </h3>
         <FkTabell
           rows={[
-            ["B – 54,7 m² (20 and.)", "3 935", "5 932", "+1 997", "−657", "−542", "+798", "4 733"],
-            ["G – 74,6 m² (32 and.)", "4 876", "7 351", "+2 475", "−875", "−672", "+928", "5 804"],
-            ["J – 81,3 m² (105 and.)", "5 134", "7 740", "+2 606", "−947", "−708", "+951", "6 085"],
-            ["L – 85,5 m² (63 and.)", "5 323", "8 024", "+2 701", "−992", "−734", "+975", "6 298"],
-            ["M – 89,7 m² (126 and.)", "5 405", "8 148", "+2 743", "−1 037", "−745", "+961", "6 366"],
+            ["B – 54,7 m² (20 and.)", "3 935", "5 932", "+1 997", "−640", "−542", "+815", "4 750"],
+            ["G – 74,6 m² (32 and.)", "4 876", "7 351", "+2 475", "−861", "−672", "+942", "5 818"],
+            ["J – 81,3 m² (105 and.)", "5 134", "7 740", "+2 606", "−934", "−708", "+964", "6 098"],
+            ["L – 85,5 m² (63 and.)", "5 323", "8 024", "+2 701", "−980", "−734", "+987", "6 310"],
+            ["M – 89,7 m² (126 and.)", "5 405", "8 148", "+2 743", "−1 028", "−745", "+970", "6 375"],
           ]}
-          snitt={["Vektet snitt — 430 andeler", "5 092", "7 677", "+2 584", "−946", "−296", "+1 342", "6 434"]}
+          snitt={["Vektet snitt — 430 andeler", "5 092", "7 677", "+2 584", "−935", "−296", "+1 353", "6 445"]}
           headerNyFu="Ny FK P1+2 brutto"
           headerNetto="Ny FK P1+2 netto"
           stromCol="Strøm + sol"
@@ -156,9 +156,9 @@ export default function Grunnlag() {
 
         <div className="mt-5 overflow-hidden rounded-2xl border border-line/70">
           <Row header label="Scenario" v1="Enova totalt" v2="P1+2 netto økning/mnd" />
-          <Row label="Kun bekreftet (4 blokker, april 2026)" v1="31 375 000" v2="+1 342 kr" />
-          <Row label="+ 30 MNOK fra 9 nye søknader (lavt anslag)" v1="61 375 000" v2="ca. +1 037 kr" />
-          <Row label="+ 40 MNOK fra 9 nye søknader (høyt anslag)" v1="71 375 000" v2="ca. +935 kr" />
+          <Row label="Kun bekreftet (4 blokker, april 2026)" v1="31 375 000" v2="+1 353 kr" />
+          <Row label="+ 30 MNOK fra 9 nye søknader (lavt anslag)" v1="61 375 000" v2="ca. +1 048 kr" />
+          <Row label="+ 40 MNOK fra 9 nye søknader (høyt anslag)" v1="71 375 000" v2="ca. +946 kr" />
         </div>
       </section>
 
@@ -292,7 +292,7 @@ export default function Grunnlag() {
           Modellen bygger på punkt-estimater. Tabellen under viser hvordan
           andelseiers <strong>netto FK-økning</strong> for Pakke 1+2 kan endre
           seg ved variasjoner i sentrale forutsetninger. Snitt-andelen ligger
-          i dag på +1 342 kr/mnd; tallene under viser endring fra dette nivået.
+          i dag på +1 353 kr/mnd; tallene under viser endring fra dette nivået.
         </p>
 
         <div className="mt-5 overflow-hidden rounded-2xl border border-line/70">
@@ -339,9 +339,9 @@ export default function Grunnlag() {
         <div className="mt-5 overflow-hidden rounded-2xl border border-line/70">
           <Row header label="Differanse P1+2 vs P1" v1="Snitt per andel" v2="Per år" />
           <Row label="Brutto FK-økning" v1="+1 520 kr/mnd" v2="18 240 kr" />
-          <Row label="Ekstra strømbesparelse + solenergi" v1="−830 kr/mnd" v2="−9 960 kr" />
+          <Row label="Ekstra strømbesparelse + solenergi" v1="−819 kr/mnd" v2="−9 828 kr" />
           <Row label="Ekstra skattefradrag" v1="−229 kr/mnd" v2="−2 748 kr" />
-          <Row label="Marginal netto merkostnad" v1="+523 kr/mnd" v2="6 276 kr" total />
+          <Row label="Marginal netto merkostnad" v1="+534 kr/mnd" v2="6 408 kr" total />
         </div>
         <div className="mt-4 text-[13.5px] leading-relaxed text-muted sm:text-[14px]">
           For andelseiere med stort eget boliglån kan den marginale gevinsten
@@ -358,14 +358,15 @@ export default function Grunnlag() {
         </h2>
         <p className="mt-4 leading-relaxed text-ink/85">
           Netto økning i felleskostnad er <strong>881 kr/mnd</strong> for Pakke
-          1 og <strong>1 342 kr/mnd</strong> for Pakke 1+2 (snitt for alle 430
+          1 og <strong>1 353 kr/mnd</strong> for Pakke 1+2 (snitt for alle 430
           andeler). Brutto økning er hhv. 1 183 og 2 584 kr/mnd. Fradragene som
           bringer brutto ned til netto er strømbesparelse oppvarming (719
           kr/mnd snitt for P2 — bergvarme reduserer 75 % av privat oppvarming,
-          ikke totalforbruket), solenergi (227 kr/mnd snitt — 114 kr brøk-FK +
-          113 kr areal-overskudd) og skattefradrag (296 kr/mnd snitt). Tallene
-          er basert på Elvia-totalen 5,57 mill kWh, Istad-data 2024–2026, og
-          oppdaterte investeringer fra budsjettinput 11.05.2026.
+          ikke totalforbruket), solenergi (216 kr/mnd snitt — 123 kr brøk-FK
+          fra felles-dekning + salgsinntekt, 93 kr areal-overskuddsdeling) og
+          skattefradrag (296 kr/mnd snitt). Tallene er basert på Elvia-totalen
+          5,57 mill kWh, Istad-data 2024–2026, og oppdatert budsjettinput
+          11.05.2026.
         </p>
         <div className="mt-5 rounded-2xl border-l-4 border-warm bg-paper px-5 py-4 text-[14.5px] leading-relaxed text-ink/85">
           <strong>Styrets rolle:</strong> Styret fremmer begge pakker som

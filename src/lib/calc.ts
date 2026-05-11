@@ -10,30 +10,39 @@ const { felles, pakke1 } = FORUTSETNINGER;
 const P1_REDUKSJONS_FAKTOR = pakke1.energibesparelseKWh / felles.oppvarmingTotalKWh;
 
 /**
- * Verdi av solar som dekker Istad-fellesforbruket (kr/år).
+ * Verdi av solar som dekker Istad-fellesforbruket direkte (kr/år).
  * Reduserer FK-budsjettet → fordelt etter brøk.
  */
 export const SOLAR_DEKKER_FELLES_KR_AR =
   felles.solcelleBruktTilFellesKWh * felles.stromPrisKrPerKWh;
 
 /**
- * Verdi av solar overskudd (kr/år).
- * Fordeles til andelseiere etter m² (overskuddsdeling) ved forbrukspris.
+ * Verdi av solar som går til andelseiere via overskuddsdeling (kr/år).
+ * Begrenset til andelseiernes private forbruk (kan ikke overskride dette).
+ * Fordeles etter m² ved forbrukspris.
  */
 export const SOLAR_OVERSKUDD_KR_AR =
   felles.solcelleOverskuddSommerKWh * felles.stromPrisKrPerKWh;
 
-/** Total solenergi-verdi (kr/år) for andelseiere samlet. */
+/**
+ * Verdi av solar som selges til nettet (overskytende strøm, kan ikke
+ * konsumeres internt). Spot-pris er konservativt anslått. BRL-inntekt →
+ * brøk-fordelt FK-reduksjon.
+ */
+export const SOLAR_SALG_KR_AR =
+  felles.solcelleSalgKWh * felles.salgsprisKrPerKWh;
+
+/** Total solenergi-verdi (kr/år). */
 export const TOTAL_SOLAR_VERDI_KR_AR =
-  SOLAR_DEKKER_FELLES_KR_AR + SOLAR_OVERSKUDD_KR_AR;
+  SOLAR_DEKKER_FELLES_KR_AR + SOLAR_OVERSKUDD_KR_AR + SOLAR_SALG_KR_AR;
 
 /**
- * Solenergi-fordel per andel basert på todelt fordeling:
- *  - Brøk-del: andel × solar-dekning av Istad / 12 (FK-reduksjon)
- *  - Areal-del: (areal/totalt) × solar-overskudd / 12 (privat kreditt via m²)
+ * Solenergi-fordel per andel basert på tredelt fordeling:
+ *  - Brøk-del (FK-reduksjon): andel × (felles-dekning + salgsinntekt) / 12
+ *  - Areal-del (overskuddsdeling): (areal/total) × overskudd / 12
  */
 export function solenergiKrMndForAndel(brok: number, areal: number): number {
-  const brokDel = (brok * SOLAR_DEKKER_FELLES_KR_AR) / 12;
+  const brokDel = (brok * (SOLAR_DEKKER_FELLES_KR_AR + SOLAR_SALG_KR_AR)) / 12;
   const arealDel =
     ((areal / felles.totaltAreal) * SOLAR_OVERSKUDD_KR_AR) / 12;
   return brokDel + arealDel;

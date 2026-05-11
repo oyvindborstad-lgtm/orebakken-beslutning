@@ -345,25 +345,26 @@ function DiffBox() {
         <DiffRow
           label="Strømbesp. + solenergi"
           p1="116 kr/mnd"
-          p2="946 kr/mnd"
-          diff="−830 kr/mnd"
+          p2="935 kr/mnd"
+          diff="−819 kr/mnd"
           diffSave
         />
         <DiffRow
           label="Netto FK-økning"
           p1="+819 kr/mnd"
-          p2="+1 342 kr/mnd"
-          diff="+523 kr/mnd"
+          p2="+1 353 kr/mnd"
+          diff="+534 kr/mnd"
           bold
         />
       </div>
       <p className="mt-4 text-[12.5px] leading-relaxed text-muted sm:text-[13px]">
         Pakke 1+2 har 1 401 kr/mnd høyere bruttoøkning enn Pakke 1, men gir
-        830 kr/mnd ekstra strømbesparelse (oppvarming + solenergi som dekker
-        Istad-felles + overskudd til andelseiere via m²) og 48 kr/mnd ekstra
-        skattefradrag (snitt). Netto merkostnad for Pakke 1+2 vs Pakke 1:
-        523 kr/mnd. Snitt for alle 430 andeler, basert på oppdatert
-        budsjettinput 11.05.2026 og Elvia-totalen 5,57 mill kWh.
+        819 kr/mnd ekstra strømbesparelse (oppvarming + solenergi som dekker
+        Istad-felles, overskudd til andelseiere via m², og spot-salg av
+        ubrukt overskytende) og 48 kr/mnd ekstra skattefradrag (snitt). Netto
+        merkostnad for Pakke 1+2 vs Pakke 1: 534 kr/mnd. Snitt for alle 430
+        andeler, basert på oppdatert budsjettinput 11.05.2026 og strøm-/lade-
+        oversikt 2024–2026.
       </p>
     </div>
   );

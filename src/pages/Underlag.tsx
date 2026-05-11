@@ -41,9 +41,10 @@ export default function Underlag() {
 
       <Section icon={<Calculator size={20} />} avsnitt="Avsnitt 2" tittel="Solenergi — todelt fordeling">
         <p className="text-[14.5px] leading-relaxed text-ink/80">
-          Solcelleproduksjonen (978 180 kWh/år) sammenlignes mot Istad
-          fellesforbruk per måned. Solar dekker Istad direkte (492 329 kWh,
-          mest av året); resterende 485 851 kWh er sommer-overskudd (mai–sep).
+          Solcelleproduksjonen (978 180 kWh/år) fordeles tredelt (per «Alle
+          bygg»-scenario i strøm-/lade-oversikt 2024–2026): 492 329 kWh
+          dekker Istad-felles direkte; 399 819 kWh går til andelseiere via
+          overskuddsdeling; 86 032 kWh selges til nettet ved spot-pris.
         </p>
         <ul className="mt-3 space-y-2 text-[14px] leading-relaxed text-ink/85">
           <li className="flex gap-2.5">
@@ -59,18 +60,28 @@ export default function Underlag() {
           <li className="flex gap-2.5">
             <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-warm-deep" />
             <span>
-              <strong>Solar overskudd til andelseiere via m²:</strong>{" "}
+              <strong>Solar overskuddsdeling til andelseiere via m²:</strong>{" "}
               {felles.solcelleOverskuddSommerKWh.toLocaleString("nb-NO")} kWh ×
               1,20 kr/kWh = <strong>{kr(felles.solcelleOverskuddSommerKWh * felles.stromPrisKrPerKWh)}/år</strong>.
               Krediteres direkte på andelseiers strømregning fordelt etter
-              areal (m²), siden strømforbruk korrelerer med boligstørrelse.
+              areal (m²).
+            </span>
+          </li>
+          <li className="flex gap-2.5">
+            <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-warm" />
+            <span>
+              <strong>Solar selges til nettet (ubrukt overskytende):</strong>{" "}
+              {felles.solcelleSalgKWh.toLocaleString("nb-NO")} kWh ×
+              {" "}{felles.salgsprisKrPerKWh.toString().replace(".", ",")} kr/kWh (spot) ={" "}
+              <strong>{kr(felles.solcelleSalgKWh * felles.salgsprisKrPerKWh)}/år</strong>.
+              Inntekten tilfaller BRL og reduserer felleskostnaden (brøk-fordelt).
             </span>
           </li>
         </ul>
         <div className="mt-4 rounded-xl bg-save-bg/60 px-5 py-4 text-[14px]">
           <strong>Total solar-verdi:</strong> {kr(TOTAL_SOLAR_VERDI_KR_AR)}/år
           → snitt per andel ca. {kr(TOTAL_SOLAR_VERDI_KR_AR / 430 / 12)}/mnd
-          (ca. 114 kr brøk-FK-reduksjon + 113 kr areal-overskudd).
+          (ca. 123 kr brøk-fordelt FK-reduksjon + 93 kr areal-overskuddsdeling).
         </div>
       </Section>
 
@@ -357,7 +368,7 @@ function Folsomhetsanalyse() {
     <div>
       <p className="text-[14.5px] leading-relaxed text-ink/80">
         Justér forutsetningene under for å se hvordan netto FK-økning P2 endrer
-        seg fra dagens estimat (+1 342 kr/mnd snitt). Tabellen er beregnet
+        seg fra dagens estimat (+1 353 kr/mnd snitt). Tabellen er beregnet
         live; tallene oppdateres mens du beveger glidebryterne.
       </p>
       <div className="mt-4 space-y-4 rounded-2xl border border-line/70 bg-surface/30 p-4 sm:p-5">
