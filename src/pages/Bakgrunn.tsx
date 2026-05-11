@@ -105,10 +105,12 @@ export default function Bakgrunn() {
             <strong>354,2 millioner kroner</strong> over 40 år til 4,90 % rente
             (grønt lån). Brutto økning i felleskostnad er{" "}
             <strong>+2 772 kr/mnd</strong> i snitt. Netto økning er{" "}
-            <strong>+1 216 kr/mnd</strong> i snitt — inkludert
-            strømbesparelse fra bergvarme/isolasjon, solenergi som dekker
-            Istad-felles + overskudd til andelseiere via m², og skattefradrag,
-            basert på Elvia-totalen 5,57 mill kWh/år og Istad-data 2025.
+            <strong>+1 342 kr/mnd</strong> i snitt — inkludert
+            strømbesparelse fra bergvarme/isolasjon (719 kr/mnd: bergvarme
+            reduserer 75 % av privat oppvarming), solenergi som dekker
+            Istad-felles + overskudd til andelseiere via m² (227 kr/mnd), og
+            skattefradrag (484 kr/mnd). Basert på Elvia-totalen 5,57 mill
+            kWh/år og Istad-data 2024–2026.
           </Pakke>
         </div>
 
@@ -271,10 +273,10 @@ export default function Bakgrunn() {
             <strong>227 kr/mnd</strong>, fordelt på de to fordelingene over.
             Begge er inkludert i netto FK-økning som vises i tabellene. Brutto
             FK gir en økning på ca. 2 772 kr/mnd (snitt), men
-            oppvarmingsbesparelse fra bergvarme (845 kr/mnd) + solenergi (227
+            oppvarmingsbesparelse fra bergvarme (719 kr/mnd) + solenergi (227
             kr/mnd) + skattefradrag (484 kr/mnd) reduserer netto til ca.{" "}
-            <strong>1 216 kr/mnd</strong>. Pakke 1+2 ender altså opp med å
-            koste deg <strong>ca. 335 kr/mnd mer</strong> enn Pakke 1 alene.
+            <strong>1 342 kr/mnd</strong>. Pakke 1+2 ender altså opp med å
+            koste deg <strong>ca. 461 kr/mnd mer</strong> enn Pakke 1 alene.
           </Faq>
           <Faq q="Hva med de 9 blokkene som ikke har fått Enova-støtte ennå?">
             Styret har bestemt seg for å installere bergvarme og solceller i{" "}

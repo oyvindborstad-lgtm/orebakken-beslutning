@@ -36,7 +36,13 @@ export const FORUTSETNINGER = {
       "Uforutsette kostnader (34,6 mill — 10 % av total)",
       "− Enova-støtte (31,375 mill)",
     ],
-    energibesparelseKWh: 3_633_610,
+    /**
+     * Oppvarmings-besparelse P2:
+     * - P1 fasade-isolasjon: 500 000 kWh
+     * - Bergvarme reduserer 75 % av privat oppvarming (75 % × 3 455 671) = 2 591 753 kWh
+     * - Sum: 3 091 753 kWh
+     */
+    energibesparelseKWh: 3_091_753,
     bruttoSnittKrMnd: 2_772,
     /**
      * Netto FK-økning snitt. Solar-modell:
@@ -45,9 +51,9 @@ export const FORUTSETNINGER = {
      *  - Solar overskudd (485 851 kWh × 1,20 = 583 021 kr/år) til andelseiere
      *    via m² (overskuddsdeling). Total: 1 173 816 kr/år.
      */
-    nettoSnittKrMnd: 1_216,
-    /** Oppvarmingsbesparelse (845) + solar total (227) = 1 072 snitt. */
-    stromBespSnittKrMnd: 1_072,
+    nettoSnittKrMnd: 1_342,
+    /** Oppvarmingsbesparelse (719) + solar total (227) = 946 snitt. */
+    stromBespSnittKrMnd: 946,
     /** Solar snitt: 114 (brøk-FK-reduksjon) + 113 (areal-overskudd) = 227 kr/mnd. */
     solenergiSnittKrMnd: 227,
     skattefradragSnittKrMnd: 484,
@@ -79,13 +85,17 @@ export const FORUTSETNINGER = {
     antallAndeler: 430,
     antallBlokker: 13,
     totaltAreal: 35_038.6,
-    /** Privat strømforbruk (sum av andelseiere, Elvia per 26.02.2026). */
+    /** Totalt strømforbruk borettslaget (Elvia per 26.02.2026). */
     totalForbrukKWh: 5_570_863,
-    /** Faktisk fellesareal-strøm 2025 (Istad Kraft, 12 mnd). */
-    fellesForbrukKWh: 1_136_201,
-    fellesKostnadKrAr: 1_363_441,
-    /** 75 % av privatforbruket regnes som oppvarming + tappevann. */
-    oppvarmingTotalKWh: 4_178_147,
+    /** Snitt fellesareal-strøm (Istad Kraft, 3-års snitt 2024–2026). */
+    fellesForbrukKWh: 963_302,
+    fellesKostnadKrAr: 1_155_962,
+    /**
+     * Privat oppvarming + tappevann.
+     * Privat = total − felles = 5 570 863 − 963 302 = 4 607 561 kWh.
+     * 75 % × privat = 3 455 671 kWh (Byggforsk-norm).
+     */
+    oppvarmingTotalKWh: 3_455_671,
     stromPrisKrPerKWh: 1.2,
     /** Spot-pris for salg av solenergi-overskudd (konservativt anslag). */
     salgsprisKrPerKWh: 0.5,
