@@ -68,25 +68,24 @@ export const FORUTSETNINGER = {
   /**
    * Månedlig energi-balanse (kWh).
    * - sol = solcelleproduksjon (Fusen energirapport)
-   * - bergvarme = pumpens eget el-forbruk (Dråpe AS)
+   * - bergvarme = pumpens eget el-forbruk (oppvarming/tappevann minus
+   *   bergvarme-besparelse = 3 455 671 − 2 591 753 = 863 918 kWh/år).
+   *   Månedlig fordeling skalert fra opprinnelig Dråpe-data (faktor 0,766).
    * - ovrig = faktisk fellesareal-strøm 2025 (Istad Kraft, full kalenderår)
-   *
-   * Felles post-P2 = bergvarme + ovrig. Solenergi dekker først felles, og
-   * det som er igjen om sommeren selges som overskudd til nettet.
    */
   manedlig: [
-    { mnd: "Jan", sol: 19_180, bergvarme: 182_323, ovrig: 158_563 },
-    { mnd: "Feb", sol: 28_770, bergvarme: 164_279, ovrig: 144_242 },
-    { mnd: "Mar", sol: 38_360, bergvarme: 122_598, ovrig: 153_842 },
-    { mnd: "Apr", sol: 67_130, bergvarme: 70_906, ovrig: 117_136 },
-    { mnd: "Mai", sol: 115_080, bergvarme: 40_283, ovrig: 59_175 },
-    { mnd: "Jun", sol: 163_030, bergvarme: 29_718, ovrig: 57_076 },
-    { mnd: "Jul", sol: 191_800, bergvarme: 28_084, ovrig: 47_688 },
-    { mnd: "Aug", sol: 182_210, bergvarme: 33_374, ovrig: 48_416 },
-    { mnd: "Sep", sol: 95_900, bergvarme: 59_117, ovrig: 49_814 },
-    { mnd: "Okt", sol: 47_950, bergvarme: 91_108, ovrig: 58_745 },
-    { mnd: "Nov", sol: 9_590, bergvarme: 134_766, ovrig: 94_017 },
-    { mnd: "Des", sol: 19_180, bergvarme: 171_462, ovrig: 147_486 },
+    { mnd: "Jan", sol: 19_180, bergvarme: 139_636, ovrig: 158_563 },
+    { mnd: "Feb", sol: 28_770, bergvarme: 125_817, ovrig: 144_242 },
+    { mnd: "Mar", sol: 38_360, bergvarme: 93_894, ovrig: 153_842 },
+    { mnd: "Apr", sol: 67_130, bergvarme: 54_305, ovrig: 117_136 },
+    { mnd: "Mai", sol: 115_080, bergvarme: 30_852, ovrig: 59_175 },
+    { mnd: "Jun", sol: 163_030, bergvarme: 22_760, ovrig: 57_076 },
+    { mnd: "Jul", sol: 191_800, bergvarme: 21_509, ovrig: 47_688 },
+    { mnd: "Aug", sol: 182_210, bergvarme: 25_560, ovrig: 48_416 },
+    { mnd: "Sep", sol: 95_900, bergvarme: 45_276, ovrig: 49_814 },
+    { mnd: "Okt", sol: 47_950, bergvarme: 69_777, ovrig: 58_745 },
+    { mnd: "Nov", sol: 9_590, bergvarme: 103_214, ovrig: 94_017 },
+    { mnd: "Des", sol: 19_180, bergvarme: 131_318, ovrig: 147_486 },
   ],
   felles: {
     antallAndeler: 430,
@@ -110,7 +109,12 @@ export const FORUTSETNINGER = {
     byggforskOppvarmingsAndel: 0.75,
     bergvarmeReduserer: 0.75,
     solcelleProduksjonKWh: 978_180,
-    bergvarmeEgetForbrukKWh: 1_128_018,
+    /**
+     * Bergvarmens eget strømforbruk = oppvarming/tappevann (3 455 671 kWh)
+     * minus bergvarme-besparelse (2 591 753 kWh) = 863 918 kWh/år.
+     * Implisitt COP ≈ 4,0.
+     */
+    bergvarmeEgetForbrukKWh: 863_918,
     /** Solar dekker Istad-fellesforbruket direkte (sum av min(sol, istad) per mnd). */
     solcelleBruktTilFellesKWh: 492_329,
     /**
