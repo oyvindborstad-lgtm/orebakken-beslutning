@@ -2,38 +2,38 @@ export const FORUTSETNINGER = {
   pakke1: {
     navn: "Pakke 1",
     undertittel: "Tak, fasader og betong",
-    laneSum: 192_000_000,
+    laneSum: 186_500_000,
     nedbetalingAr: 30,
     rentePct: 5.0,
-    arligTermin: 12_368_370,
+    arligTermin: 12_014_068,
     flertallskrav: "50 %" as const,
     inkluderer: [
-      "Tak og fasader (105 mill)",
+      "Tak og fasader (100 mill)",
       "Betongrehabilitering (65 mill)",
       "Prosjektledelse OBOS Prosjekt (5 mill)",
-      "Uforutsette kostnader (17 mill)",
+      "Uforutsette kostnader (16,5 mill)",
     ],
     energibesparelseKWh: 500_000,
-    bruttoSnittKrMnd: 1_252,
-    nettoSnittKrMnd: 881,
+    bruttoSnittKrMnd: 1_183,
+    nettoSnittKrMnd: 819,
     stromBespSnittKrMnd: 116,
-    skattefradragSnittKrMnd: 254,
+    skattefradragSnittKrMnd: 248,
   },
   pakke2: {
     navn: "Pakke 1+2",
     undertittel: "Pakke 1 + bergvarme og solceller",
-    laneSum: 354_225_000,
+    laneSum: 337_225_000,
     nedbetalingAr: 40,
     rentePct: 4.9,
-    arligTermin: 20_216_007,
+    arligTermin: 19_245_798,
     flertallskrav: "2/3" as const,
     inkluderer: [
-      "Tak og fasader (105 mill)",
+      "Tak og fasader (100 mill)",
       "Betongrehabilitering (65 mill)",
-      "Bergvarme (160 mill)",
+      "Bergvarme (150 mill)",
       "Solceller (11 mill)",
       "Prosjektledelse OBOS Prosjekt (10 mill)",
-      "Uforutsette kostnader (34,6 mill — 10 % av total)",
+      "Uforutsette kostnader (32,6 mill — 10 % av total)",
       "− Enova-støtte (31,375 mill)",
     ],
     /**
@@ -43,9 +43,10 @@ export const FORUTSETNINGER = {
      * - Sum: 3 091 753 kWh
      */
     energibesparelseKWh: 3_091_753,
-    bruttoSnittKrMnd: 2_772,
+    bruttoSnittKrMnd: 2_584,
     /**
-     * Netto FK-økning snitt. Solar-modell:
+     * Netto FK-økning snitt etter ny Excel 11.05.26 (lavere lånebeløp 337,225 mill).
+     * Solar-modell:
      *  - Solar dekker Istad felles direkte (492 329 kWh × 1,20 = 590 795 kr/år)
      *    → reduserer FK, fordelt etter brøk
      *  - Solar overskudd (485 851 kWh × 1,20 = 583 021 kr/år) til andelseiere
@@ -56,7 +57,7 @@ export const FORUTSETNINGER = {
     stromBespSnittKrMnd: 946,
     /** Solar snitt: 114 (brøk-FK-reduksjon) + 113 (areal-overskudd) = 227 kr/mnd. */
     solenergiSnittKrMnd: 227,
-    skattefradragSnittKrMnd: 484,
+    skattefradragSnittKrMnd: 296,
   },
   /**
    * Månedlig energi-balanse (kWh).

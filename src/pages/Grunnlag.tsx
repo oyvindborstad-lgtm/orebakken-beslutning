@@ -43,12 +43,12 @@ export default function Grunnlag() {
 
         <div className="mt-6 overflow-hidden rounded-2xl border border-line/70">
           <Row header label="Kostnadspost" v1="Pakke 1 (kr)" v2="Pakke 1+2 totalt (kr)" />
-          <Row label="Tak og fasader" v1="105 000 000" v2="105 000 000" />
+          <Row label="Tak og fasader" v1="100 000 000" v2="100 000 000" />
           <Row label="Betongrehabilitering" v1="65 000 000" v2="65 000 000" />
-          <Row label="Bergvarme (energibrønner + varmesentral)" v1="—" v2="160 000 000" />
+          <Row label="Bergvarme (energibrønner + varmesentral)" v1="—" v2="150 000 000" />
           <Row label="Solcelleanlegg" v1="—" v2="11 000 000" />
           <Row label="Prosjektledelse OBOS Prosjekt" v1="5 000 000" v2="10 000 000" />
-          <Row label="Uforutsette kostnader (10 % av total)" v1="17 000 000" v2="34 600 000" />
+          <Row label="Uforutsette kostnader (10 % av total)" v1="16 500 000" v2="32 600 000" />
           <Row
             label="(−) Bekreftet Enova-støtte (4 blokker)"
             v1="—"
@@ -68,8 +68,8 @@ export default function Grunnlag() {
           />
           <Row
             label="Månedlig annuitet (hele borettslaget)"
-            v1="1 030 698 kr"
-            v2="1 684 667 kr"
+            v1="1 001 172 kr"
+            v2="1 603 817 kr"
           />
         </div>
       </section>
@@ -98,13 +98,13 @@ export default function Grunnlag() {
         </h3>
         <FkTabell
           rows={[
-            ["B – 54,7 m² (20 and.)", "3 935", "4 902", "+967", "−78", "−314", "+575", "4 510"],
-            ["G – 74,6 m² (32 and.)", "4 876", "6 074", "+1 198", "−106", "−389", "+703", "5 579"],
-            ["J – 81,3 m² (105 and.)", "5 134", "6 396", "+1 262", "−116", "−410", "+736", "5 870"],
-            ["L – 85,5 m² (63 and.)", "5 323", "6 631", "+1 308", "−122", "−425", "+761", "6 084"],
-            ["M – 89,7 m² (126 and.)", "5 405", "6 733", "+1 328", "−129", "−432", "+768", "6 173"],
+            ["B – 54,7 m² (20 and.)", "3 935", "4 849", "+914", "−78", "−305", "+531", "4 466"],
+            ["G – 74,6 m² (32 and.)", "4 876", "6 009", "+1 133", "−106", "−378", "+648", "5 524"],
+            ["J – 81,3 m² (105 and.)", "5 134", "6 327", "+1 193", "−116", "−398", "+678", "5 812"],
+            ["L – 85,5 m² (63 and.)", "5 323", "6 559", "+1 236", "−122", "−413", "+702", "6 025"],
+            ["M – 89,7 m² (126 and.)", "5 405", "6 661", "+1 256", "−129", "−419", "+708", "6 113"],
           ]}
-          snitt={["Vektet snitt — 430 andeler", "5 092", "6 344", "+1 252", "−116", "−254", "+881", "5 974"]}
+          snitt={["Vektet snitt — 430 andeler", "5 092", "6 275", "+1 183", "−116", "−248", "+819", "5 911"]}
         />
 
         <h3 className="display mt-8 text-lg font-semibold text-ink">
@@ -112,13 +112,13 @@ export default function Grunnlag() {
         </h3>
         <FkTabell
           rows={[
-            ["B – 54,7 m² (20 and.)", "3 935", "6 077", "+2 142", "−679", "−570", "+893", "4 828"],
-            ["G – 74,6 m² (32 and.)", "4 876", "7 531", "+2 655", "−915", "−706", "+1 034", "5 910"],
-            ["J – 81,3 m² (105 and.)", "5 134", "7 929", "+2 795", "−994", "−743", "+1 058", "6 192"],
-            ["L – 85,5 m² (63 and.)", "5 323", "8 221", "+2 898", "−1 043", "−771", "+1 084", "6 407"],
-            ["M – 89,7 m² (126 and.)", "5 405", "8 348", "+2 943", "−1 094", "−783", "+1 066", "6 471"],
+            ["B – 54,7 m² (20 and.)", "3 935", "5 932", "+1 997", "−657", "−542", "+798", "4 733"],
+            ["G – 74,6 m² (32 and.)", "4 876", "7 351", "+2 475", "−875", "−672", "+928", "5 804"],
+            ["J – 81,3 m² (105 and.)", "5 134", "7 740", "+2 606", "−947", "−708", "+951", "6 085"],
+            ["L – 85,5 m² (63 and.)", "5 323", "8 024", "+2 701", "−992", "−734", "+975", "6 298"],
+            ["M – 89,7 m² (126 and.)", "5 405", "8 148", "+2 743", "−1 037", "−745", "+961", "6 366"],
           ]}
-          snitt={["Vektet snitt — 430 andeler", "5 092", "7 864", "+2 772", "−946", "−484", "+1 342", "6 434"]}
+          snitt={["Vektet snitt — 430 andeler", "5 092", "7 677", "+2 584", "−946", "−296", "+1 342", "6 434"]}
           headerNyFu="Ny FK P1+2 brutto"
           headerNetto="Ny FK P1+2 netto"
           stromCol="Strøm + sol"
@@ -157,8 +157,8 @@ export default function Grunnlag() {
         <div className="mt-5 overflow-hidden rounded-2xl border border-line/70">
           <Row header label="Scenario" v1="Enova totalt" v2="P1+2 netto økning/mnd" />
           <Row label="Kun bekreftet (4 blokker, april 2026)" v1="31 375 000" v2="+1 342 kr" />
-          <Row label="+ 30 MNOK fra 9 nye søknader (lavt anslag)" v1="61 375 000" v2="ca. +983 kr" />
-          <Row label="+ 40 MNOK fra 9 nye søknader (høyt anslag)" v1="71 375 000" v2="ca. +863 kr" />
+          <Row label="+ 30 MNOK fra 9 nye søknader (lavt anslag)" v1="61 375 000" v2="ca. +1 037 kr" />
+          <Row label="+ 40 MNOK fra 9 nye søknader (høyt anslag)" v1="71 375 000" v2="ca. +935 kr" />
         </div>
       </section>
 
@@ -207,11 +207,11 @@ export default function Grunnlag() {
         </h3>
         <div className="mt-3 overflow-hidden rounded-2xl border border-line/70">
           <Row header label="Post" v1="Verdi" v2="Merknad" rightLast />
-          <Row label="Tak og fasader" v1="105 000 000 kr" v2="basert på innhentet tilbud" rightLast />
+          <Row label="Tak og fasader" v1="100 000 000 kr" v2="basert på innhentet tilbud" rightLast />
           <Row label="Betongrehabilitering" v1="65 000 000 kr" v2="inkl. verandaer og fasadebetong" rightLast />
           <Row label="Prosjektledelse OBOS Prosjekt" v1="5 000 000 kr" v2="fordelt likt P1/P2" rightLast />
-          <Row label="Uforutsette kostnader" v1="17 000 000 kr" v2="risikoavsetning" rightLast />
-          <Row label="Sum lånebeløp P1" v1="192 000 000 kr" v2="" total rightLast />
+          <Row label="Uforutsette kostnader" v1="16 500 000 kr" v2="risikoavsetning" rightLast />
+          <Row label="Sum lånebeløp P1" v1="186 500 000 kr" v2="" total rightLast />
         </div>
 
         <h3 className="display mt-7 text-lg font-semibold text-ink">
@@ -219,14 +219,14 @@ export default function Grunnlag() {
         </h3>
         <div className="mt-3 overflow-hidden rounded-2xl border border-line/70">
           <Row header label="Post" v1="Verdi" v2="Merknad" rightLast />
-          <Row label="Tak og fasader" v1="105 000 000 kr" v2="basert på innhentet tilbud" rightLast />
+          <Row label="Tak og fasader" v1="100 000 000 kr" v2="basert på innhentet tilbud" rightLast />
           <Row label="Betongrehabilitering" v1="65 000 000 kr" v2="inkl. verandaer og fasadebetong" rightLast />
-          <Row label="Bergvarme" v1="160 000 000 kr" v2="alle 13 blokker" rightLast />
+          <Row label="Bergvarme" v1="150 000 000 kr" v2="alle 13 blokker" rightLast />
           <Row label="Solcelleanlegg" v1="11 000 000 kr" v2="978 180 kWh/år produksjon" rightLast />
           <Row label="Prosjektledelse OBOS Prosjekt" v1="10 000 000 kr" v2="totalt for P1 + P2" rightLast />
-          <Row label="Uforutsette kostnader" v1="34 600 000 kr" v2="10 % av total investering" rightLast />
+          <Row label="Uforutsette kostnader" v1="32 600 000 kr" v2="10 % av total investering" rightLast />
           <Row label="(−) Bekreftet Enova-støtte" v1="−31 375 000 kr" v2="endelig tilsagn april 2026" tone="muted" rightLast />
-          <Row label="Sum lånebeløp P1+P2" v1="354 225 000 kr" v2="" total rightLast />
+          <Row label="Sum lånebeløp P1+P2" v1="337 225 000 kr" v2="" total rightLast />
         </div>
 
         <h3 className="display mt-7 text-lg font-semibold text-ink">
@@ -269,9 +269,9 @@ export default function Grunnlag() {
             v1="Merkostnad totalt"
             v2="Per andel / mnd"
           />
-          <Row label="Pakke 1 (192 MNOK)" v1="24 000 000 kr" v2="+1 550 kr/mnd" />
-          <Row label="Pakke 2-tillegg (162 MNOK)" v1="20 250 000 kr" v2="+1 308 kr/mnd" />
-          <Row label="Samlet P1+P2 (354 MNOK)" v1="44 250 000 kr" v2="+2 858 kr/mnd" total />
+          <Row label="Pakke 1 (186,5 MNOK)" v1="23 313 000 kr" v2="+1 506 kr/mnd" />
+          <Row label="Pakke 2-tillegg (150,7 MNOK)" v1="18 838 000 kr" v2="+1 217 kr/mnd" />
+          <Row label="Samlet P1+P2 (337,2 MNOK)" v1="42 150 000 kr" v2="+2 723 kr/mnd" total />
         </div>
       </section>
 
@@ -341,7 +341,7 @@ export default function Grunnlag() {
           <Row label="Brutto FK-økning" v1="+1 520 kr/mnd" v2="18 240 kr" />
           <Row label="Ekstra strømbesparelse + solenergi" v1="−830 kr/mnd" v2="−9 960 kr" />
           <Row label="Ekstra skattefradrag" v1="−229 kr/mnd" v2="−2 748 kr" />
-          <Row label="Marginal netto merkostnad" v1="+461 kr/mnd" v2="5 532 kr" total />
+          <Row label="Marginal netto merkostnad" v1="+523 kr/mnd" v2="6 276 kr" total />
         </div>
         <div className="mt-4 text-[13.5px] leading-relaxed text-muted sm:text-[14px]">
           For andelseiere med stort eget boliglån kan den marginale gevinsten
@@ -359,12 +359,13 @@ export default function Grunnlag() {
         <p className="mt-4 leading-relaxed text-ink/85">
           Netto økning i felleskostnad er <strong>881 kr/mnd</strong> for Pakke
           1 og <strong>1 342 kr/mnd</strong> for Pakke 1+2 (snitt for alle 430
-          andeler). Brutto økning er hhv. 1 252 og 2 772 kr/mnd. Fradragene som
+          andeler). Brutto økning er hhv. 1 183 og 2 584 kr/mnd. Fradragene som
           bringer brutto ned til netto er strømbesparelse oppvarming (719
           kr/mnd snitt for P2 — bergvarme reduserer 75 % av privat oppvarming,
           ikke totalforbruket), solenergi (227 kr/mnd snitt — 114 kr brøk-FK +
-          113 kr areal-overskudd) og skattefradrag (484 kr/mnd snitt). Tallene
-          er basert på Elvia-totalen 5,57 mill kWh og Istad-data 2024–2026.
+          113 kr areal-overskudd) og skattefradrag (296 kr/mnd snitt). Tallene
+          er basert på Elvia-totalen 5,57 mill kWh, Istad-data 2024–2026, og
+          oppdaterte investeringer fra budsjettinput 11.05.2026.
         </p>
         <div className="mt-5 rounded-2xl border-l-4 border-warm bg-paper px-5 py-4 text-[14.5px] leading-relaxed text-ink/85">
           <strong>Styrets rolle:</strong> Styret fremmer begge pakker som

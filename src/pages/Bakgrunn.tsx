@@ -84,10 +84,10 @@ export default function Bakgrunn() {
             flertall.
             <br />
             <br />
-            Borettslaget tar opp <strong>192 millioner kroner</strong> i lån over
+            Borettslaget tar opp <strong>186,5 millioner kroner</strong> i lån over
             30 år til 5,00 % rente. Brutto økning i felleskostnad er{" "}
-            <strong>+1 252 kr/mnd</strong> i snitt. Netto økning, etter
-            strømbesparelse og skattefradrag, er <strong>+881 kr/mnd</strong> i
+            <strong>+1 183 kr/mnd</strong> i snitt. Netto økning, etter
+            strømbesparelse og skattefradrag, er <strong>+819 kr/mnd</strong> i
             snitt.
           </Pakke>
 
@@ -102,15 +102,15 @@ export default function Bakgrunn() {
             <br />
             <br />
             Borettslaget tar opp totalt{" "}
-            <strong>354,2 millioner kroner</strong> over 40 år til 4,90 % rente
+            <strong>337,2 millioner kroner</strong> over 40 år til 4,90 % rente
             (grønt lån). Brutto økning i felleskostnad er{" "}
-            <strong>+2 772 kr/mnd</strong> i snitt. Netto økning er{" "}
+            <strong>+2 584 kr/mnd</strong> i snitt. Netto økning er{" "}
             <strong>+1 342 kr/mnd</strong> i snitt — inkludert
             strømbesparelse fra bergvarme/isolasjon (719 kr/mnd: bergvarme
             reduserer 75 % av privat oppvarming), solenergi som dekker
             Istad-felles + overskudd til andelseiere via m² (227 kr/mnd), og
-            skattefradrag (484 kr/mnd). Basert på Elvia-totalen 5,57 mill
-            kWh/år og Istad-data 2024–2026.
+            skattefradrag snitt (296 kr/mnd). Basert på oppdatert budsjettinput
+            11.05.2026.
           </Pakke>
         </div>
 
@@ -272,11 +272,11 @@ export default function Bakgrunn() {
             Total solar-effekt for andelseier-snittet: ca.{" "}
             <strong>227 kr/mnd</strong>, fordelt på de to fordelingene over.
             Begge er inkludert i netto FK-økning som vises i tabellene. Brutto
-            FK gir en økning på ca. 2 772 kr/mnd (snitt), men
+            FK gir en økning på ca. 2 584 kr/mnd (snitt), men
             oppvarmingsbesparelse fra bergvarme (719 kr/mnd) + solenergi (227
-            kr/mnd) + skattefradrag (484 kr/mnd) reduserer netto til ca.{" "}
+            kr/mnd) + skattefradrag snitt (296 kr/mnd) reduserer netto til ca.{" "}
             <strong>1 342 kr/mnd</strong>. Pakke 1+2 ender altså opp med å
-            koste deg <strong>ca. 461 kr/mnd mer</strong> enn Pakke 1 alene.
+            koste deg <strong>ca. 523 kr/mnd mer</strong> enn Pakke 1 alene.
           </Faq>
           <Faq q="Hva med de 9 blokkene som ikke har fått Enova-støtte ennå?">
             Styret har bestemt seg for å installere bergvarme og solceller i{" "}
