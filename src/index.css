@@ -64,6 +64,9 @@
   .pkg-stripe-2 {
     background: linear-gradient(180deg, #d88438 0%, #b76a24 100%);
   }
+  .pkg-stripe-3 {
+    background: linear-gradient(180deg, #4f8b47 0%, #3a6932 100%);
+  }
   /* Hide scrollbar but keep scrollable */
   .no-scrollbar {
     scrollbar-width: none;

@@ -1,6 +1,6 @@
 export const FORUTSETNINGER = {
   pakke1: {
-    navn: "Pakke 1",
+    navn: "Alt 1",
     undertittel: "Tak, fasader og betong",
     /** OBOS Banken Alt 1 (13.05.2026): lån etter 10 mill ENØK-støtte. */
     laneSum: 176_000_000,
@@ -22,8 +22,8 @@ export const FORUTSETNINGER = {
     skattefradragSnittKrMnd: 240,
   },
   pakke2: {
-    navn: "Pakke 1+2",
-    undertittel: "Pakke 1 + bergvarme og solceller",
+    navn: "Alt 2",
+    undertittel: "P1 + bergvarme og solceller (31 mill Enova)",
     /** OBOS Banken Alt 2 (13.05.2026): lån etter 31,3 mill ENØK-støtte. */
     laneSum: 341_700_000,
     nedbetalingAr: 40,
@@ -65,6 +65,29 @@ export const FORUTSETNINGER = {
      */
     solenergiSnittKrMnd: 216,
     skattefradragSnittKrMnd: 319,
+  },
+  pakke3: {
+    navn: "Alt 3",
+    undertittel: "P1 + bergvarme og solceller (60 mill Enova)",
+    /** OBOS Banken Alt 3 (13.05.2026): lån etter 60 mill ENØK-støtte (utvidet). */
+    laneSum: 313_000_000,
+    nedbetalingAr: 40,
+    rentePct: 5.04,
+    arligTermin: 18_513_416,
+    flertallskrav: "2/3" as const,
+    inkluderer: [
+      "Rehab-kostnad 379,8 mill (tak, fasader, betong, bergvarme, solceller, m.m.)",
+      "Finanskostnader i byggeperiode 23,7 mill",
+      "Totalprosjektkostnad 403,5 mill",
+      "− ENØK-støtte 60 mill (utvidet — alle 13 blokker innvilget)",
+      "= Nytt lån 313 mill (24 mnd avdragsfritt)",
+    ],
+    energibesparelseKWh: 3_091_753,
+    bruttoSnittKrMnd: 2_441,
+    nettoSnittKrMnd: 1_215,
+    stromBespSnittKrMnd: 935,
+    solenergiSnittKrMnd: 216,
+    skattefradragSnittKrMnd: 292,
   },
   /**
    * Månedlig energi-balanse (kWh).
@@ -138,4 +161,4 @@ export const FORUTSETNINGER = {
   },
 } as const;
 
-export type PakkeId = "p1" | "p2";
+export type PakkeId = "p1" | "p2" | "p3";

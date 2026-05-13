@@ -16,4 +16,5 @@ export type Andel = {
   dagensFu: number;
   p1: PakkeTall;
   p2: PakkeTall;
+  p3: PakkeTall;
 };

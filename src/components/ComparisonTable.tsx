@@ -8,38 +8,46 @@ type Row = {
   info?: React.ReactNode;
   p1: number;
   p2: number;
+  p3: number;
   accent?: "save" | "tax" | "net" | "sun";
   sign?: boolean;
 };
 
 export default function ComparisonTable({ andel }: { andel: Andel }) {
-  // Solenergi via overskuddsdeling: andelens andel av solproduksjonen,
-  // fordelt etter brøk og kreditert direkte på private strømregningen.
-  // Inngår nå i strømbesparelsen og dermed i netto reell endring.
+  // Solenergi for Alt 2 og Alt 3 (samme energimodell — kun lånebeløp varierer).
   const solenergi = solenergiKrMndForAndel(andel.brok, andel.areal); // positivt tall = besparelse
+
   const p2NettoAr1MedSol = andel.p2.nettoAr1 - solenergi;
   const p2NettoSnittMedSol = andel.p2.nettoSnitt - solenergi;
+  const p3NettoAr1MedSol = andel.p3.nettoAr1 - solenergi;
+  const p3NettoSnittMedSol = andel.p3.nettoSnitt - solenergi;
 
   const rows: Row[] = [
-    { label: "Ny felleskostnad / mnd", p1: andel.p1.nyFu, p2: andel.p2.nyFu },
+    {
+      label: "Ny felleskostnad / mnd",
+      p1: andel.p1.nyFu,
+      p2: andel.p2.nyFu,
+      p3: andel.p3.nyFu,
+    },
     {
       label: "Bruttoøkning fra dagens",
       p1: andel.p1.okning,
       p2: andel.p2.okning,
+      p3: andel.p3.okning,
       sign: true,
     },
     {
       label: "Strømbesparelse oppvarming (areal-fordelt)",
       info: (
         <>
-          Pakke 1 sparer 500 000 kWh/år (bedre fasadeisolasjon). Pakke 1+2
-          sparer 3 633 610 kWh/år oppvarming (P1-isolasjon + bergvarme som
-          erstatter ~75 % av oppvarmingen, basert på Elvia-totalen 5 570 863
-          kWh/år). Fordeles per leilighet etter areal.
+          Alt 1 sparer 500 000 kWh/år (fasadeisolasjon). Alt 2 og Alt 3 sparer
+          i tillegg 2 591 753 kWh/år (bergvarme reduserer 75 % av privat
+          oppvarming). Fordeles per leilighet etter areal.
         </>
       ),
       p1: andel.p1.stromBesp,
       p2: andel.p2.stromBesp,
+      p3: andel.p3.stromBesp,
       accent: "save",
       sign: true,
     },
@@ -47,16 +55,15 @@ export default function ComparisonTable({ andel }: { andel: Andel }) {
       label: "Solenergi (FK-reduksjon + overskuddsdeling)",
       info: (
         <>
-          Solcelleanlegget produserer 978 180 kWh/år. Tredelt fordeling
-          (per «Alle bygg»-scenario i strøm-/lade-oversikt 2024–2026):
-          492 329 kWh dekker Istad-felles (brøk-fordelt FK-reduksjon),
-          399 819 kWh går til andelseiere via overskuddsdeling (areal-
-          fordelt på private målere), 86 032 kWh selges til nettet ved
-          spot-pris og inntekten reduserer FK (brøk-fordelt).
+          Solcelleanlegget produserer 978 180 kWh/år. Tredelt fordeling:
+          492 329 kWh dekker Istad-felles (brøk), 399 819 kWh til andelseiere
+          via overskuddsdeling (areal), 86 032 kWh selges til nettet (spot).
+          Samme for Alt 2 og Alt 3.
         </>
       ),
       p1: 0,
       p2: -solenergi,
+      p3: -solenergi,
       accent: "sun",
       sign: true,
     },
@@ -65,12 +72,13 @@ export default function ComparisonTable({ andel }: { andel: Andel }) {
       info: (
         <>
           22 % av borettslagets renteutgifter på nytt felleslån, fordelt etter
-          din brøk via RF-1215. Tilfaller deg personlig — ikke borettslaget. År
-          1 er høyest; reduseres etter hvert som lånet nedbetales.
+          din brøk via RF-1215. Tilfaller deg personlig. Lavere lånebeløp gir
+          lavere fradrag (Alt 3 vs Alt 2).
         </>
       ),
       p1: andel.p1.skfrAr1,
       p2: andel.p2.skfrAr1,
+      p3: andel.p3.skfrAr1,
       accent: "tax",
       sign: true,
     },
@@ -80,11 +88,11 @@ export default function ComparisonTable({ andel }: { andel: Andel }) {
         <>
           Det faktiske beløpet du merker på pengeboken: bruttoøkning −
           strømbesparelse oppvarming − solenergi-kreditt − skattefradrag.
-          Solenergi via overskuddsdeling er inkludert.
         </>
       ),
       p1: andel.p1.nettoAr1,
       p2: p2NettoAr1MedSol,
+      p3: p3NettoAr1MedSol,
       accent: "net",
       sign: true,
     },
@@ -92,18 +100,25 @@ export default function ComparisonTable({ andel }: { andel: Andel }) {
       label: "Netto snitt (over hele lånetid)",
       info: (
         <>
-          Renten — og dermed skattefradraget på 22 % — er høyest år 1 og synker
-          gradvis etter hvert som lånet nedbetales. «Snitt» er gjennomsnittet
-          over hele lånetiden (30 år for P1, 40 år for P1+2) og er det mest
-          representative langtidsbudsjettet for husstanden din. Solenergi via
-          overskuddsdeling er inkludert.
+          Snitt over hele lånetiden (30 år for Alt 1, 40 år for Alt 2/3). Mer
+          representativt for langtidsbudsjettet enn år 1.
         </>
       ),
       p1: andel.p1.nettoSnitt,
       p2: p2NettoSnittMedSol,
+      p3: p3NettoSnittMedSol,
       sign: true,
     },
   ];
+
+  const colorFor = (accent: Row["accent"], v: number) => {
+    if (accent === "save") return "text-save";
+    if (accent === "sun") return "text-warm-deep";
+    if (accent === "tax") return "text-tax-ink";
+    if (accent === "net")
+      return v > 0 ? "text-ink font-bold" : "text-save font-bold";
+    return "text-ink";
+  };
 
   return (
     <>
@@ -122,32 +137,39 @@ export default function ComparisonTable({ andel }: { andel: Andel }) {
               </span>
             </span>
           </div>
-          <div className="mt-3 grid grid-cols-2 gap-2">
+          <div className="mt-3 grid grid-cols-3 gap-2">
             <div className="rounded-xl bg-brand-50/70 p-3 text-center">
-              <div className="label">Pakke 1</div>
-              <div className="num mt-1 display text-[20px] font-semibold leading-none text-brand">
+              <div className="label">Alt 1</div>
+              <div className="num mt-1 display text-[17px] font-semibold leading-none text-brand">
                 {kr(andel.p1.nyFu)}
               </div>
-              <div className="mt-1 text-[10.5px] text-muted">/ mnd brutto</div>
+              <div className="mt-1 text-[10px] text-muted">/ mnd brutto</div>
             </div>
             <div className="rounded-xl bg-warm-bg/80 p-3 text-center">
-              <div className="label">Pakke 1+2</div>
-              <div className="num mt-1 display text-[20px] font-semibold leading-none text-warm-deep">
+              <div className="label">Alt 2</div>
+              <div className="num mt-1 display text-[17px] font-semibold leading-none text-warm-deep">
                 {kr(andel.p2.nyFu)}
               </div>
-              <div className="mt-1 text-[10.5px] text-muted">/ mnd brutto</div>
+              <div className="mt-1 text-[10px] text-muted">/ mnd brutto</div>
+            </div>
+            <div className="rounded-xl bg-save-bg/70 p-3 text-center">
+              <div className="label">Alt 3</div>
+              <div className="num mt-1 display text-[17px] font-semibold leading-none text-save">
+                {kr(andel.p3.nyFu)}
+              </div>
+              <div className="mt-1 text-[10px] text-muted">/ mnd brutto</div>
             </div>
           </div>
         </div>
 
         {rows.map((r) => (
-          <MobileRow key={r.label} row={r} />
+          <MobileRow key={r.label} row={r} colorFor={colorFor} />
         ))}
       </div>
 
-      {/* Desktop / tablet: 3-col grid */}
+      {/* Desktop / tablet: 4-col grid */}
       <div className="hidden rounded-2xl border border-line/70 bg-paper shadow-card sm:block">
-        <div className="grid grid-cols-[1.6fr_1fr_1fr] items-stretch border-b border-line/70">
+        <div className="grid grid-cols-[1.4fr_1fr_1fr_1fr] items-stretch border-b border-line/70">
           <div className="px-6 py-5 sm:px-8">
             <div className="label">Sammenligning</div>
             <div className="mt-1 text-[13px] text-muted">
@@ -157,19 +179,26 @@ export default function ComparisonTable({ andel }: { andel: Andel }) {
               </span>
             </div>
           </div>
-          <div className="border-l border-line/70 bg-brand-50/50 px-4 py-5 text-center">
-            <div className="label">Pakke 1</div>
-            <div className="num mt-1 display text-[22px] font-semibold leading-none text-brand">
+          <div className="border-l border-line/70 bg-brand-50/50 px-3 py-5 text-center">
+            <div className="label">Alt 1</div>
+            <div className="num mt-1 display text-[18px] font-semibold leading-none text-brand">
               {kr(andel.p1.nyFu)}
             </div>
-            <div className="mt-1 text-[10.5px] text-muted">/ mnd brutto</div>
+            <div className="mt-1 text-[10px] text-muted">/ mnd brutto</div>
           </div>
-          <div className="border-l border-line/70 bg-warm-bg/60 px-4 py-5 text-center">
-            <div className="label">Pakke 1+2</div>
-            <div className="num mt-1 display text-[22px] font-semibold leading-none text-warm-deep">
+          <div className="border-l border-line/70 bg-warm-bg/60 px-3 py-5 text-center">
+            <div className="label">Alt 2</div>
+            <div className="num mt-1 display text-[18px] font-semibold leading-none text-warm-deep">
               {kr(andel.p2.nyFu)}
             </div>
-            <div className="mt-1 text-[10.5px] text-muted">/ mnd brutto</div>
+            <div className="mt-1 text-[10px] text-muted">/ mnd brutto</div>
+          </div>
+          <div className="border-l border-line/70 bg-save-bg/50 px-3 py-5 text-center">
+            <div className="label">Alt 3</div>
+            <div className="num mt-1 display text-[18px] font-semibold leading-none text-save">
+              {kr(andel.p3.nyFu)}
+            </div>
+            <div className="mt-1 text-[10px] text-muted">/ mnd brutto</div>
           </div>
         </div>
 
@@ -177,19 +206,11 @@ export default function ComparisonTable({ andel }: { andel: Andel }) {
           {rows.map((r, i) => {
             const last = i === rows.length - 1;
             const fmt = (v: number) => (r.sign ? krSigned(v) : kr(v));
-            const colorFor = (v: number) => {
-              if (r.accent === "save") return "text-save";
-              if (r.accent === "sun") return "text-warm-deep";
-              if (r.accent === "tax") return "text-tax-ink";
-              if (r.accent === "net")
-                return v > 0 ? "text-ink font-bold" : "text-save font-bold";
-              return "text-ink";
-            };
             return (
               <div
                 key={r.label}
                 role="row"
-                className={`grid grid-cols-[1.6fr_1fr_1fr] items-center ${
+                className={`grid grid-cols-[1.4fr_1fr_1fr_1fr] items-center ${
                   last ? "" : "border-b border-line/40"
                 } ${r.accent === "net" ? "bg-tax-bg/40" : ""}`}
               >
@@ -198,14 +219,19 @@ export default function ComparisonTable({ andel }: { andel: Andel }) {
                   {r.info && <InfoTip>{r.info}</InfoTip>}
                 </div>
                 <div
-                  className={`px-4 py-3.5 text-right text-[14px] ${colorFor(r.p1)}`}
+                  className={`px-3 py-3.5 text-right text-[14px] ${colorFor(r.accent, r.p1)}`}
                 >
                   {fmt(r.p1)}
                 </div>
                 <div
-                  className={`px-4 py-3.5 text-right text-[14px] ${colorFor(r.p2)}`}
+                  className={`px-3 py-3.5 text-right text-[14px] ${colorFor(r.accent, r.p2)}`}
                 >
                   {fmt(r.p2)}
+                </div>
+                <div
+                  className={`px-3 py-3.5 text-right text-[14px] ${colorFor(r.accent, r.p3)}`}
+                >
+                  {fmt(r.p3)}
                 </div>
               </div>
             );
@@ -216,16 +242,14 @@ export default function ComparisonTable({ andel }: { andel: Andel }) {
   );
 }
 
-function MobileRow({ row }: { row: Row }) {
+function MobileRow({
+  row,
+  colorFor,
+}: {
+  row: Row;
+  colorFor: (accent: Row["accent"], v: number) => string;
+}) {
   const fmt = (v: number) => (row.sign ? krSigned(v) : kr(v));
-  const colorFor = (v: number) => {
-    if (row.accent === "save") return "text-save";
-    if (row.accent === "sun") return "text-warm-deep";
-    if (row.accent === "tax") return "text-tax-ink";
-    if (row.accent === "net")
-      return v > 0 ? "text-ink font-bold" : "text-save font-bold";
-    return "text-ink";
-  };
   const bg = row.accent === "net" ? "bg-tax-bg/50" : "bg-paper";
   return (
     <div className={`rounded-2xl border border-line/70 p-4 ${bg}`}>
@@ -233,21 +257,29 @@ function MobileRow({ row }: { row: Row }) {
         <span>{row.label}</span>
         {row.info && <InfoTip>{row.info}</InfoTip>}
       </div>
-      <div className="num mt-2.5 grid grid-cols-2 gap-2">
-        <div className="rounded-lg border border-line/60 bg-paper px-3 py-2.5">
-          <div className="text-[10.5px] font-semibold uppercase tracking-wide text-muted">
-            Pakke 1
+      <div className="num mt-2.5 grid grid-cols-3 gap-2">
+        <div className="rounded-lg border border-line/60 bg-paper px-2 py-2.5">
+          <div className="text-[10px] font-semibold uppercase tracking-wide text-muted">
+            Alt 1
           </div>
-          <div className={`mt-1 text-[16px] font-semibold ${colorFor(row.p1)}`}>
+          <div className={`mt-1 text-[14px] font-semibold ${colorFor(row.accent, row.p1)}`}>
             {fmt(row.p1)}
           </div>
         </div>
-        <div className="rounded-lg border border-line/60 bg-paper px-3 py-2.5">
-          <div className="text-[10.5px] font-semibold uppercase tracking-wide text-muted">
-            Pakke 1+2
+        <div className="rounded-lg border border-line/60 bg-paper px-2 py-2.5">
+          <div className="text-[10px] font-semibold uppercase tracking-wide text-muted">
+            Alt 2
           </div>
-          <div className={`mt-1 text-[16px] font-semibold ${colorFor(row.p2)}`}>
+          <div className={`mt-1 text-[14px] font-semibold ${colorFor(row.accent, row.p2)}`}>
             {fmt(row.p2)}
+          </div>
+        </div>
+        <div className="rounded-lg border border-line/60 bg-paper px-2 py-2.5">
+          <div className="text-[10px] font-semibold uppercase tracking-wide text-muted">
+            Alt 3
+          </div>
+          <div className={`mt-1 text-[14px] font-semibold ${colorFor(row.accent, row.p3)}`}>
+            {fmt(row.p3)}
           </div>
         </div>
       </div>

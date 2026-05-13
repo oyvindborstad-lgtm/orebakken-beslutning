@@ -1,16 +1,24 @@
-import { Hammer, Sun, ArrowUpRight } from "lucide-react";
-import { FORUTSETNINGER } from "../data/forutsetninger";
+import { Hammer, Sun, Sparkles, ArrowUpRight } from "lucide-react";
+import { FORUTSETNINGER, type PakkeId } from "../data/forutsetninger";
 import { kr, krSigned } from "../lib/format";
 
-type Props = { id: "p1" | "p2" };
+type Props = { id: PakkeId };
 
 export default function PackageCard({ id }: Props) {
-  const pakke = id === "p1" ? FORUTSETNINGER.pakke1 : FORUTSETNINGER.pakke2;
+  const pakke =
+    id === "p1"
+      ? FORUTSETNINGER.pakke1
+      : id === "p2"
+      ? FORUTSETNINGER.pakke2
+      : FORUTSETNINGER.pakke3;
   const felles = FORUTSETNINGER.felles;
-  const Icon = id === "p1" ? Hammer : Sun;
-  const stripe = id === "p1" ? "pkg-stripe-1" : "pkg-stripe-2";
-  const accentText = id === "p1" ? "text-brand" : "text-warm-deep";
-  const accentBg = id === "p1" ? "bg-brand-50" : "bg-warm-bg";
+  const Icon = id === "p1" ? Hammer : id === "p2" ? Sun : Sparkles;
+  const stripe =
+    id === "p1" ? "pkg-stripe-1" : id === "p2" ? "pkg-stripe-2" : "pkg-stripe-3";
+  const accentText =
+    id === "p1" ? "text-brand" : id === "p2" ? "text-warm-deep" : "text-save";
+  const accentBg =
+    id === "p1" ? "bg-brand-50" : id === "p2" ? "bg-warm-bg" : "bg-save-bg";
   const flertall =
     pakke.flertallskrav === "50 %"
       ? "Krever 50 % flertall"
@@ -51,7 +59,7 @@ export default function PackageCard({ id }: Props) {
         <ul className="mt-5 space-y-2 text-[13.5px] leading-relaxed text-ink/85 sm:text-[14px]">
           {pakke.inkluderer.map((item) => (
             <li key={item} className="flex gap-2.5">
-              <span className={`mt-2 block h-1 w-1 shrink-0 rounded-full sm:mt-2.5 ${id === "p1" ? "bg-brand" : "bg-warm-deep"}`} />
+              <span className={`mt-2 block h-1 w-1 shrink-0 rounded-full sm:mt-2.5 ${id === "p1" ? "bg-brand" : id === "p2" ? "bg-warm-deep" : "bg-save"}`} />
               <span>{item}</span>
             </li>
           ))}
@@ -71,7 +79,7 @@ export default function PackageCard({ id }: Props) {
               {krSigned(pakke.nettoSnittKrMnd)}
             </div>
           </div>
-          {id === "p2" && (
+          {(id === "p2" || id === "p3") && (
             <div className="col-span-2 mt-1 border-t border-save/15 pt-3 text-[11.5px] leading-relaxed text-ink/75 sm:text-[12px]">
               <div className="flex flex-wrap justify-between gap-2">
                 <span>Solcelleproduksjon</span>

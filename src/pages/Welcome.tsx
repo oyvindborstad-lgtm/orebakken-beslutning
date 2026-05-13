@@ -12,7 +12,7 @@ import PackageCard from "../components/PackageCard";
 import { kr, krSigned } from "../lib/format";
 import { FORUTSETNINGER } from "../data/forutsetninger";
 
-const { pakke1, pakke2, felles } = FORUTSETNINGER;
+const { pakke1, pakke2, pakke3, felles } = FORUTSETNINGER;
 
 export default function Welcome() {
   return (
@@ -79,7 +79,7 @@ export default function Welcome() {
           </h2>
         </div>
 
-        <div className="grid gap-4 sm:gap-5 lg:grid-cols-2">
+        <div className="grid gap-4 sm:gap-5 lg:grid-cols-3">
           <SnittKort
             id="p1"
             stripe="pkg-stripe-1"
@@ -97,6 +97,15 @@ export default function Welcome() {
             solenergi={pakke2.solenergiSnittKrMnd}
             skfr={pakke2.skattefradragSnittKrMnd}
           />
+          <SnittKort
+            id="p3"
+            stripe="pkg-stripe-3"
+            kostBrutto={pakke3.bruttoSnittKrMnd}
+            kostNetto={pakke3.nettoSnittKrMnd}
+            stromBesp={pakke3.stromBespSnittKrMnd - pakke3.solenergiSnittKrMnd}
+            solenergi={pakke3.solenergiSnittKrMnd}
+            skfr={pakke3.skattefradragSnittKrMnd}
+          />
         </div>
 
         <DiffBox />
@@ -105,18 +114,22 @@ export default function Welcome() {
       {/* Pakke-kort */}
       <section id="pakkene" className="space-y-5 sm:space-y-6">
         <div>
-          <div className="label">To alternativer</div>
+          <div className="label">Tre alternativer</div>
           <h2 className="display mt-2 text-[24px] font-semibold leading-tight text-ink sm:text-[28px] lg:text-[34px]">
-            Pakke 1 eller Pakke 1+2
+            Alt 1, Alt 2 eller Alt 3
           </h2>
-          <p className="mt-3 max-w-2xl text-[14.5px] leading-relaxed text-muted sm:text-[15px]">
-            Pakke 1 kan vedtas alene. Pakke 2 (bergvarme + solceller) krever
-            kvalifisert 2/3-flertall og forutsetter at Pakke 1 vedtas.
+          <p className="mt-3 max-w-3xl text-[14.5px] leading-relaxed text-muted sm:text-[15px]">
+            Alt 1 (tak/fasader/betong) kan vedtas alene. Alt 2 og Alt 3 inkluderer
+            i tillegg bergvarme og solceller. Forskjellen mellom Alt 2 og Alt 3
+            er hvor mye ENØK-støtte Enova innvilger: Alt 2 (31 mill, bekreftet) /
+            Alt 3 (60 mill, mulig ved utvidet tilsagn). Alle Pakke 1+2-varianter
+            krever 2/3-flertall.
           </p>
         </div>
-        <div className="grid gap-4 sm:gap-5 lg:grid-cols-2">
+        <div className="grid gap-4 sm:gap-5 lg:grid-cols-3">
           <PackageCard id="p1" />
           <PackageCard id="p2" />
+          <PackageCard id="p3" />
         </div>
       </section>
 
@@ -260,7 +273,7 @@ function SnittKort({
   solenergi,
   skfr,
 }: {
-  id: "p1" | "p2";
+  id: "p1" | "p2" | "p3";
   stripe: string;
   kostBrutto: number;
   kostNetto: number;
@@ -268,8 +281,10 @@ function SnittKort({
   solenergi?: number;
   skfr: number;
 }) {
-  const navn = id === "p1" ? "Pakke 1" : "Pakke 1+2";
+  const navn = id === "p1" ? "Alt 1" : id === "p2" ? "Alt 2" : "Alt 3";
   const flertall = id === "p1" ? "50 % flertall" : "2/3 flertall";
+  const accentClass =
+    id === "p1" ? "text-brand" : id === "p2" ? "text-warm-deep" : "text-save";
   return (
     <article className="relative overflow-hidden rounded-3xl border border-line/70 bg-paper shadow-card">
       <div className={`h-1.5 w-full ${stripe}`} />
@@ -288,7 +303,7 @@ function SnittKort({
           </div>
           <div>
             <div className="label">Netto økning</div>
-            <div className={`num mt-1.5 display text-[30px] font-semibold leading-[1] tracking-tightest sm:text-[40px] ${id === "p1" ? "text-brand" : "text-warm-deep"}`}>
+            <div className={`num mt-1.5 display text-[30px] font-semibold leading-[1] tracking-tightest sm:text-[40px] ${accentClass}`}>
               {krSigned(kostNetto)}
             </div>
             <div className="mt-1 text-[11px] text-muted">/ mnd · etter fradrag</div>
@@ -333,76 +348,93 @@ function DiffBox() {
   return (
     <div className="rounded-3xl border-l-4 border-brand bg-paper p-5 shadow-soft sm:p-7">
       <div className="display text-base font-semibold text-ink sm:text-lg">
-        Hva er forskjellen mellom Pakke 1 og Pakke 1+2?
+        Sammenligning av Alt 1, Alt 2 og Alt 3
       </div>
-      <div className="mt-4 grid gap-3 sm:gap-4 lg:grid-cols-3">
-        <DiffRow
-          label="Bruttoøkning FK"
-          p1="+1 130 kr/mnd"
-          p2="+2 771 kr/mnd"
-          diff="+1 641 kr/mnd"
+      <div className="mt-4 grid gap-3 sm:gap-4 lg:grid-cols-2">
+        <DiffRow3
+          label="Bruttoøkning FK / mnd"
+          a1="+1 130 kr"
+          a2="+2 771 kr"
+          a3="+2 441 kr"
         />
-        <DiffRow
-          label="Strømbesp. + solenergi"
-          p1="116 kr/mnd"
-          p2="935 kr/mnd"
-          diff="−819 kr/mnd"
-          diffSave
+        <DiffRow3
+          label="Strømbesparelse + solenergi"
+          a1="−116 kr"
+          a2="−935 kr"
+          a3="−935 kr"
+          tone="save"
         />
-        <DiffRow
+        <DiffRow3
+          label="Skattefradrag (22 %)"
+          a1="−240 kr"
+          a2="−319 kr"
+          a3="−292 kr"
+          tone="tax"
+        />
+        <DiffRow3
           label="Netto FK-økning"
-          p1="+774 kr/mnd"
-          p2="+1 517 kr/mnd"
-          diff="+743 kr/mnd"
+          a1="+774 kr"
+          a2="+1 517 kr"
+          a3="+1 215 kr"
           bold
         />
       </div>
       <p className="mt-4 text-[12.5px] leading-relaxed text-muted sm:text-[13px]">
-        Pakke 1+2 (Alt 2) har 1 641 kr/mnd høyere bruttoøkning enn Pakke 1
-        (Alt 1), men gir 819 kr/mnd ekstra strømbesparelse (oppvarming +
-        solenergi) og 79 kr/mnd ekstra skattefradrag (snitt). Netto
-        merkostnad for Pakke 1+2 vs Pakke 1: 743 kr/mnd. Med utvidet Enova
-        (60 mill, Alt 3) reduseres marginalen til 441 kr/mnd. Snitt for alle
-        430 andeler, basert på OBOS Banken likviditetsanalyse 13.05.2026.
+        <strong>Alt 1:</strong> bare tak/fasader/betong, krever 50 % flertall.
+        Lånebeløp 176 mill kr.
+        <br />
+        <strong>Alt 2:</strong> alt i Alt 1 pluss bergvarme og solceller, med
+        31 mill kr i Enova-støtte. Lånebeløp 341,7 mill kr. Krever 2/3-flertall.
+        <br />
+        <strong>Alt 3:</strong> samme investering som Alt 2, men med 60 mill kr
+        i Enova-støtte. Lånebeløp 313 mill kr. Krever 2/3-flertall.
+        <br />
+        Marginal merkostnad: Alt 2 vs Alt 1 = +743 kr/mnd. Alt 3 vs Alt 1 =
+        +441 kr/mnd. Snitt for alle 430 andeler, basert på OBOS Banken
+        likviditetsanalyse 13.05.2026.
       </p>
     </div>
   );
 }
 
-function DiffRow({
+function DiffRow3({
   label,
-  p1,
-  p2,
-  diff,
-  diffSave,
+  a1,
+  a2,
+  a3,
+  tone,
   bold,
 }: {
   label: string;
-  p1: string;
-  p2: string;
-  diff: string;
-  diffSave?: boolean;
+  a1: string;
+  a2: string;
+  a3: string;
+  tone?: "save" | "tax";
   bold?: boolean;
 }) {
+  const cls =
+    tone === "save"
+      ? "text-save"
+      : tone === "tax"
+      ? "text-tax-ink"
+      : bold
+      ? "text-ink"
+      : "text-ink";
   return (
     <div className="rounded-xl border border-line/60 bg-surface/40 p-3.5 sm:p-4">
       <div className="label">{label}</div>
       <div className="mt-2.5 grid grid-cols-3 gap-1 text-[12.5px] sm:text-[13px]">
         <div>
-          <div className="text-[10px] uppercase tracking-wide text-muted">P1</div>
-          <div className="num font-semibold text-ink">{p1}</div>
+          <div className="text-[10px] uppercase tracking-wide text-muted">Alt 1</div>
+          <div className={`num ${bold ? "font-bold" : "font-semibold"} ${cls}`}>{a1}</div>
         </div>
         <div>
-          <div className="text-[10px] uppercase tracking-wide text-muted">P1+2</div>
-          <div className="num font-semibold text-ink">{p2}</div>
+          <div className="text-[10px] uppercase tracking-wide text-muted">Alt 2</div>
+          <div className={`num ${bold ? "font-bold" : "font-semibold"} ${cls}`}>{a2}</div>
         </div>
         <div>
-          <div className="text-[10px] uppercase tracking-wide text-muted">Diff</div>
-          <div
-            className={`num ${bold ? "font-bold" : "font-semibold"} ${diffSave ? "text-save" : "text-ink"}`}
-          >
-            {diff}
-          </div>
+          <div className="text-[10px] uppercase tracking-wide text-muted">Alt 3</div>
+          <div className={`num ${bold ? "font-bold" : "font-semibold"} ${cls}`}>{a3}</div>
         </div>
       </div>
     </div>

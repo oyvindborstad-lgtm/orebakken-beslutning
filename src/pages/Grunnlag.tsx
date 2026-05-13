@@ -101,7 +101,7 @@ export default function Grunnlag() {
         </p>
 
         <h3 className="display mt-6 text-lg font-semibold text-ink">
-          2.1 Pakke 1 — per leilighetstype
+          2.1 Alt 1 — Pakke 1 alene (per leilighetstype)
         </h3>
         <FkTabell
           rows={[
@@ -115,7 +115,7 @@ export default function Grunnlag() {
         />
 
         <h3 className="display mt-8 text-lg font-semibold text-ink">
-          2.2 Pakke 1+2 — per leilighetstype
+          2.2 Alt 2 — Pakke 1+2 med 31 mill Enova (per leilighetstype)
         </h3>
         <FkTabell
           rows={[
@@ -126,8 +126,25 @@ export default function Grunnlag() {
             ["M – 89,7 m² (126 and.)", "5 405", "8 347", "+2 942", "−1 024", "−804", "+1 114", "6 519"],
           ]}
           snitt={["Vektet snitt — 430 andeler", "5 092", "7 863", "+2 771", "−935", "−319", "+1 517", "6 609"]}
-          headerNyFu="Ny FK P1+2 brutto"
-          headerNetto="Ny FK P1+2 netto"
+          headerNyFu="Ny FK Alt 2 brutto"
+          headerNetto="Ny FK Alt 2 netto"
+          stromCol="Strøm + sol"
+        />
+
+        <h3 className="display mt-8 text-lg font-semibold text-ink">
+          2.3 Alt 3 — Pakke 1+2 med 60 mill Enova (per leilighetstype)
+        </h3>
+        <FkTabell
+          rows={[
+            ["B – 54,7 m² (20 and.)", "3 935", "5 822", "+1 887", "−640", "−536", "+711", "4 646"],
+            ["G – 74,6 m² (32 and.)", "4 876", "7 215", "+2 339", "−861", "−664", "+814", "5 690"],
+            ["J – 81,3 m² (105 and.)", "5 134", "7 596", "+2 462", "−934", "−699", "+829", "5 963"],
+            ["L – 85,5 m² (63 and.)", "5 323", "7 876", "+2 553", "−980", "−725", "+848", "6 171"],
+            ["M – 89,7 m² (126 and.)", "5 405", "7 997", "+2 592", "−1 024", "−736", "+832", "6 237"],
+          ]}
+          snitt={["Vektet snitt — 430 andeler", "5 092", "7 534", "+2 441", "−935", "−292", "+1 215", "6 307"]}
+          headerNyFu="Ny FK Alt 3 brutto"
+          headerNetto="Ny FK Alt 3 netto"
           stromCol="Strøm + sol"
         />
       </section>
