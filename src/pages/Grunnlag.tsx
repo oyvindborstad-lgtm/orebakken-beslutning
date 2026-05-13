@@ -60,7 +60,7 @@ export default function Grunnlag() {
           />
           <Row
             label="Nedbetalingstid / rente"
-            v1="30 år / 5,04 %"
+            v1="30 år / 5,14 %"
             v2="40 år / 5,04 %"
           />
           <Row
@@ -240,7 +240,7 @@ export default function Grunnlag() {
         </h3>
         <div className="mt-3 overflow-hidden rounded-2xl border border-line/70">
           <Row header label="Forutsetning" v1="Verdi" v2="Merknad" rightLast />
-          <Row label="Rente P1 / nedbetalingstid" v1="5,04 % / 30 år" v2="annuitet, 24 mnd avdragsfritt" rightLast />
+          <Row label="Rente P1 / nedbetalingstid" v1="5,14 % / 30 år" v2="annuitet, 24 mnd avdragsfritt" rightLast />
           <Row label="Rente P1+2 / nedbetalingstid" v1="5,04 % / 40 år" v2="OBOS-tilbud, 24 mnd avdragsfritt" rightLast />
           <Row label="Strømpris" v1="1,20 kr/kWh" v2="konservativt anslag" rightLast />
           <Row label="Strømbesparelse P1 (input)" v1="500 000 kWh/år" v2="fasadeisolasjon" rightLast />

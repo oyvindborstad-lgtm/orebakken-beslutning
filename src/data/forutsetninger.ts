@@ -5,7 +5,7 @@ export const FORUTSETNINGER = {
     /** OBOS Banken Alt 1 (13.05.2026): lån etter 10 mill ENØK-støtte. */
     laneSum: 176_000_000,
     nedbetalingAr: 30,
-    rentePct: 5.04,
+    rentePct: 5.14,
     arligTermin: 11_742_220,
     flertallskrav: "50 %" as const,
     inkluderer: [

@@ -97,7 +97,7 @@ export default function Underlag() {
           sumRow={["Nytt lån (etter Enova)", "176 000 000", "341 700 000"]}
         />
         <div className="mt-3 grid gap-3 sm:grid-cols-2">
-          <Stat label="Pakke 1 (Alt 1): rente / løpetid" value="5,04 % / 30 år" sub="24 mnd avdragsfritt" />
+          <Stat label="Pakke 1 (Alt 1): rente / løpetid" value="5,14 % / 30 år" sub="24 mnd avdragsfritt" />
           <Stat label="Pakke 1+2 (Alt 2): rente / løpetid" value="5,04 % / 40 år" sub="24 mnd avdragsfritt" />
         </div>
         <div className="mt-3 grid gap-3 sm:grid-cols-2">

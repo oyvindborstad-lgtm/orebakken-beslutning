@@ -85,7 +85,7 @@ export default function Bakgrunn() {
             <br />
             <br />
             Borettslaget tar opp <strong>176 millioner kroner</strong> i lån over
-            30 år til 5,04 % rente (etter 10 mill ENØK-støtte for tak/fasader).
+            30 år til 5,14 % rente (etter 10 mill ENØK-støtte for tak/fasader).
             Brutto økning i felleskostnad er <strong>+1 130 kr/mnd</strong> i
             snitt. Netto økning, etter strømbesparelse og skattefradrag, er{" "}
             <strong>+774 kr/mnd</strong> i snitt. OBOS Banken likviditetsanalyse
