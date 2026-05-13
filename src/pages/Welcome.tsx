@@ -360,8 +360,8 @@ function DiffBox() {
         <DiffRow3
           label="Strømbesparelse + solenergi"
           a1="−116 kr"
-          a2="−935 kr"
-          a3="−935 kr"
+          a2="−946 kr"
+          a3="−946 kr"
           tone="save"
         />
         <DiffRow3
@@ -374,8 +374,8 @@ function DiffBox() {
         <DiffRow3
           label="Netto FK-økning"
           a1="+774 kr"
-          a2="+1 517 kr"
-          a3="+1 215 kr"
+          a2="+1 506 kr"
+          a3="+1 203 kr"
           bold
         />
       </div>
@@ -389,8 +389,8 @@ function DiffBox() {
         <strong>Alt 3:</strong> samme investering som Alt 2, men med 60 mill kr
         i Enova-støtte. Lånebeløp 313 mill kr. Krever 2/3-flertall.
         <br />
-        Marginal merkostnad: Alt 2 vs Alt 1 = +743 kr/mnd. Alt 3 vs Alt 1 =
-        +441 kr/mnd. Snitt for alle 430 andeler, basert på OBOS Banken
+        Marginal merkostnad: Alt 2 vs Alt 1 = +732 kr/mnd. Alt 3 vs Alt 1 =
+        +429 kr/mnd. Snitt for alle 430 andeler, basert på OBOS Banken
         likviditetsanalyse 13.05.2026.
       </p>
     </div>

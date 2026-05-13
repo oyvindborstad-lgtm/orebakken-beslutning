@@ -10,42 +10,19 @@ const { felles, pakke1 } = FORUTSETNINGER;
 const P1_REDUKSJONS_FAKTOR = pakke1.energibesparelseKWh / felles.oppvarmingTotalKWh;
 
 /**
- * Verdi av solar som dekker Istad-fellesforbruket direkte (kr/år).
- * Reduserer FK-budsjettet → fordelt etter brøk.
+ * Solenergi-modell: hele solcelleproduksjonen (978 180 kWh × 1,20 kr/kWh)
+ * fordeles per m² til andelseierne. Solar dekker først Istad-felles
+ * (reduserer FK), deretter overskuddsdeling til private målere — men alt
+ * fordeles per m² siden strømforbruk korrelerer med boligstørrelse.
  */
-export const SOLAR_DEKKER_FELLES_KR_AR =
-  felles.solcelleBruktTilFellesKWh * felles.stromPrisKrPerKWh;
-
-/**
- * Verdi av solar som går til andelseiere via overskuddsdeling (kr/år).
- * Begrenset til andelseiernes private forbruk (kan ikke overskride dette).
- * Fordeles etter m² ved forbrukspris.
- */
-export const SOLAR_OVERSKUDD_KR_AR =
-  felles.solcelleOverskuddSommerKWh * felles.stromPrisKrPerKWh;
-
-/**
- * Verdi av solar som selges til nettet (overskytende strøm, kan ikke
- * konsumeres internt). Spot-pris er konservativt anslått. BRL-inntekt →
- * brøk-fordelt FK-reduksjon.
- */
-export const SOLAR_SALG_KR_AR =
-  felles.solcelleSalgKWh * felles.salgsprisKrPerKWh;
-
-/** Total solenergi-verdi (kr/år). */
 export const TOTAL_SOLAR_VERDI_KR_AR =
-  SOLAR_DEKKER_FELLES_KR_AR + SOLAR_OVERSKUDD_KR_AR + SOLAR_SALG_KR_AR;
+  felles.solcelleProduksjonKWh * felles.stromPrisKrPerKWh;
 
 /**
- * Solenergi-fordel per andel basert på tredelt fordeling:
- *  - Brøk-del (FK-reduksjon): andel × (felles-dekning + salgsinntekt) / 12
- *  - Areal-del (overskuddsdeling): (areal/total) × overskudd / 12
+ * Solenergi-fordel per andel: areal-fordelt andel av total solar-verdi.
  */
-export function solenergiKrMndForAndel(brok: number, areal: number): number {
-  const brokDel = (brok * (SOLAR_DEKKER_FELLES_KR_AR + SOLAR_SALG_KR_AR)) / 12;
-  const arealDel =
-    ((areal / felles.totaltAreal) * SOLAR_OVERSKUDD_KR_AR) / 12;
-  return brokDel + arealDel;
+export function solenergiKrMndForAndel(_brok: number, areal: number): number {
+  return ((areal / felles.totaltAreal) * TOTAL_SOLAR_VERDI_KR_AR) / 12;
 }
 
 /**

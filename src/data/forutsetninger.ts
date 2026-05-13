@@ -55,15 +55,14 @@ export const FORUTSETNINGER = {
      *    brøk-fordelt (BRL-inntekt → FK-reduksjon)
      *  - Total solar-verdi: 1 113 594 kr/år
      */
-    nettoSnittKrMnd: 1_517,
-    /** Oppvarmingsbesparelse (719) + solar total (216) = 935 snitt. */
-    stromBespSnittKrMnd: 935,
+    nettoSnittKrMnd: 1_506,
+    /** Oppvarmingsbesparelse (719) + solar (227) = 946 snitt. */
+    stromBespSnittKrMnd: 946,
     /**
-     * Solar snitt: 123 kr brøk-fordelt (FK-reduksjon fra Istad-dekning 492 329
-     * kWh + spot-salg 86 032 kWh) + 93 kr areal-fordelt (overskuddsdeling
-     * 399 819 kWh) = 216 kr/mnd.
+     * Solar fordeles per m²: hele 978 180 kWh × 1,20 = 1 173 816 kr/år
+     * fordelt over 35 038,6 m². Snitt per andel (81,5 m²): 227 kr/mnd.
      */
-    solenergiSnittKrMnd: 216,
+    solenergiSnittKrMnd: 227,
     skattefradragSnittKrMnd: 319,
   },
   pakke3: {
@@ -84,9 +83,9 @@ export const FORUTSETNINGER = {
     ],
     energibesparelseKWh: 3_091_753,
     bruttoSnittKrMnd: 2_441,
-    nettoSnittKrMnd: 1_215,
-    stromBespSnittKrMnd: 935,
-    solenergiSnittKrMnd: 216,
+    nettoSnittKrMnd: 1_203,
+    stromBespSnittKrMnd: 946,
+    solenergiSnittKrMnd: 227,
     skattefradragSnittKrMnd: 292,
   },
   /**
@@ -139,19 +138,13 @@ export const FORUTSETNINGER = {
      * Implisitt COP ≈ 4,0.
      */
     bergvarmeEgetForbrukKWh: 863_918,
-    /** Solar dekker Istad-fellesforbruket direkte (sum av min(sol, istad) per mnd). */
+    /**
+     * Solar dekker Istad-fellesforbruket direkte (sum av min(sol, istad) per
+     * mnd) — vises som info i Underlag. Hele solar (978 180 kWh) verdsettes
+     * imidlertid til full forbrukspris 1,20 kr/kWh og fordeles per m².
+     */
     solcelleBruktTilFellesKWh: 492_329,
-    /**
-     * Solar overskudd til andelseiere via overskuddsdeling (mai–sep, sol > Istad
-     * men inntil andelseiernes private forbruk på 99 276 kWh/mnd snitt).
-     * Fra strøm- og lade-oversikt "Alle bygg – fordeling".
-     */
-    solcelleOverskuddSommerKWh: 399_819,
-    /**
-     * Solar overskytende — kan ikke konsumeres internt og må selges til nettet
-     * ved spot-pris (forbruksprisen er forbeholdt egetforbruk).
-     */
-    solcelleSalgKWh: 86_032,
+    solcelleOverskuddSommerKWh: 485_851,
     enovaBekreftet: 31_375_000,
     enovaSokerFor: 9,
     enovaInnvilgetFor: 4,

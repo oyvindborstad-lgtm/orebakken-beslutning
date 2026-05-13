@@ -107,11 +107,11 @@ export default function Bakgrunn() {
             (etter 31,3 mill ENØK-støtte for bergvarme/solceller — Alt 2 i OBOS
             Banken likviditetsanalyse). Brutto økning i felleskostnad er{" "}
             <strong>+2 771 kr/mnd</strong> i snitt. Netto økning er{" "}
-            <strong>+1 517 kr/mnd</strong> i snitt — inkludert
+            <strong>+1 506 kr/mnd</strong> i snitt — inkludert
             strømbesparelse fra bergvarme/isolasjon (719 kr/mnd), solenergi
-            tredelt (216 kr/mnd), og skattefradrag snitt (319 kr/mnd).
+            areal-fordelt (227 kr/mnd), og skattefradrag snitt (319 kr/mnd).
             Alternativt med 60 mill ENØK-støtte (Alt 3) reduseres netto til
-            ca. +1 215 kr/mnd. Basert på OBOS Banken 13.05.2026.
+            ca. +1 203 kr/mnd. Basert på OBOS Banken 13.05.2026.
           </Pakke>
         </div>
 
@@ -256,35 +256,31 @@ export default function Bakgrunn() {
           </Faq>
           <Faq q="Hvordan brukes solenergien? Får jeg noe ut av det?">
             Solcelleanlegget på takene produserer ca.{" "}
-            <strong>978 180 kWh per år</strong>. Modellen er todelt:
+            <strong>978 180 kWh per år</strong>. Hele produksjonen verdsettes
+            til full forbrukspris (1,20 kr/kWh = 1 173 816 kr/år) og fordeles
+            til andelseierne <strong>etter areal (m²)</strong> — siden
+            strømforbruk korrelerer med boligstørrelse.
             <br />
             <br />
-            <strong>1) Solar dekker Istad-felles direkte</strong> (492 329 kWh
-            × 1,20 kr = 590 795 kr/år). Reduserer felleskostnaden og fordeles
-            på andelseiere etter eierbrøk.
+            I praksis dekker solenergien deler av fellesarealets strømforbruk
+            (Istad-felles) direkte og bidrar til overskuddsdeling til
+            andelseierne. All verdi havner hos andelseierne — enten via lavere
+            felleskostnad eller direkte kreditt på strømregningen — og
+            fordeles per m².
             <br />
             <br />
-            <strong>2) Solar overskuddsdeling til andelseiere via m²</strong>
-            {" "}(399 819 kWh × 1,20 kr = 479 783 kr/år). Krediteres direkte på
-            din private strømregning fordelt etter areal.
+            Solar-effekt for snitt-leiligheten (81,5 m²): ca.{" "}
+            <strong>227 kr/mnd</strong>. Mindre leiligheter får mindre, større
+            leiligheter får mer (lineært med areal).
             <br />
             <br />
-            <strong>3) Solar selges til nettet (ubrukt overskytende)</strong>
-            {" "}(86 032 kWh × 0,50 kr spot = 43 016 kr/år). Salgsinntekten går
-            til BRL og reduserer felleskostnaden (brøk-fordelt).
-            <br />
-            <br />
-            Total solar-effekt for andelseier-snittet: ca.{" "}
-            <strong>216 kr/mnd</strong> (123 kr brøk-fordelt FK-reduksjon +
-            93 kr areal-fordelt privat kreditt).
-            Begge er inkludert i netto FK-økning som vises i tabellene. Brutto
-            FK gir en økning på ca. 2 771 kr/mnd (snitt, Alt 2), men
-            oppvarmingsbesparelse fra bergvarme (719 kr/mnd) + solenergi (216
-            kr/mnd) + skattefradrag snitt (319 kr/mnd) reduserer netto til ca.{" "}
-            <strong>1 517 kr/mnd</strong>. Pakke 1+2 (Alt 2) ender altså opp
-            med å koste deg <strong>ca. 743 kr/mnd mer</strong> enn Pakke 1
-            (Alt 1). Med 60 mill Enova-støtte (Alt 3) reduseres marginalen
-            til 441 kr/mnd.
+            Brutto FK gir en økning på ca. 2 771 kr/mnd (snitt, Alt 2), men
+            oppvarmingsbesparelse fra bergvarme (719 kr/mnd) + solenergi
+            (227 kr/mnd) + skattefradrag snitt (319 kr/mnd) reduserer netto
+            til ca. <strong>1 506 kr/mnd</strong>. Pakke 1+2 (Alt 2) ender
+            altså opp med å koste deg <strong>ca. 732 kr/mnd mer</strong> enn
+            Pakke 1 (Alt 1). Med 60 mill Enova-støtte (Alt 3) reduseres
+            marginalen til 429 kr/mnd.
           </Faq>
           <Faq q="Hva med de 9 blokkene som ikke har fått Enova-støtte ennå?">
             Styret har bestemt seg for å installere bergvarme og solceller i{" "}

@@ -55,10 +55,10 @@ export default function ComparisonTable({ andel }: { andel: Andel }) {
       label: "Solenergi (FK-reduksjon + overskuddsdeling)",
       info: (
         <>
-          Solcelleanlegget produserer 978 180 kWh/år. Tredelt fordeling:
-          492 329 kWh dekker Istad-felles (brøk), 399 819 kWh til andelseiere
-          via overskuddsdeling (areal), 86 032 kWh selges til nettet (spot).
-          Samme for Alt 2 og Alt 3.
+          Solcelleanlegget produserer 978 180 kWh/år. Hele produksjonen
+          verdsettes til 1,20 kr/kWh og fordeles per m² — dekker først
+          Istad-felles (FK-reduksjon) og deretter overskuddsdeling til
+          andelseierne. Samme verdi for Alt 2 og Alt 3.
         </>
       ),
       p1: 0,
