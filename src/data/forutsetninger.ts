@@ -2,39 +2,40 @@ export const FORUTSETNINGER = {
   pakke1: {
     navn: "Pakke 1",
     undertittel: "Tak, fasader og betong",
-    laneSum: 186_500_000,
+    /** OBOS Banken Alt 1 (13.05.2026): lån etter 10 mill ENØK-støtte. */
+    laneSum: 176_000_000,
     nedbetalingAr: 30,
-    rentePct: 5.0,
-    arligTermin: 12_014_068,
+    rentePct: 5.04,
+    arligTermin: 11_742_220,
     flertallskrav: "50 %" as const,
     inkluderer: [
-      "Tak og fasader (100 mill)",
-      "Betongrehabilitering (65 mill)",
-      "Prosjektledelse OBOS Prosjekt (5 mill)",
-      "Uforutsette kostnader (16,5 mill)",
+      "Rehab-kostnad 193,3 mill (tak, fasader, betong, vinduer m.m.)",
+      "Finanskostnader i byggeperiode 11,8 mill",
+      "Totalprosjektkostnad 205,1 mill",
+      "− ENØK-støtte 10 mill",
+      "= Nytt lån 176 mill (24 mnd avdragsfritt)",
     ],
     energibesparelseKWh: 500_000,
-    bruttoSnittKrMnd: 1_183,
-    nettoSnittKrMnd: 819,
+    bruttoSnittKrMnd: 1_130,
+    nettoSnittKrMnd: 774,
     stromBespSnittKrMnd: 116,
-    skattefradragSnittKrMnd: 248,
+    skattefradragSnittKrMnd: 240,
   },
   pakke2: {
     navn: "Pakke 1+2",
     undertittel: "Pakke 1 + bergvarme og solceller",
-    laneSum: 337_225_000,
+    /** OBOS Banken Alt 2 (13.05.2026): lån etter 31,3 mill ENØK-støtte. */
+    laneSum: 341_700_000,
     nedbetalingAr: 40,
-    rentePct: 4.9,
-    arligTermin: 19_245_798,
+    rentePct: 5.04,
+    arligTermin: 20_210_972,
     flertallskrav: "2/3" as const,
     inkluderer: [
-      "Tak og fasader (100 mill)",
-      "Betongrehabilitering (65 mill)",
-      "Bergvarme (150 mill)",
-      "Solceller (11 mill)",
-      "Prosjektledelse OBOS Prosjekt (10 mill)",
-      "Uforutsette kostnader (32,6 mill — 10 % av total)",
-      "− Enova-støtte (31,375 mill)",
+      "Rehab-kostnad 379,8 mill (tak, fasader, betong, bergvarme, solceller, m.m.)",
+      "Finanskostnader i byggeperiode 23,7 mill",
+      "Totalprosjektkostnad 403,5 mill",
+      "− ENØK-støtte 31,3 mill (bekreftet for 4 blokker)",
+      "= Nytt lån 341,7 mill (24 mnd avdragsfritt)",
     ],
     /**
      * Oppvarmings-besparelse P2:
@@ -43,7 +44,7 @@ export const FORUTSETNINGER = {
      * - Sum: 3 091 753 kWh
      */
     energibesparelseKWh: 3_091_753,
-    bruttoSnittKrMnd: 2_584,
+    bruttoSnittKrMnd: 2_771,
     /**
      * Netto FK-økning snitt. Solar-modell (per HTML «Alle bygg – fordeling»):
      *  - Solar dekker Istad felles direkte (492 329 kWh × 1,20 = 590 795 kr/år)
@@ -54,7 +55,7 @@ export const FORUTSETNINGER = {
      *    brøk-fordelt (BRL-inntekt → FK-reduksjon)
      *  - Total solar-verdi: 1 113 594 kr/år
      */
-    nettoSnittKrMnd: 1_353,
+    nettoSnittKrMnd: 1_517,
     /** Oppvarmingsbesparelse (719) + solar total (216) = 935 snitt. */
     stromBespSnittKrMnd: 935,
     /**
@@ -63,7 +64,7 @@ export const FORUTSETNINGER = {
      * 399 819 kWh) = 216 kr/mnd.
      */
     solenergiSnittKrMnd: 216,
-    skattefradragSnittKrMnd: 296,
+    skattefradragSnittKrMnd: 319,
   },
   /**
    * Månedlig energi-balanse (kWh).

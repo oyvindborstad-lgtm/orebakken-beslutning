@@ -84,11 +84,12 @@ export default function Bakgrunn() {
             flertall.
             <br />
             <br />
-            Borettslaget tar opp <strong>186,5 millioner kroner</strong> i lån over
-            30 år til 5,00 % rente. Brutto økning i felleskostnad er{" "}
-            <strong>+1 183 kr/mnd</strong> i snitt. Netto økning, etter
-            strømbesparelse og skattefradrag, er <strong>+819 kr/mnd</strong> i
-            snitt.
+            Borettslaget tar opp <strong>176 millioner kroner</strong> i lån over
+            30 år til 5,04 % rente (etter 10 mill ENØK-støtte for tak/fasader).
+            Brutto økning i felleskostnad er <strong>+1 130 kr/mnd</strong> i
+            snitt. Netto økning, etter strømbesparelse og skattefradrag, er{" "}
+            <strong>+774 kr/mnd</strong> i snitt. OBOS Banken likviditetsanalyse
+            13.05.2026, Alt 1.
           </Pakke>
 
           <Pakke
@@ -102,16 +103,15 @@ export default function Bakgrunn() {
             <br />
             <br />
             Borettslaget tar opp totalt{" "}
-            <strong>337,2 millioner kroner</strong> over 40 år til 4,90 % rente
-            (grønt lån). Brutto økning i felleskostnad er{" "}
-            <strong>+2 584 kr/mnd</strong> i snitt. Netto økning er{" "}
-            <strong>+1 353 kr/mnd</strong> i snitt — inkludert
-            strømbesparelse fra bergvarme/isolasjon (719 kr/mnd: bergvarme
-            reduserer 75 % av privat oppvarming), solenergi tredelt
-            (216 kr/mnd: felles-dekning brøk + overskuddsdeling areal +
-            spot-salg av ubrukt overskytende), og skattefradrag snitt
-            (296 kr/mnd). Basert på oppdatert budsjettinput 11.05.2026 og
-            strøm-/lade-oversikt 2024–2026.
+            <strong>341,7 millioner kroner</strong> over 40 år til 5,04 % rente
+            (etter 31,3 mill ENØK-støtte for bergvarme/solceller — Alt 2 i OBOS
+            Banken likviditetsanalyse). Brutto økning i felleskostnad er{" "}
+            <strong>+2 771 kr/mnd</strong> i snitt. Netto økning er{" "}
+            <strong>+1 517 kr/mnd</strong> i snitt — inkludert
+            strømbesparelse fra bergvarme/isolasjon (719 kr/mnd), solenergi
+            tredelt (216 kr/mnd), og skattefradrag snitt (319 kr/mnd).
+            Alternativt med 60 mill ENØK-støtte (Alt 3) reduseres netto til
+            ca. +1 215 kr/mnd. Basert på OBOS Banken 13.05.2026.
           </Pakke>
         </div>
 
@@ -278,11 +278,13 @@ export default function Bakgrunn() {
             <strong>216 kr/mnd</strong> (123 kr brøk-fordelt FK-reduksjon +
             93 kr areal-fordelt privat kreditt).
             Begge er inkludert i netto FK-økning som vises i tabellene. Brutto
-            FK gir en økning på ca. 2 584 kr/mnd (snitt), men
+            FK gir en økning på ca. 2 771 kr/mnd (snitt, Alt 2), men
             oppvarmingsbesparelse fra bergvarme (719 kr/mnd) + solenergi (216
-            kr/mnd) + skattefradrag snitt (296 kr/mnd) reduserer netto til ca.{" "}
-            <strong>1 353 kr/mnd</strong>. Pakke 1+2 ender altså opp med å
-            koste deg <strong>ca. 534 kr/mnd mer</strong> enn Pakke 1 alene.
+            kr/mnd) + skattefradrag snitt (319 kr/mnd) reduserer netto til ca.{" "}
+            <strong>1 517 kr/mnd</strong>. Pakke 1+2 (Alt 2) ender altså opp
+            med å koste deg <strong>ca. 743 kr/mnd mer</strong> enn Pakke 1
+            (Alt 1). Med 60 mill Enova-støtte (Alt 3) reduseres marginalen
+            til 441 kr/mnd.
           </Faq>
           <Faq q="Hva med de 9 blokkene som ikke har fått Enova-støtte ennå?">
             Styret har bestemt seg for å installere bergvarme og solceller i{" "}

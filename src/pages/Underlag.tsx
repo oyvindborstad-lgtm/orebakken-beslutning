@@ -89,23 +89,26 @@ export default function Underlag() {
         <Tabell
           headers={["Post", "Pakke 1", "Pakke 1+2"]}
           rows={[
-            ["Tak og fasader", "100 000 000", "100 000 000"],
-            ["Betongrehabilitering", "65 000 000", "65 000 000"],
-            ["Bergvarme (energibrønner + sentral)", "—", "150 000 000"],
-            ["Solcelleanlegg (978 180 kWh/år)", "—", "11 000 000"],
-            ["Prosjektledelse OBOS Prosjekt", "5 000 000", "10 000 000"],
-            ["Uforutsette kostnader (10 % av total)", "16 500 000", "32 600 000"],
-            ["(−) Bekreftet Enova-støtte (4 blokker)", "—", "−31 375 000"],
+            ["Rehabiliteringskostnad", "193 254 000", "379 753 000"],
+            ["Finanskostnader byggeperiode", "11 844 000", "23 738 400"],
+            ["Totalprosjektkostnad", "205 098 000", "403 491 400"],
+            ["(−) ENØK-støtte (Alt 1: 10 mill / Alt 2: 31,3 mill)", "−10 000 000", "−31 300 000"],
           ]}
-          sumRow={["Samlet lånebeløp", "186 500 000", "337 225 000"]}
+          sumRow={["Nytt lån (etter Enova)", "176 000 000", "341 700 000"]}
         />
         <div className="mt-3 grid gap-3 sm:grid-cols-2">
-          <Stat label="Pakke 1: rente / løpetid" value="5,00 % / 30 år" sub="vanlig felleslån, annuitet" />
-          <Stat label="Pakke 1+2: rente / løpetid" value="4,90 % / 40 år" sub="grønt felleslån, annuitet" />
+          <Stat label="Pakke 1 (Alt 1): rente / løpetid" value="5,04 % / 30 år" sub="24 mnd avdragsfritt" />
+          <Stat label="Pakke 1+2 (Alt 2): rente / løpetid" value="5,04 % / 40 år" sub="24 mnd avdragsfritt" />
         </div>
         <div className="mt-3 grid gap-3 sm:grid-cols-2">
-          <Stat label="Månedlig termin P1 (BRL totalt)" value="1 001 172 kr" sub="12 014 068 kr/år" />
-          <Stat label="Månedlig termin P1+2 (BRL totalt)" value="1 603 817 kr" sub="19 245 798 kr/år" />
+          <Stat label="Halvårlig termin P1 (BRL totalt)" value="5 871 110 kr" sub="årlig 11 742 220 kr" />
+          <Stat label="Halvårlig termin P1+2 Alt 2 (BRL totalt)" value="10 105 486 kr" sub="årlig 20 210 972 kr" />
+        </div>
+        <div className="mt-3 rounded-xl bg-warm-bg/40 px-5 py-4 text-[13.5px] leading-relaxed text-ink/85">
+          <strong>Alt 3 — utvidet ENØK-støtte (60 mill):</strong> Hvis Enova
+          innvilger støtte for de 9 gjenstående blokkene tilsvarende
+          ~60 mill totalt, blir nytt lån etter Enova 313 000 000 kr og
+          halvårlig termin 9 256 708 kr (årlig 18 513 416 kr).
         </div>
       </Section>
 
@@ -120,8 +123,8 @@ export default function Underlag() {
           rows={[
             ["Driftskostnader normalisert (post-rehab)", "17 686 079"],
             ["Eksisterende lån (renter + avdrag)", "2 000 000"],
-            ["Ny annuitet Pakke 1", "12 014 068"],
-            ["Ny annuitet Pakke 1+2", "19 245 798"],
+            ["Ny annuitet Pakke 1 (Alt 1)", "11 742 220"],
+            ["Ny annuitet Pakke 1+2 (Alt 2)", "20 210 972"],
             ["Ønsket likviditetsoverskudd", "1 500 000"],
             ["(−) Renteinntekter bank", "−220 000"],
             ["(−) Andre driftsinntekter (lade, leil., trim)", "−1 050 000"],
@@ -368,7 +371,7 @@ function Folsomhetsanalyse() {
     <div>
       <p className="text-[14.5px] leading-relaxed text-ink/80">
         Justér forutsetningene under for å se hvordan netto FK-økning P2 endrer
-        seg fra dagens estimat (+1 353 kr/mnd snitt). Tabellen er beregnet
+        seg fra dagens estimat (+1 517 kr/mnd snitt — Alt 2). Tabellen er beregnet
         live; tallene oppdateres mens du beveger glidebryterne.
       </p>
       <div className="mt-4 space-y-4 rounded-2xl border border-line/70 bg-surface/30 p-4 sm:p-5">
