@@ -10,9 +10,9 @@ import {
 } from "lucide-react";
 import PackageCard from "../components/PackageCard";
 import { kr, krSigned } from "../lib/format";
-import { FORUTSETNINGER } from "../data/forutsetninger";
+import { FORUTSETNINGER, RENTEBANER } from "../data/forutsetninger";
 
-const { pakke1, pakke2, pakke3, felles } = FORUTSETNINGER;
+const { pakke1, pakke2, felles } = FORUTSETNINGER;
 
 export default function Welcome() {
   return (
@@ -31,9 +31,10 @@ export default function Welcome() {
           </h1>
           <p className="mt-5 max-w-2xl text-[15px] leading-relaxed text-ink/70 sm:text-[16.5px] lg:text-[17px]">
             Du skal stemme over om Orebakken BRL skal rehabilitere bygningene
-            fra 1971–1974, og hvilken løsning vi velger. Dette verktøyet viser
+            fra 1971–1974, og hvilken pakke vi velger. Dette verktøyet viser
             tallene som er beregnet for din andel — ny felleskostnad,
-            strømbesparelse, skattefradrag og netto endring per måned.
+            strømbesparelse, skattefradrag og netto endring per måned. Tre
+            rentebaner vises per pakke (5,04 / 5,54 / 6,04 %).
           </p>
           <div className="mt-7 flex flex-wrap items-center gap-3">
             <Link href="/finn" className="btn-primary">
@@ -49,15 +50,15 @@ export default function Welcome() {
               tone="brand"
               icon={<Hammer size={16} />}
               navn="Pakke 1"
-              tittel="Tak, fasader og betong"
-              tekst="Nye tak på alle 13 blokker, fasader med forbedret isolasjon, reparasjon av betongskader på verandaer og fasader, og oppgradering av oppganger og kjellerdører."
+              tittel="Tak, fasader, betong og vinduer"
+              tekst="Nye tak på alle 13 blokker, fasader med etterisolering og nye vinduer (U=0,80), reparasjon av betongskader, og oppgradering av oppganger og kjellerdører. Nytt lån 190 mill."
             />
             <PakkeIntro
               tone="warm"
               icon={<Sun size={16} />}
-              navn="Pakke 1+2"
+              navn="Pakke 2"
               tittel="Pakke 1 + bergvarme og solceller"
-              tekst="Alt i Pakke 1, pluss bergvarmeanlegg som felles oppvarming fra bakken og solcelleanlegg på takene i alle 13 blokker. Erstatter dagens elektriske panelovner."
+              tekst="Alt i Pakke 1, pluss bergvarmeanlegg som felles oppvarming fra bakken og solcelleanlegg på takene i alle 13 blokker. Nytt lån 341,7 mill (mulig redusert til 308 mill om Enova innvilger for resterende 9 blokker)."
             />
           </div>
 
@@ -73,38 +74,29 @@ export default function Welcome() {
       {/* Snittall */}
       <section className="space-y-5">
         <div>
-          <div className="label">Vektet snitt for alle 430 andeler</div>
+          <div className="label">Vektet snitt for alle 430 andeler — hovedscenario 5,04 %</div>
           <h2 className="display mt-2 text-[24px] font-semibold leading-tight text-ink sm:text-[28px] lg:text-[34px]">
             Felleskostnaden — i tall
           </h2>
         </div>
 
-        <div className="grid gap-4 sm:gap-5 lg:grid-cols-3">
+        <div className="grid gap-4 sm:gap-5 lg:grid-cols-2">
           <SnittKort
             id="p1"
             stripe="pkg-stripe-1"
-            kostBrutto={pakke1.bruttoSnittKrMnd}
-            kostNetto={pakke1.nettoSnittKrMnd}
-            stromBesp={pakke1.stromBespSnittKrMnd}
-            skfr={pakke1.skattefradragSnittKrMnd}
+            kostBrutto={pakke1.rentebaner.r1.bruttoSnittKrMnd}
+            kostNetto={pakke1.rentebaner.r1.nettoSnittKrMnd}
+            stromBesp={pakke1.rentebaner.r1.stromBespSnittKrMnd}
+            skfr={pakke1.rentebaner.r1.skattefradragSnittKrMnd}
           />
           <SnittKort
             id="p2"
             stripe="pkg-stripe-2"
-            kostBrutto={pakke2.bruttoSnittKrMnd}
-            kostNetto={pakke2.nettoSnittKrMnd}
-            stromBesp={pakke2.stromBespSnittKrMnd - pakke2.solenergiSnittKrMnd}
-            solenergi={pakke2.solenergiSnittKrMnd}
-            skfr={pakke2.skattefradragSnittKrMnd}
-          />
-          <SnittKort
-            id="p3"
-            stripe="pkg-stripe-3"
-            kostBrutto={pakke3.bruttoSnittKrMnd}
-            kostNetto={pakke3.nettoSnittKrMnd}
-            stromBesp={pakke3.stromBespSnittKrMnd - pakke3.solenergiSnittKrMnd}
-            solenergi={pakke3.solenergiSnittKrMnd}
-            skfr={pakke3.skattefradragSnittKrMnd}
+            kostBrutto={pakke2.rentebaner.r1.bruttoSnittKrMnd}
+            kostNetto={pakke2.rentebaner.r1.nettoSnittKrMnd}
+            stromBesp={pakke2.rentebaner.r1.stromBespSnittKrMnd}
+            solenergi={pakke2.rentebaner.r1.solenergiSnittKrMnd}
+            skfr={pakke2.rentebaner.r1.skattefradragSnittKrMnd}
           />
         </div>
 
@@ -114,22 +106,21 @@ export default function Welcome() {
       {/* Pakke-kort */}
       <section id="pakkene" className="space-y-5 sm:space-y-6">
         <div>
-          <div className="label">Tre alternativer</div>
+          <div className="label">To pakker</div>
           <h2 className="display mt-2 text-[24px] font-semibold leading-tight text-ink sm:text-[28px] lg:text-[34px]">
-            Alt 1, Alt 2 eller Alt 3
+            Pakke 1 eller Pakke 2
           </h2>
           <p className="mt-3 max-w-3xl text-[14.5px] leading-relaxed text-muted sm:text-[15px]">
-            Alt 1 (tak/fasader/betong) kan vedtas alene. Alt 2 og Alt 3 inkluderer
-            i tillegg bergvarme og solceller. Forskjellen mellom Alt 2 og Alt 3
-            er hvor mye ENØK-støtte Enova innvilger: Alt 2 (31 mill, bekreftet) /
-            Alt 3 (60 mill, mulig ved utvidet tilsagn). Alle Pakke 1+2-varianter
-            krever 2/3-flertall.
+            Pakke 1 (tak, fasader, betong og vinduer) kan vedtas alene og
+            krever 50 % flertall. Pakke 2 omfatter alt i Pakke 1 pluss
+            bergvarme og solceller, og krever 2/3-flertall. Begge pakker
+            finansieres som grønt lån med rente 5,04 % i hovedscenarioet —
+            tabellen lengre ned viser også 5,54 % og 6,04 %.
           </p>
         </div>
-        <div className="grid gap-4 sm:gap-5 lg:grid-cols-3">
+        <div className="grid gap-4 sm:gap-5 lg:grid-cols-2">
           <PackageCard id="p1" />
           <PackageCard id="p2" />
-          <PackageCard id="p3" />
         </div>
       </section>
 
@@ -147,11 +138,11 @@ export default function Welcome() {
               {kr(felles.enovaBekreftet)} bekreftet
             </h3>
             <p className="mt-3 max-w-3xl text-[14px] leading-relaxed text-white/85 sm:text-[15px]">
-              Enova ga i april 2026 endelig tilsagn på{" "}
-              {kr(felles.enovaBekreftet)} til bergvarme og solceller i 4 av 13
-              blokker. Beløpet er allerede trukket fra lånebeløpet for
-              Pakke 1+2. Styret søker for de resterende 9 blokkene innen mai
-              2026 — all støtte som innvilges, reduserer borettslagets lån.
+              Enova ga endelig tilsagn på {kr(felles.enovaBekreftet)} til
+              bergvarme og solceller i 4 av 13 blokker. Styret søker for de
+              resterende 9 blokkene — forventet svar slutten av juni 2026 kan
+              gi ytterligere {kr(felles.enovaForventetTillegg)} (Pakke 2-lån
+              ned til 307,9 mill).
             </p>
           </div>
         </div>
@@ -173,8 +164,7 @@ export default function Welcome() {
             </h3>
             <p className="mt-2 text-[13.5px] leading-relaxed text-muted sm:text-[14px]">
               Hvorfor må vi gjøre noe nå? Hva er bergvarme? Hva betyr
-              skattefradraget? Den tekniske og praktiske bakgrunnen for
-              beslutningen.
+              skattefradraget?
             </p>
           </div>
           <ArrowRight size={18} className="mt-1 shrink-0 text-muted transition group-hover:translate-x-0.5 group-hover:text-brand" />
@@ -192,7 +182,7 @@ export default function Welcome() {
               Investeringsoversikt og forutsetninger
             </h3>
             <p className="mt-2 text-[13.5px] leading-relaxed text-muted sm:text-[14px]">
-              Detaljert oversikt over investering, energibesparelse, Enova-scenarier,
+              Detaljert oversikt over investering, energibesparelse, Enova,
               kostnadsvekst ved utsettelse og styrets vurdering.
             </p>
           </div>
@@ -223,9 +213,7 @@ function PakkeIntro({
     <div className="overflow-hidden rounded-2xl border border-line/70 bg-paper/90 backdrop-blur shadow-soft">
       <div className={`h-1 w-full ${stripe}`} />
       <div className="flex gap-3 p-4 sm:p-5">
-        <div
-          className={`grid h-9 w-9 shrink-0 place-items-center rounded-lg ${accentBg} ${accentText}`}
-        >
+        <div className={`grid h-9 w-9 shrink-0 place-items-center rounded-lg ${accentBg} ${accentText}`}>
           {icon}
         </div>
         <div className="min-w-0">
@@ -273,7 +261,7 @@ function SnittKort({
   solenergi,
   skfr,
 }: {
-  id: "p1" | "p2" | "p3";
+  id: "p1" | "p2";
   stripe: string;
   kostBrutto: number;
   kostNetto: number;
@@ -281,16 +269,15 @@ function SnittKort({
   solenergi?: number;
   skfr: number;
 }) {
-  const navn = id === "p1" ? "Alt 1" : id === "p2" ? "Alt 2" : "Alt 3";
+  const navn = id === "p1" ? "Pakke 1" : "Pakke 2";
   const flertall = id === "p1" ? "50 % flertall" : "2/3 flertall";
-  const accentClass =
-    id === "p1" ? "text-brand" : id === "p2" ? "text-warm-deep" : "text-save";
+  const accentClass = id === "p1" ? "text-brand" : "text-warm-deep";
   return (
     <article className="relative overflow-hidden rounded-3xl border border-line/70 bg-paper shadow-card">
       <div className={`h-1.5 w-full ${stripe}`} />
       <div className="p-5 sm:p-7 lg:p-8">
         <div className="flex items-center justify-between gap-3">
-          <div className="label">{navn} · vektet snitt</div>
+          <div className="label">{navn} · vektet snitt · 5,04 %</div>
           <span className="chip !py-0.5 !px-2 text-[10.5px]">{flertall}</span>
         </div>
         <div className="mt-5 grid grid-cols-2 gap-4 sm:gap-6">
@@ -312,9 +299,9 @@ function SnittKort({
         <div className="mt-5 space-y-2 rounded-xl bg-surface/60 p-3.5 text-[13px] sm:mt-6 sm:p-4 sm:text-sm">
           <Reduksjon label="Strømbesparelse oppvarming" value={-stromBesp} kind="save" />
           {solenergi !== undefined && solenergi > 0 && (
-            <Reduksjon label="Solenergi (dekker felleskost.)" value={-solenergi} kind="sun" />
+            <Reduksjon label="Solenergi (areal-fordelt)" value={-solenergi} kind="sun" />
           )}
-          <Reduksjon label="Skattefradrag (22 %)" value={-skfr} kind="tax" />
+          <Reduksjon label="Skattefradrag (22 %, snitt)" value={-skfr} kind="tax" />
         </div>
       </div>
     </article>
@@ -344,99 +331,105 @@ function Reduksjon({
   );
 }
 
+/** 2 pakker × 3 rentebaner = 6 søyler */
 function DiffBox() {
   return (
     <div className="rounded-3xl border-l-4 border-brand bg-paper p-5 shadow-soft sm:p-7">
       <div className="display text-base font-semibold text-ink sm:text-lg">
-        Sammenligning av Alt 1, Alt 2 og Alt 3
+        Pakke 1 og Pakke 2 ved tre rentebaner
       </div>
-      <div className="mt-4 grid gap-3 sm:gap-4 lg:grid-cols-2">
-        <DiffRow3
-          label="Bruttoøkning FK / mnd"
-          a1="+1 130 kr"
-          a2="+2 771 kr"
-          a3="+2 441 kr"
-        />
-        <DiffRow3
-          label="Strømbesparelse + solenergi"
-          a1="−116 kr"
-          a2="−946 kr"
-          a3="−946 kr"
-          tone="save"
-        />
-        <DiffRow3
-          label="Skattefradrag (22 %)"
-          a1="−240 kr"
-          a2="−319 kr"
-          a3="−292 kr"
-          tone="tax"
-        />
-        <DiffRow3
-          label="Netto FK-økning"
-          a1="+774 kr"
-          a2="+1 506 kr"
-          a3="+1 203 kr"
-          bold
-        />
-      </div>
-      <p className="mt-4 text-[12.5px] leading-relaxed text-muted sm:text-[13px]">
-        <strong>Alt 1:</strong> bare tak/fasader/betong, krever 50 % flertall.
-        Lånebeløp 176 mill kr.
-        <br />
-        <strong>Alt 2:</strong> alt i Alt 1 pluss bergvarme og solceller, med
-        31 mill kr i Enova-støtte. Lånebeløp 341,7 mill kr. Krever 2/3-flertall.
-        <br />
-        <strong>Alt 3:</strong> samme investering som Alt 2, men med 60 mill kr
-        i Enova-støtte. Lånebeløp 313 mill kr. Krever 2/3-flertall.
-        <br />
-        Marginal merkostnad: Alt 2 vs Alt 1 = +732 kr/mnd. Alt 3 vs Alt 1 =
-        +429 kr/mnd. Snitt for alle 430 andeler, basert på OBOS Banken
-        likviditetsanalyse 13.05.2026.
+      <p className="mt-1 text-[13px] text-muted sm:text-[13.5px]">
+        Snitt for alle 430 andeler. Brutto er ren FK-økning fra OBOS-banken;
+        netto trekker fra strømbesparelse, solenergi og snitt-skattefradrag.
       </p>
+
+      <div className="mt-4 grid gap-4 lg:grid-cols-2">
+        <PakkeBox tone="brand" navn="Pakke 1 · 190 mill · 30 år" pakke={pakke1} />
+        <PakkeBox tone="warm" navn="Pakke 2 · 341,7 mill · 40 år" pakke={pakke2} />
+      </div>
+
+      <div className="mt-4 rounded-2xl border border-save/30 bg-save-bg/40 p-4 text-[13px] leading-relaxed text-ink/85 sm:text-[13.5px]">
+        <strong>Forventet tilleggsstøtte Enova:</strong> Hvis Enova innvilger
+        søknad for de 9 resterende blokkene (svar slutten av juni 2026), kan
+        Pakke 2-lånet reduseres med {kr(felles.enovaForventetTillegg)} —
+        til 307,9 mill. Det reduserer netto FK-økning for Pakke 2 fra +1 577
+        kr/mnd snitt til ca. +1 245 kr/mnd snitt (ved 5,04 %).
+      </div>
     </div>
   );
 }
 
-function DiffRow3({
+function PakkeBox({
+  tone,
+  navn,
+  pakke,
+}: {
+  tone: "brand" | "warm";
+  navn: string;
+  pakke: typeof pakke1 | typeof pakke2;
+}) {
+  const accentBg = tone === "brand" ? "bg-brand-50" : "bg-warm-bg";
+  const accentText = tone === "brand" ? "text-brand" : "text-warm-deep";
+  return (
+    <div className={`rounded-2xl ${accentBg} p-4 sm:p-5`}>
+      <div className={`label ${accentText}`}>{navn}</div>
+      <div className="mt-3 overflow-x-auto">
+        <table className="w-full min-w-[320px] text-[12.5px] sm:text-[13px]">
+          <thead>
+            <tr className="text-muted">
+              <th className="text-left font-medium pr-2 pb-1.5">Rente</th>
+              {RENTEBANER.map((rb) => (
+                <th key={rb.id} className="text-right font-medium pb-1.5 num">
+                  {rb.label}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody className="num">
+            <Tr label="Brutto FK-økning" cells={(["r1", "r2", "r3"] as const).map((r) => krSigned(pakke.rentebaner[r].bruttoSnittKrMnd))} />
+            <Tr label="Strøm-besparelse" cells={(["r1", "r2", "r3"] as const).map((r) => krSigned(-pakke.rentebaner[r].stromBespSnittKrMnd))} tone="save" />
+            {"solenergiSnittKrMnd" in pakke.rentebaner.r1 && (
+              <Tr label="Solenergi" cells={(["r1", "r2", "r3"] as const).map((r) => {
+                const v = (pakke.rentebaner[r] as { solenergiSnittKrMnd?: number }).solenergiSnittKrMnd ?? 0;
+                return krSigned(-v);
+              })} tone="sun" />
+            )}
+            <Tr label="Skattefradrag (snitt)" cells={(["r1", "r2", "r3"] as const).map((r) => krSigned(-pakke.rentebaner[r].skattefradragSnittKrMnd))} tone="tax" />
+            <Tr label="Netto FK-økning" cells={(["r1", "r2", "r3"] as const).map((r) => krSigned(pakke.rentebaner[r].nettoSnittKrMnd))} bold />
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
+
+function Tr({
   label,
-  a1,
-  a2,
-  a3,
+  cells,
   tone,
   bold,
 }: {
   label: string;
-  a1: string;
-  a2: string;
-  a3: string;
-  tone?: "save" | "tax";
+  cells: string[];
+  tone?: "save" | "tax" | "sun";
   bold?: boolean;
 }) {
   const cls =
     tone === "save"
       ? "text-save"
+      : tone === "sun"
+      ? "text-warm-deep"
       : tone === "tax"
       ? "text-tax-ink"
-      : bold
-      ? "text-ink"
       : "text-ink";
   return (
-    <div className="rounded-xl border border-line/60 bg-surface/40 p-3.5 sm:p-4">
-      <div className="label">{label}</div>
-      <div className="mt-2.5 grid grid-cols-3 gap-1 text-[12.5px] sm:text-[13px]">
-        <div>
-          <div className="text-[10px] uppercase tracking-wide text-muted">Alt 1</div>
-          <div className={`num ${bold ? "font-bold" : "font-semibold"} ${cls}`}>{a1}</div>
-        </div>
-        <div>
-          <div className="text-[10px] uppercase tracking-wide text-muted">Alt 2</div>
-          <div className={`num ${bold ? "font-bold" : "font-semibold"} ${cls}`}>{a2}</div>
-        </div>
-        <div>
-          <div className="text-[10px] uppercase tracking-wide text-muted">Alt 3</div>
-          <div className={`num ${bold ? "font-bold" : "font-semibold"} ${cls}`}>{a3}</div>
-        </div>
-      </div>
-    </div>
+    <tr className="border-t border-line/40">
+      <td className="py-1.5 pr-2 text-ink/80">{label}</td>
+      {cells.map((c, i) => (
+        <td key={i} className={`py-1.5 text-right ${cls} ${bold ? "font-bold" : "font-semibold"}`}>
+          {c}
+        </td>
+      ))}
+    </tr>
   );
 }

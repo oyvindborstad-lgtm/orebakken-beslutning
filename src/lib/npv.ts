@@ -36,19 +36,13 @@ export function aarligKontantstromSnitt(
   stromPrisOverstyring?: number,
 ): { ar: number[]; verdi: number[]; sum: number } {
   const p = pakke === "p1" ? pakke1 : pakke2;
-  const rente = rentePctOverstyring ?? p.rentePct;
+  const basisRente = p.rentebaner.r1.rentePct; // hovedscenario 5,04 %
+  const rente = rentePctOverstyring ?? basisRente;
 
-  // Brutto økning per år (terminer på nytt lån) — uavhengig av rente i seg
-  // selv (det er allerede regnet inn i bruttoSnittKrMnd × 12).
-  // Men vi kan justere ved å regne om annuitet hvis rente endres.
-  // Per andel snitt
   const A = FORUTSETNINGER.felles.antallAndeler;
-  // Bedre: bruk pakke.bruttoSnittKrMnd × 12 — som allerede tar høyde for
-  // nedbetaling. Vi justerer KUN for rente-overstyring som differanse i
-  // total rentekostnad / nedbetalingAr / 12 / antallAndeler.
   const renteJusteringAr =
     (totalRenter(p.laneSum, rente, p.nedbetalingAr) -
-      totalRenter(p.laneSum, p.rentePct, p.nedbetalingAr)) /
+      totalRenter(p.laneSum, basisRente, p.nedbetalingAr)) /
     p.nedbetalingAr /
     A;
 
@@ -56,19 +50,16 @@ export function aarligKontantstromSnitt(
     ? stromPrisOverstyring / FORUTSETNINGER.felles.stromPrisKrPerKWh
     : 1;
 
-  const stromBespAr = p.stromBespSnittKrMnd * 12 * stromPrisFaktor;
-  const skfrAr =
-    pakke === "p1"
-      ? pakke1.skattefradragSnittKrMnd * 12
-      : pakke2.skattefradragSnittKrMnd * 12;
-  // Hvis rente endres, justeres skfr proporsjonalt med ny renteandel
+  const r1 = p.rentebaner.r1;
+  const stromBespAr = r1.stromBespSnittKrMnd * 12 * stromPrisFaktor;
+  const skfrAr = r1.skattefradragSnittKrMnd * 12;
   const skfrJustering =
     (snittRenteAr(p.laneSum, rente, p.nedbetalingAr) /
-      snittRenteAr(p.laneSum, p.rentePct, p.nedbetalingAr) -
+      snittRenteAr(p.laneSum, basisRente, p.nedbetalingAr) -
       1) *
     skfrAr;
 
-  const bruttoBaseAr = p.bruttoSnittKrMnd * 12;
+  const bruttoBaseAr = r1.bruttoSnittKrMnd * 12;
   const nettoAr =
     bruttoBaseAr +
     renteJusteringAr -

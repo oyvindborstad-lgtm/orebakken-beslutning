@@ -38,11 +38,11 @@ export default function StromCalculator({
   const p2Besp = harVerdi ? personligP2Besparelse(kWh, andel.brok) : null;
   const p1Besp = harVerdi ? personligStromBesparelseP1(kWh) : 0;
 
-  const fkP1Personlig = harVerdi ? beregnFkP1(andel, kWh) : null;
-  const fkP2Personlig = harVerdi ? beregnFkP2(andel, kWh) : null;
+  const fkP1Personlig = harVerdi ? beregnFkP1(andel, "r1", kWh) : null;
+  const fkP2Personlig = harVerdi ? beregnFkP2(andel, "r1", kWh) : null;
 
-  const arealP1 = Math.abs(andel.p1.stromBesp);
-  const arealP2 = Math.abs(andel.p2.stromBesp);
+  const arealP1 = Math.abs(andel.p1.r1.stromBesp);
+  const arealP2 = Math.abs(andel.p2.r1.stromBesp);
 
   return (
     <article className="card">
@@ -122,24 +122,24 @@ export default function StromCalculator({
 
         <div className="grid gap-3 sm:grid-cols-2">
           <PakkeResultat
-            tittel="Pakke 1"
+            tittel="Pakke 1 (5,04 %)"
             tone="brand"
             harVerdi={harVerdi}
             arealBesp={arealP1}
             personligBesp={p1Besp}
             fkPersonlig={fkP1Personlig}
-            arealFu={andel.p1.nyFu}
-            arealNetto={andel.p1.nettoAr1}
+            arealFu={andel.p1.r1.nyFu}
+            arealNetto={andel.p1.r1.nettoAr1}
           />
           <PakkeResultat
-            tittel="Pakke 1+2"
+            tittel="Pakke 2 (5,04 %)"
             tone="warm"
             harVerdi={harVerdi}
             arealBesp={arealP2}
             personligBesp={p2Besp?.total ?? 0}
             fkPersonlig={fkP2Personlig}
-            arealFu={andel.p2.nyFu}
-            arealNetto={andel.p2.nettoAr1}
+            arealFu={andel.p2.r1.nyFu}
+            arealNetto={andel.p2.r1.nettoAr1}
             split={p2Besp ?? undefined}
           />
         </div>

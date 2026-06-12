@@ -84,12 +84,13 @@ export default function Bakgrunn() {
             flertall.
             <br />
             <br />
-            Borettslaget tar opp <strong>176 millioner kroner</strong> i lån over
-            30 år til 5,14 % rente (etter 10 mill ENØK-støtte for tak/fasader).
-            Brutto økning i felleskostnad er <strong>+1 130 kr/mnd</strong> i
-            snitt. Netto økning, etter strømbesparelse og skattefradrag, er{" "}
-            <strong>+774 kr/mnd</strong> i snitt. OBOS Banken likviditetsanalyse
-            13.05.2026, Alt 1.
+            Borettslaget tar opp <strong>190 millioner kroner</strong> i lån over
+            30 år til 5,04 % rente på grønt lån (etter 2 mill ENØK-støtte
+            som utbetales etter prosjektslutt). Brutto økning i felleskostnad
+            er <strong>+1 363 kr/mnd</strong> i snitt. Netto økning, etter
+            strømbesparelse og skattefradrag, er <strong>+992 kr/mnd</strong> i
+            snitt. OBOS Banken likviditetsanalyse 12.06.2026 — tre rentebaner
+            (5,04 / 5,54 / 6,04 %) vises i sammenligningstabellen.
           </Pakke>
 
           <Pakke
@@ -104,14 +105,17 @@ export default function Bakgrunn() {
             <br />
             Borettslaget tar opp totalt{" "}
             <strong>341,7 millioner kroner</strong> over 40 år til 5,04 % rente
-            (etter 31,3 mill ENØK-støtte for bergvarme/solceller — Alt 2 i OBOS
-            Banken likviditetsanalyse). Brutto økning i felleskostnad er{" "}
-            <strong>+2 771 kr/mnd</strong> i snitt. Netto økning er{" "}
-            <strong>+1 506 kr/mnd</strong> i snitt — inkludert
-            strømbesparelse fra bergvarme/isolasjon (719 kr/mnd), solenergi
-            areal-fordelt (227 kr/mnd), og skattefradrag snitt (319 kr/mnd).
-            Alternativt med 60 mill ENØK-støtte (Alt 3) reduseres netto til
-            ca. +1 203 kr/mnd. Basert på OBOS Banken 13.05.2026.
+            (etter 31,3 mill ENØK-støtte bekreftet for 4 blokker). Brutto
+            økning i felleskostnad er <strong>+3 007 kr/mnd</strong> i snitt.
+            Netto økning er <strong>+1 577 kr/mnd</strong> i snitt —
+            inkludert strømbesparelse fra bergvarme/isolasjon (719 kr/mnd),
+            solenergi areal-fordelt (227 kr/mnd), og skattefradrag snitt
+            (483 kr/mnd år 1). Dersom Enova innvilger forventet tilleggsstøtte
+            på 33,78 mill (svar slutten av juni 2026), reduseres lånet til
+            307,9 mill og netto FK-økning faller til ca.{" "}
+            <strong>+1 245 kr/mnd</strong> i snitt. Tre rentebaner vises
+            (5,04 / 5,54 / 6,04 %). Basert på OBOS Banken 13.05.2026
+            forholdsmessig overført til ny per-andel-struktur.
           </Pakke>
         </div>
 
@@ -274,13 +278,14 @@ export default function Bakgrunn() {
             leiligheter får mer (lineært med areal).
             <br />
             <br />
-            Brutto FK gir en økning på ca. 2 771 kr/mnd (snitt, Alt 2), men
-            oppvarmingsbesparelse fra bergvarme (719 kr/mnd) + solenergi
-            (227 kr/mnd) + skattefradrag snitt (319 kr/mnd) reduserer netto
-            til ca. <strong>1 506 kr/mnd</strong>. Pakke 1+2 (Alt 2) ender
-            altså opp med å koste deg <strong>ca. 732 kr/mnd mer</strong> enn
-            Pakke 1 (Alt 1). Med 60 mill Enova-støtte (Alt 3) reduseres
-            marginalen til 429 kr/mnd.
+            Brutto FK gir en økning på ca. 3 007 kr/mnd (Pakke 2 snitt ved
+            5,04 %), men oppvarmingsbesparelse fra bergvarme (719 kr/mnd) +
+            solenergi (227 kr/mnd) + skattefradrag snitt (483 kr/mnd år 1)
+            reduserer netto til ca. <strong>1 577 kr/mnd</strong>. Pakke 2
+            ender altså opp med å koste deg{" "}
+            <strong>ca. 585 kr/mnd mer</strong> enn Pakke 1 alene. Med
+            forventet Enova-tilleggsstøtte (33,78 mill) reduseres marginalen
+            til ca. 253 kr/mnd.
           </Faq>
           <Faq q="Hva med de 9 blokkene som ikke har fått Enova-støtte ennå?">
             Styret har bestemt seg for å installere bergvarme og solceller i{" "}

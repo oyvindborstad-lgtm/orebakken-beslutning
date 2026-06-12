@@ -1,28 +1,25 @@
-import { Hammer, Sun, Sparkles, ArrowUpRight } from "lucide-react";
-import { FORUTSETNINGER, type PakkeId } from "../data/forutsetninger";
+import { Hammer, Sun, ArrowUpRight } from "lucide-react";
+import { FORUTSETNINGER } from "../data/forutsetninger";
+import type { PakkeId } from "../lib/types";
 import { kr, krSigned } from "../lib/format";
 
 type Props = { id: PakkeId };
 
 export default function PackageCard({ id }: Props) {
-  const pakke =
-    id === "p1"
-      ? FORUTSETNINGER.pakke1
-      : id === "p2"
-      ? FORUTSETNINGER.pakke2
-      : FORUTSETNINGER.pakke3;
+  const pakke = id === "p1" ? FORUTSETNINGER.pakke1 : FORUTSETNINGER.pakke2;
   const felles = FORUTSETNINGER.felles;
-  const Icon = id === "p1" ? Hammer : id === "p2" ? Sun : Sparkles;
-  const stripe =
-    id === "p1" ? "pkg-stripe-1" : id === "p2" ? "pkg-stripe-2" : "pkg-stripe-3";
-  const accentText =
-    id === "p1" ? "text-brand" : id === "p2" ? "text-warm-deep" : "text-save";
-  const accentBg =
-    id === "p1" ? "bg-brand-50" : id === "p2" ? "bg-warm-bg" : "bg-save-bg";
+  const Icon = id === "p1" ? Hammer : Sun;
+  const stripe = id === "p1" ? "pkg-stripe-1" : "pkg-stripe-2";
+  const accentText = id === "p1" ? "text-brand" : "text-warm-deep";
+  const accentBg = id === "p1" ? "bg-brand-50" : "bg-warm-bg";
   const flertall =
     pakke.flertallskrav === "50 %"
       ? "Krever 50 % flertall"
       : "Krever 2/3 flertall";
+
+  // Vis snittall ved 5,04 % (hovedscenario).
+  const nettoSnitt = pakke.rentebaner.r1.nettoSnittKrMnd;
+  const bruttoSnitt = pakke.rentebaner.r1.bruttoSnittKrMnd;
 
   return (
     <article className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-line/70 bg-paper shadow-card">
@@ -50,16 +47,13 @@ export default function PackageCard({ id }: Props) {
             valueDesktop={kr(pakke.laneSum)}
           />
           <Stat label="Løpetid" valueMobile={`${pakke.nedbetalingAr} år`} />
-          <Stat
-            label="Rente"
-            valueMobile={`${pakke.rentePct.toString().replace(".", ",")} %`}
-          />
+          <Stat label="Rente" valueMobile="5,04 %" />
         </dl>
 
         <ul className="mt-5 space-y-2 text-[13.5px] leading-relaxed text-ink/85 sm:text-[14px]">
           {pakke.inkluderer.map((item) => (
             <li key={item} className="flex gap-2.5">
-              <span className={`mt-2 block h-1 w-1 shrink-0 rounded-full sm:mt-2.5 ${id === "p1" ? "bg-brand" : id === "p2" ? "bg-warm-deep" : "bg-save"}`} />
+              <span className={`mt-2 block h-1 w-1 shrink-0 rounded-full sm:mt-2.5 ${id === "p1" ? "bg-brand" : "bg-warm-deep"}`} />
               <span>{item}</span>
             </li>
           ))}
@@ -76,10 +70,13 @@ export default function PackageCard({ id }: Props) {
           <div className="min-w-0">
             <div className="label !text-save">Snitt FK netto / mnd</div>
             <div className="num mt-1 text-[16px] font-semibold leading-tight text-save sm:text-lg">
-              {krSigned(pakke.nettoSnittKrMnd)}
+              {krSigned(nettoSnitt)}
+            </div>
+            <div className="mt-0.5 text-[10.5px] text-muted">
+              brutto: {krSigned(bruttoSnitt)} ved 5,04 %
             </div>
           </div>
-          {(id === "p2" || id === "p3") && (
+          {id === "p2" && (
             <div className="col-span-2 mt-1 border-t border-save/15 pt-3 text-[11.5px] leading-relaxed text-ink/75 sm:text-[12px]">
               <div className="flex flex-wrap justify-between gap-2">
                 <span>Solcelleproduksjon</span>
@@ -94,8 +91,8 @@ export default function PackageCard({ id }: Props) {
                 </span>
               </div>
               <div className="mt-1 text-muted">
-                Netto-besparelsen over inkluderer både solceller og at
-                bergvarmen selv bruker strøm.
+                Netto-besparelsen inkluderer både solceller og at bergvarmen
+                selv bruker strøm.
               </div>
             </div>
           )}

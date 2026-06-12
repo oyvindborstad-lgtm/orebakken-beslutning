@@ -309,33 +309,29 @@ function NaverdiAnalyse() {
 }
 
 function Folsomhetsanalyse() {
-  const [rente, setRente] = useState<number>(pakke2.rentePct);
+  const p2r1 = pakke2.rentebaner.r1;
+  const [rente, setRente] = useState<number>(p2r1.rentePct);
   const [stromPris, setStromPris] = useState<number>(felles.stromPrisKrPerKWh);
   const [byggekostMult, setByggekostMult] = useState<number>(1.0);
 
-  // Re-compute snitt-tall basert på endrede forutsetninger.
-  // Brutto FK er proporsjonal med lånebeløp og avhenger av rente via annuitet.
   const lanesum = pakke2.laneSum * byggekostMult;
   const annuitet = (lanesum * (rente / 100 / 12)) / (1 - Math.pow(1 + rente / 100 / 12, -pakke2.nedbetalingAr * 12));
 
-  // Strømbesparelse skalerer med strømpris (oppvarmingsbesparelse)
   const strømFaktor = stromPris / felles.stromPrisKrPerKWh;
-  const oppvarmingsBespSnitt = 845 * strømFaktor;
-  const solenergiSnitt = ((felles.solcelleBruktTilFellesKWh * stromPris + felles.solcelleOverskuddSommerKWh * felles.salgsprisKrPerKWh) / felles.antallAndeler) / 12;
+  const oppvarmingsBespSnitt = p2r1.stromBespSnittKrMnd * strømFaktor;
+  const solenergiSnitt = p2r1.solenergiSnittKrMnd * strømFaktor;
   const totalStromBespSnitt = oppvarmingsBespSnitt + solenergiSnitt;
 
-  // Skattefradrag — proporsjonal med rente × lånesum (omtrentlig)
   const totalRente = annuitet * 12 * pakke2.nedbetalingAr - lanesum;
   const snittRenteAr = totalRente / pakke2.nedbetalingAr;
   const skfrSnittKrMnd = (snittRenteAr * 0.22) / felles.antallAndeler / 12;
 
-  // Brutto med ny rente og lånesum
   const bruttoNyMnd = annuitet / felles.antallAndeler;
-  const baselineLaneAndelMnd = pakke2.arligTermin / 12 / felles.antallAndeler;
-  const justertBruttoOkning = pakke2.bruttoSnittKrMnd + (bruttoNyMnd - baselineLaneAndelMnd);
+  const baselineLaneAndelMnd = p2r1.arligTermin / 12 / felles.antallAndeler;
+  const justertBruttoOkning = p2r1.bruttoSnittKrMnd + (bruttoNyMnd - baselineLaneAndelMnd);
 
   const nyNetto = justertBruttoOkning - totalStromBespSnitt - skfrSnittKrMnd;
-  const baselineNetto = pakke2.nettoSnittKrMnd;
+  const baselineNetto = p2r1.nettoSnittKrMnd;
   const endring = nyNetto - baselineNetto;
 
   return (
@@ -351,8 +347,8 @@ function Folsomhetsanalyse() {
         <Slider label="Byggekost (multiplikator)" value={byggekostMult} setValue={setByggekostMult} min={0.8} max={1.3} step={0.05} suffix="×" />
       </div>
       <div className="mt-5 grid gap-3 sm:grid-cols-3">
-        <Stat label="Brutto FK-økning P2 / mnd snitt" value={`${justertBruttoOkning.toFixed(0)} kr`} sub={`baseline: ${pakke2.bruttoSnittKrMnd} kr`} />
-        <Stat label="Strøm + solenergi snitt" value={`${totalStromBespSnitt.toFixed(0)} kr`} sub={`baseline: ${pakke2.stromBespSnittKrMnd} kr`} />
+        <Stat label="Brutto FK-økning P2 / mnd snitt" value={`${justertBruttoOkning.toFixed(0)} kr`} sub={`baseline: ${p2r1.bruttoSnittKrMnd} kr`} />
+        <Stat label="Strøm + solenergi snitt" value={`${totalStromBespSnitt.toFixed(0)} kr`} sub={`baseline: ${p2r1.stromBespSnittKrMnd + p2r1.solenergiSnittKrMnd} kr`} />
         <Stat label="Netto FK-økning snitt" value={`${nyNetto.toFixed(0)} kr/mnd`} sub={`endring: ${endring >= 0 ? "+" : ""}${endring.toFixed(0)} kr/mnd`} />
       </div>
       <div className="mt-4 rounded-xl border-l-4 border-warm bg-warm-bg/40 px-5 py-4 text-[13px] leading-relaxed text-ink/80">
@@ -407,10 +403,10 @@ function Forutsetningsliste() {
     ["Enova søkes for (resterende)", `${felles.enovaSokerFor} blokker`],
     ["Pakke 1 lånebeløp", `${pakke1.laneSum.toLocaleString("nb-NO")} kr`],
     ["Pakke 1 nedbetalingstid", `${pakke1.nedbetalingAr} år`],
-    ["Pakke 1 rente", `${pakke1.rentePct.toString().replace(".", ",")} %`],
+    ["Pakke 1 rente (hovedscenario)", `${pakke1.rentebaner.r1.rentePct.toString().replace(".", ",")} %`],
     ["Pakke 1+2 lånebeløp", `${pakke2.laneSum.toLocaleString("nb-NO")} kr`],
     ["Pakke 1+2 nedbetalingstid", `${pakke2.nedbetalingAr} år`],
-    ["Pakke 1+2 rente (grønt lån)", `${pakke2.rentePct.toString().replace(".", ",")} %`],
+    ["Pakke 2 rente (hovedscenario, grønt lån)", `${pakke2.rentebaner.r1.rentePct.toString().replace(".", ",")} %`],
     ["Snitt FK i dag", `${felles.fkSnittIDagKrMnd.toLocaleString("nb-NO")} kr/mnd`],
     ["Dagens FK-budsjett 2026", `${felles.dagensBudsjettFKKrAr.toLocaleString("nb-NO")} kr/år`],
     ["Byggprisindeks per år (forutsatt)", `${(felles.byggprisIndeksPctPrAr * 100).toFixed(0)} %`],
