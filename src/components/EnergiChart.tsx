@@ -1,10 +1,14 @@
 import { useState, useMemo, useRef } from "react";
-import { Sun, Flame, TrendingUp, Battery, ChevronLeft, ChevronRight } from "lucide-react";
+import { Sun, Flame, TrendingUp, Battery, Droplet, ChevronLeft, ChevronRight } from "lucide-react";
 import { FORUTSETNINGER } from "../data/forutsetninger";
 
 const { manedlig, felles } = FORUTSETNINGER;
 
-const fmt = (n: number) => n.toLocaleString("nb-NO");
+const FORBRUKSPRIS = 1.20; // kr/kWh — verdi når sol erstatter strøm-kjøp
+const SALGSPRIS = 0.50;    // kr/kWh — spot ved tilbakesalg
+
+const fmt = (n: number) => Math.round(n).toLocaleString("nb-NO");
+const fmtKr = (n: number) => `${fmt(n)} kr`;
 const pctFmt = (n: number) =>
   `${(n * 100).toFixed(1).replace(".", ",")} %`;
 
@@ -16,20 +20,27 @@ type EnrichedMonth = {
   forbruk: number;
   solBrukt: number;
   overskudd: number;
+  tilLager: number;
+  tilSalg: number;
   dekning: number;
 };
 
 export default function EnergiChart() {
   // Default-velg juli (høyest sol-produksjon, viser overskudd)
   const [selectedIdx, setSelectedIdx] = useState<number>(6);
+  // Andel av sommer-overskudd som lagres som varmtvann (0–100 %)
+  const [lagring, setLagring] = useState<number>(80);
 
-  const { enriched, total, totalForbruk, dekning, dekningBergvarme, overskudd, yMax, yTicks } =
+  const { enriched, total, totalForbruk, dekning, overskudd, totalLager, totalSalg, verdiSparing, yMax, yTicks } =
     useMemo(() => {
+      const f = lagring / 100;
       const enriched: EnrichedMonth[] = manedlig.map((m) => {
         const forbruk = m.bergvarme + m.ovrig;
         const solBrukt = Math.min(m.sol, forbruk);
         const overskudd = Math.max(0, m.sol - forbruk);
-        return { ...m, forbruk, solBrukt, overskudd, dekning: solBrukt / forbruk };
+        const tilLager = overskudd * f;
+        const tilSalg = overskudd - tilLager;
+        return { ...m, forbruk, solBrukt, overskudd, tilLager, tilSalg, dekning: solBrukt / forbruk };
       });
       const total = manedlig.reduce(
         (acc, m) => ({
@@ -41,13 +52,18 @@ export default function EnergiChart() {
       );
       const totalForbruk = total.bergvarme + total.ovrig;
       const overskudd = enriched.reduce((a, m) => a + m.overskudd, 0);
+      const totalLager = enriched.reduce((a, m) => a + m.tilLager, 0);
+      const totalSalg = enriched.reduce((a, m) => a + m.tilSalg, 0);
       const totalSolBrukt = total.sol - overskudd;
       const dekning = totalSolBrukt / totalForbruk;
-      const dekningBergvarme = total.sol / total.bergvarme;
+      // Verdi: sol på stedet (1,20) + lager (1,20) + salg (0,50)
+      const verdiMed = totalSolBrukt * FORBRUKSPRIS + totalLager * FORBRUKSPRIS + totalSalg * SALGSPRIS;
+      const verdiUten = totalSolBrukt * FORBRUKSPRIS + overskudd * SALGSPRIS;
+      const verdiSparing = verdiMed - verdiUten;
       const yMax = Math.max(...enriched.map((m) => Math.max(m.forbruk, m.sol)));
       const yTicks = [0, 100_000, 200_000, 300_000].filter((t) => t <= yMax * 1.1);
-      return { enriched, total, totalForbruk, dekning, dekningBergvarme, overskudd, yMax, yTicks };
-    }, []);
+      return { enriched, total, totalForbruk, dekning, overskudd, totalLager, totalSalg, verdiSparing, yMax, yTicks };
+    }, [lagring]);
 
   const Y = (v: number) => (v / (yMax * 1.05)) * 100;
   const sel = enriched[selectedIdx];
@@ -64,18 +80,54 @@ export default function EnergiChart() {
         <div className="min-w-0 flex-1">
           <div className="label">Energiprofil — månedlig</div>
           <h3 className="display mt-1.5 text-xl font-semibold text-ink sm:text-2xl">
-            Solenergi vs. energiforbruk
+            Solenergi vs. energiforbruk — med varmtvann som lager
           </h3>
           <p className="mt-2 max-w-2xl text-[13.5px] leading-relaxed text-muted sm:text-[14px]">
-            Månedlig solproduksjon (Fusen) sammenlignet med strømforbruk til
-            bergvarme (Dråpe AS) og øvrig fellesdrift. Klikk på en måned eller
-            bruk piltastene for å se detaljer.
+            Sommer-overskuddet kan styres til bergvarmens varmtvannstank
+            (1,20 kr/kWh erstatning) framfor å selges til nettet (0,50 kr/kWh
+            spot). Justér slideren for å se effekten på årsverdien.
           </p>
         </div>
       </div>
 
+      {/* Lagrings-slider */}
+      <div className="mt-5 rounded-2xl border border-warm/30 bg-warm-bg/50 p-4 sm:p-5">
+        <div className="flex flex-wrap items-baseline justify-between gap-2">
+          <label htmlFor="energi-lagring" className="label !text-warm-deep">
+            Andel av sommer-overskudd lagret som varmtvann
+          </label>
+          <span className="num text-lg font-semibold text-warm-deep">
+            {lagring} %
+          </span>
+        </div>
+        <input
+          id="energi-lagring"
+          type="range"
+          min={0}
+          max={100}
+          step={5}
+          value={lagring}
+          onChange={(e) => setLagring(Number(e.target.value))}
+          className="mt-3 w-full accent-warm-deep"
+        />
+        <div className="mt-1 flex justify-between text-[11px] text-muted">
+          <span>0 % = alt selges (0,50 kr/kWh)</span>
+          <span>100 % = alt lagres (1,20 kr/kWh)</span>
+        </div>
+        <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-4">
+          <MiniStat label="Lagret som varmtvann" value={`${fmt(totalLager)} kWh`} tone="warm" />
+          <MiniStat label="Solgt til nett" value={`${fmt(totalSalg)} kWh`} tone="brand" />
+          <MiniStat label="Årsverdi solar" value={fmtKr(total.sol * FORBRUKSPRIS - totalSalg * (FORBRUKSPRIS - SALGSPRIS))} tone="save" />
+          <MiniStat
+            label="Gevinst vs kun salg"
+            value={verdiSparing > 0 ? `+${fmtKr(verdiSparing)}` : "—"}
+            tone="save"
+          />
+        </div>
+      </div>
+
       {/* Yearly KPIs */}
-      <div className="mt-6 grid grid-cols-2 gap-3 lg:grid-cols-4">
+      <div className="mt-6 grid grid-cols-2 gap-3 lg:grid-cols-5">
         <KpiKort
           icon={<Sun size={16} />}
           tone="warm"
@@ -98,11 +150,18 @@ export default function EnergiChart() {
           sub="av totalt forbruk"
         />
         <KpiKort
+          icon={<Droplet size={16} />}
+          tone="warm"
+          label="→ Varmtvann (lager)"
+          value={`${fmt(totalLager)} kWh`}
+          sub={`Verdi: ${fmtKr(totalLager * FORBRUKSPRIS)}`}
+        />
+        <KpiKort
           icon={<TrendingUp size={16} />}
           tone="brand"
-          label="Overskudd for salg"
-          value={`${fmt(overskudd)} kWh`}
-          sub="per år (jun–aug)"
+          label="→ Salg til nett"
+          value={`${fmt(totalSalg)} kWh`}
+          sub={`Verdi: ${fmtKr(totalSalg * SALGSPRIS)}`}
         />
       </div>
 
@@ -137,10 +196,10 @@ export default function EnergiChart() {
           <div className="px-4 pt-3 text-[11px] text-muted sm:hidden">
             ← sveip for å se alle kolonner →
           </div>
-          <table className="w-full min-w-[700px] text-[13px]">
+          <table className="w-full min-w-[780px] text-[13px]">
             <thead>
               <tr className="bg-brand text-white">
-                {["Måned", "Solprod.", "Bergvarme", "Øvrig", "Totalt forbruk", "Sol brukt", "Overskudd", "Dekning"].map(
+                {["Måned", "Solprod.", "Forbruk", "Sol brukt", "→ Varmtvann", "→ Salg", "Dekning"].map(
                   (h, i) => (
                     <th
                       key={h}
@@ -167,22 +226,19 @@ export default function EnergiChart() {
                     {m.mnd}
                   </td>
                   <td className="border-b border-line/40 px-3 py-2 text-right text-warm-deep">
-                    {fmt(m.sol)} kWh
+                    {fmt(m.sol)}
                   </td>
-                  <td className="border-b border-line/40 px-3 py-2 text-right text-rose-700">
-                    {fmt(m.bergvarme)} kWh
-                  </td>
-                  <td className="border-b border-line/40 px-3 py-2 text-right text-ink/75">
-                    {fmt(m.ovrig)} kWh
-                  </td>
-                  <td className="border-b border-line/40 px-3 py-2 text-right font-semibold text-ink">
-                    {fmt(m.forbruk)} kWh
+                  <td className="border-b border-line/40 px-3 py-2 text-right text-ink">
+                    {fmt(m.forbruk)}
                   </td>
                   <td className="border-b border-line/40 px-3 py-2 text-right text-save">
-                    {fmt(m.solBrukt)} kWh
+                    {fmt(m.solBrukt)}
+                  </td>
+                  <td className="border-b border-line/40 px-3 py-2 text-right text-warm-deep">
+                    {m.tilLager > 0 ? fmt(m.tilLager) : "—"}
                   </td>
                   <td className="border-b border-line/40 px-3 py-2 text-right text-brand">
-                    {m.overskudd > 0 ? `+${fmt(m.overskudd)} kWh` : "—"}
+                    {m.tilSalg > 0 ? fmt(m.tilSalg) : "—"}
                   </td>
                   <td className="border-b border-line/40 px-3 py-2 text-right text-warm-deep">
                     {pctFmt(m.dekning)}
@@ -191,14 +247,11 @@ export default function EnergiChart() {
               ))}
               <tr className="bg-brand-50 font-semibold">
                 <td className="px-3 py-2.5 text-left text-ink">Totalt</td>
-                <td className="px-3 py-2.5 text-right text-warm-deep">{fmt(total.sol)} kWh</td>
-                <td className="px-3 py-2.5 text-right text-rose-700">{fmt(total.bergvarme)} kWh</td>
-                <td className="px-3 py-2.5 text-right text-ink/85">{fmt(total.ovrig)} kWh</td>
-                <td className="px-3 py-2.5 text-right text-ink">{fmt(totalForbruk)} kWh</td>
-                <td className="px-3 py-2.5 text-right text-save">
-                  {fmt(total.sol - overskudd)} kWh
-                </td>
-                <td className="px-3 py-2.5 text-right text-brand">{fmt(overskudd)} kWh</td>
+                <td className="px-3 py-2.5 text-right text-warm-deep">{fmt(total.sol)}</td>
+                <td className="px-3 py-2.5 text-right text-ink">{fmt(totalForbruk)}</td>
+                <td className="px-3 py-2.5 text-right text-save">{fmt(total.sol - overskudd)}</td>
+                <td className="px-3 py-2.5 text-right text-warm-deep">{fmt(totalLager)}</td>
+                <td className="px-3 py-2.5 text-right text-brand">{fmt(totalSalg)}</td>
                 <td className="px-3 py-2.5 text-right text-warm-deep">{pctFmt(dekning)}</td>
               </tr>
             </tbody>
@@ -207,34 +260,38 @@ export default function EnergiChart() {
       </details>
 
       <div className="mt-5 rounded-2xl border-l-4 border-warm bg-warm-bg/60 p-4 text-[13.5px] leading-relaxed text-ink/85">
-        <div className="font-semibold text-ink">Om solenergi vs. bergvarme</div>
+        <div className="font-semibold text-ink">Varmtvann som energilager</div>
         <ul className="mt-2 space-y-1.5">
           <li className="flex gap-2.5">
             <span className="mt-2 block h-1 w-1 shrink-0 rounded-full bg-warm-deep" />
             <span>
-              Solcellene produserer {fmt(total.sol)} kWh per år — mest om sommeren (Jul:{" "}
-              {fmt(191800)} kWh).
+              Solcellene produserer {fmt(total.sol)} kWh/år — mest om sommeren
+              når oppvarmingsbehovet er lavest.
             </span>
           </li>
           <li className="flex gap-2.5">
             <span className="mt-2 block h-1 w-1 shrink-0 rounded-full bg-warm-deep" />
             <span>
-              Bergvarmen bruker {fmt(total.bergvarme)} kWh strøm per år — mest om vinteren (Jan:{" "}
-              {fmt(182323)} kWh).
+              Bergvarmens varmtvannstank kan brukes som termisk batteri: vi
+              kjører ekstra varme inn i tanken når sola produserer mest, og
+              henter den ut når vi trenger varmtvann uten å kjøpe strøm.
             </span>
           </li>
           <li className="flex gap-2.5">
             <span className="mt-2 block h-1 w-1 shrink-0 rounded-full bg-warm-deep" />
             <span>
-              Solenergi dekker {pctFmt(dekning)} av totalt strømforbruk og{" "}
-              {pctFmt(dekningBergvarme)} av bergvarmeforbruket.
+              Hver kWh som flyttes fra «salg» til «lager» tjener{" "}
+              <strong>0,70 kr</strong> (1,20 kr erstatningsverdi − 0,50 kr
+              spotpris). Ved 80 % lagring av {fmt(felles.solcelleOverskuddSommerKWh)} kWh sommer-overskudd gir
+              det ca. {fmtKr(felles.solcelleOverskuddSommerKWh * 0.8 * (FORBRUKSPRIS - SALGSPRIS))} ekstra per år.
             </span>
           </li>
           <li className="flex gap-2.5">
             <span className="mt-2 block h-1 w-1 shrink-0 rounded-full bg-warm-deep" />
             <span>
-              Juni–august gir solcellene overskudd ({fmt(felles.solcelleOverskuddSommerKWh)} kWh/år)
-              som kan selges tilbake til nettet.
+              Forutsetning: bergvarme + varmtvannstank fra Pakke 2 installert
+              og styringssystem konfigurert for sol-prioritert varmtvann-
+              produksjon.
             </span>
           </li>
         </ul>
@@ -287,6 +344,8 @@ function ChartSurface({
         <Legend swatch="bg-rose-300" label="Bergvarme" />
         <Legend swatch="bg-line" label="Øvrig drift" />
         <Legend swatch="bg-warm" label="Sol" />
+        <Legend swatch="bg-warm-deep" label="→ Varmtvann" />
+        <Legend swatch="bg-brand/60" label="→ Salg" />
       </div>
 
       <div
@@ -364,10 +423,14 @@ function BarColumn({
 }) {
   const forbrukH = Y(m.forbruk);
   const bergvarmeH = Y(m.bergvarme);
-  const solH = Y(m.sol);
+  // Sol-bar splittes: solBrukt (lyseste varm), tilLager (varm-deep), tilSalg (brand/60)
+  const solBruktH = Y(m.solBrukt);
+  const lagerH = Y(m.tilLager);
+  const salgH = Y(m.tilSalg);
+  const solH = solBruktH + lagerH + salgH;
   const ariaLabel = `${m.mnd}: forbruk ${fmt(m.forbruk)} kWh, sol ${fmt(m.sol)} kWh${
-    m.overskudd > 0 ? `, overskudd ${fmt(m.overskudd)} kWh` : ""
-  }`;
+    m.tilLager > 0 ? `, varmtvann-lager ${fmt(m.tilLager)} kWh` : ""
+  }${m.tilSalg > 0 ? `, salg ${fmt(m.tilSalg)} kWh` : ""}`;
   return (
     <button
       type="button"
@@ -384,7 +447,7 @@ function BarColumn({
       {isSelected && (
         <span className="pointer-events-none absolute inset-x-0 -top-1 bottom-[-2px] -mx-0.5 rounded-md bg-brand/8 ring-1 ring-brand/25" />
       )}
-      {/* Stacked: bergvarme + øvrig */}
+      {/* Stacked: bergvarme + øvrig (forbruks-stack) */}
       <span
         className="relative z-10 flex flex-1 flex-col-reverse overflow-hidden rounded-t-sm"
         style={{ height: `${forbrukH}%` }}
@@ -401,14 +464,36 @@ function BarColumn({
           }`}
         />
       </span>
-      {/* Solar bar */}
+      {/* Solar-stack: solBrukt + lager + salg */}
       <span
-        className={`relative z-10 flex-1 rounded-t-sm transition-colors ${
-          isSelected ? "bg-warm-deep" : "bg-warm group-hover:bg-warm-deep"
-        }`}
+        className="relative z-10 flex flex-1 flex-col-reverse overflow-hidden rounded-t-sm"
         style={{ height: `${solH}%` }}
-      />
-      {/* Overskudd marker */}
+      >
+        {/* Bunn: sol brukt på stedet (lyseste) */}
+        <span
+          className={`transition-colors ${
+            isSelected ? "bg-warm" : "bg-warm/80 group-hover:bg-warm"
+          }`}
+          style={{ height: `${(solBruktH / Math.max(solH, 0.001)) * 100}%` }}
+        />
+        {/* Midten: lagret (deep) */}
+        {m.tilLager > 0 && (
+          <span
+            className={`transition-colors ${
+              isSelected ? "bg-warm-deep" : "bg-warm-deep/85 group-hover:bg-warm-deep"
+            }`}
+            style={{ height: `${(lagerH / Math.max(solH, 0.001)) * 100}%` }}
+          />
+        )}
+        {/* Topp: solgt (brand) */}
+        {m.tilSalg > 0 && (
+          <span
+            className="bg-brand/60 transition-colors group-hover:bg-brand/75"
+            style={{ height: `${(salgH / Math.max(solH, 0.001)) * 100}%` }}
+          />
+        )}
+      </span>
+      {/* Overskudd-marker (lagret + solgt) */}
       {m.overskudd > 0 && (
         <span
           className="pointer-events-none absolute left-0 right-0 z-20 flex flex-col items-center"
@@ -417,10 +502,6 @@ function BarColumn({
           <span className="num text-[9px] font-semibold text-save sm:text-[10px]">
             +{Math.round(m.overskudd / 1000)}k
           </span>
-          <span
-            className="border-l-2 border-dashed border-save"
-            style={{ height: `${Y(m.overskudd)}%`, marginTop: 1 }}
-          />
         </span>
       )}
     </button>
@@ -441,18 +522,9 @@ function DetailPanel({
   onNext: () => void;
 }) {
   const monthName: Record<string, string> = {
-    Jan: "Januar",
-    Feb: "Februar",
-    Mar: "Mars",
-    Apr: "April",
-    Mai: "Mai",
-    Jun: "Juni",
-    Jul: "Juli",
-    Aug: "August",
-    Sep: "September",
-    Okt: "Oktober",
-    Nov: "November",
-    Des: "Desember",
+    Jan: "Januar", Feb: "Februar", Mar: "Mars", Apr: "April",
+    Mai: "Mai", Jun: "Juni", Jul: "Juli", Aug: "August",
+    Sep: "September", Okt: "Oktober", Nov: "November", Des: "Desember",
   };
 
   return (
@@ -487,43 +559,31 @@ function DetailPanel({
       </div>
 
       <div className="p-4 sm:p-5">
-        <DetailRow
-          label="Solproduksjon"
-          value={`${fmt(month.sol)} kWh`}
-          tone="warm"
-          dot
-        />
-        <DetailRow
-          label="Bergvarme"
-          value={`${fmt(month.bergvarme)} kWh`}
-          tone="rose"
-          dot
-        />
-        <DetailRow
-          label="Øvrig fellesdrift"
-          value={`${fmt(month.ovrig)} kWh`}
-          tone="muted"
-          dot
-        />
+        <DetailRow label="Solproduksjon" value={`${fmt(month.sol)} kWh`} tone="warm" dot />
+        <DetailRow label="Bergvarme" value={`${fmt(month.bergvarme)} kWh`} tone="rose" dot />
+        <DetailRow label="Øvrig fellesdrift" value={`${fmt(month.ovrig)} kWh`} tone="muted" dot />
         <div className="my-3 border-t border-line/50" />
-        <DetailRow
-          label="Totalt forbruk"
-          value={`${fmt(month.forbruk)} kWh`}
-          bold
-        />
-        <DetailRow
-          label="Sol brukt på stedet"
-          value={`${fmt(month.solBrukt)} kWh`}
-          tone="save"
-        />
-        {month.overskudd > 0 ? (
+        <DetailRow label="Totalt forbruk" value={`${fmt(month.forbruk)} kWh`} bold />
+        <DetailRow label="Sol brukt på stedet" value={`${fmt(month.solBrukt)} kWh`} tone="save" />
+        {month.tilLager > 0 ? (
           <DetailRow
-            label="Overskudd til salg"
-            value={`+${fmt(month.overskudd)} kWh`}
-            tone="brand"
+            label="→ Varmtvann (lager)"
+            value={`+${fmt(month.tilLager)} kWh`}
+            tone="warm"
+            sub={`Verdi ${fmtKr(month.tilLager * FORBRUKSPRIS)}`}
           />
         ) : (
-          <DetailRow label="Overskudd til salg" value="—" tone="muted" />
+          <DetailRow label="→ Varmtvann (lager)" value="—" tone="muted" />
+        )}
+        {month.tilSalg > 0 ? (
+          <DetailRow
+            label="→ Salg til nett"
+            value={`+${fmt(month.tilSalg)} kWh`}
+            tone="brand"
+            sub={`Verdi ${fmtKr(month.tilSalg * SALGSPRIS)}`}
+          />
+        ) : (
+          <DetailRow label="→ Salg til nett" value="—" tone="muted" />
         )}
 
         <div className="mt-4 rounded-xl bg-save-bg/70 p-3">
@@ -553,41 +613,38 @@ function DetailRow({
   tone,
   bold,
   dot,
+  sub,
 }: {
   label: string;
   value: string;
   tone?: "warm" | "rose" | "muted" | "save" | "brand";
   bold?: boolean;
   dot?: boolean;
+  sub?: string;
 }) {
   const cls =
-    tone === "warm"
-      ? "text-warm-deep"
-      : tone === "rose"
-      ? "text-rose-700"
-      : tone === "save"
-      ? "text-save"
-      : tone === "brand"
-      ? "text-brand"
-      : tone === "muted"
-      ? "text-ink/70"
-      : "text-ink";
+    tone === "warm" ? "text-warm-deep"
+    : tone === "rose" ? "text-rose-700"
+    : tone === "save" ? "text-save"
+    : tone === "brand" ? "text-brand"
+    : tone === "muted" ? "text-ink/70"
+    : "text-ink";
   const dotCls =
-    tone === "warm"
-      ? "bg-warm"
-      : tone === "rose"
-      ? "bg-rose-300"
-      : tone === "muted"
-      ? "bg-line"
-      : "";
+    tone === "warm" ? "bg-warm"
+    : tone === "rose" ? "bg-rose-300"
+    : tone === "muted" ? "bg-line"
+    : "";
   return (
-    <div className="flex items-center justify-between gap-2 py-1.5">
+    <div className="flex items-baseline justify-between gap-2 py-1.5">
       <span className="flex items-center gap-2 text-[13px] text-ink/80">
         {dot && <span className={`inline-block h-2.5 w-2.5 rounded-sm ${dotCls}`} />}
         {label}
       </span>
-      <span className={`num text-[14px] ${bold ? "font-semibold" : "font-medium"} ${cls}`}>
-        {value}
+      <span className="text-right">
+        <span className={`num text-[14px] ${bold ? "font-semibold" : "font-medium"} ${cls}`}>
+          {value}
+        </span>
+        {sub && <div className="text-[10.5px] text-muted">{sub}</div>}
       </span>
     </div>
   );
@@ -618,10 +675,30 @@ function KpiKort({
         {icon}
         {label}
       </div>
-      <div className="num mt-1.5 text-[16px] font-semibold leading-tight sm:text-[18px]">
+      <div className="num mt-1.5 text-[15px] font-semibold leading-tight sm:text-[17px]">
         {value}
       </div>
       <div className="mt-0.5 text-[11px] opacity-75 sm:text-[11.5px]">{sub}</div>
+    </div>
+  );
+}
+
+function MiniStat({
+  label,
+  value,
+  tone,
+}: {
+  label: string;
+  value: string;
+  tone: "warm" | "brand" | "save";
+}) {
+  const cls = tone === "warm" ? "text-warm-deep" : tone === "brand" ? "text-brand" : "text-save";
+  return (
+    <div className="rounded-xl bg-paper px-3 py-2 shadow-soft">
+      <div className="text-[10px] font-semibold uppercase tracking-wide text-muted">
+        {label}
+      </div>
+      <div className={`num mt-0.5 text-[14px] font-semibold ${cls}`}>{value}</div>
     </div>
   );
 }
