@@ -29,39 +29,62 @@ export default function Bakgrunn() {
         </p>
       </section>
 
+      {/* Bygningsmassen kort */}
+      <section className="card">
+        <h2 className="display text-xl font-semibold text-ink sm:text-2xl">
+          Kort om bygningsmassen
+        </h2>
+        <p className="mt-3 leading-relaxed text-ink/80">
+          Orebakken Borettslag ble bygget i <strong>1972</strong> og består av{" "}
+          <strong>13 blokker</strong> med totalt <strong>430 leiligheter</strong>{" "}
+          langs Landingsveien 56–138 på Hovseter. Bygningsmassen er en
+          blanding av lavblokker (4 etasjer, 8 leiligheter per oppgang) og to
+          høyblokker (Landingsveien 80–82 og 84–86, 8 etasjer, 32 leiligheter
+          per oppgang). Samlet takflate er ca. <strong>8 400 m²</strong>.
+          Yttervegg er utvendig isolert med kun ~100 mm mineralull
+          (OPAK 2020) — lite etter dagens standard, og bidrar til kuldebroer
+          og trekk.
+        </p>
+      </section>
+
       {/* Hvorfor nå? */}
       <section className="card">
         <h2 className="display text-xl font-semibold text-ink sm:text-2xl">
           Hvorfor må vi gjøre noe nå?
         </h2>
         <p className="mt-3 leading-relaxed text-ink/80">
-          Orebakkens blokker ble bygget på 1970-tallet. Det meste har holdt
-          godt, men nå er vi ved et naturlig punkt der store deler av
-          bygningsskallet trenger utskifting:
+          Det meste har holdt godt, men vi er ved et naturlig punkt der store
+          deler av bygningsskallet trenger utskifting:
         </p>
         <ul className="mt-4 space-y-2.5 text-[15px] leading-relaxed text-ink/85">
           <Bullet>
-            <strong>Takene</strong> ble lagt 1999–2000 og er ved slutten av sin
-            levetid.
+            <strong>Takene</strong> ble omtekket 1999–2000 og er ved slutten
+            av normal levetid (20–30 år). Tilstandsrapporten fra 2023 anbefaler
+            at alle taksluk skiftes snarest; ett tak er vurdert kritisk.
           </Bullet>
           <Bullet>
-            <strong>Fasader og vinduer</strong> fra 1984-rehabiliteringen er
-            slitt og mister isolasjonsevnen.
+            <strong>Vinduer og balkongdører</strong> — de eldste er fra 1985.
+            Ved befaring i 2023 ble 45 vinduer satt i «rød sone» — ett hadde
+            falt inn i rommet. Nye vinduer (U-verdi 0,80) tilfredsstiller
+            TEK17.
           </Bullet>
           <Bullet>
-            <strong>Betongskader</strong> på verandaer og fasader er mer
-            alvorlige enn antatt og forverres raskt.
+            <strong>Betong</strong> — tilstandskontroll i 2026 påviste
+            betongskade med nedfallsfare på balkonger, søyler og
+            fasadeelementer. Akutt sikkerhetsmeisling er allerede utført.
           </Bullet>
           <Bullet>
-            <strong>Strømforbruket</strong> til oppvarming er svært høyt — gamle
-            bygninger uten god isolasjon bruker mye mer energi enn nødvendig.
+            <strong>Strømforbruket</strong> til oppvarming er svært høyt —
+            gamle bygninger uten god isolasjon bruker mye mer energi enn
+            nødvendig. Pakke 1 sparer ca. 500 000 kWh/år.
           </Bullet>
         </ul>
         <div className="mt-5 rounded-2xl border-l-4 border-warm bg-warm-bg/60 px-5 py-4 text-[14.5px] leading-relaxed text-ink/85">
-          Hvert år vi venter, stiger byggeprisene med ca. 4 %. Utsetter vi tre
-          år, koster det samme arbeidet om lag <strong>44 millioner kroner mer</strong>{" "}
-          enn det gjør nå — det tilsvarer nesten 2 858 kr ekstra per andel per
-          måned over låneperioden.
+          SSB byggekostnadsindeks (bolig) steg 4,3 % fra 2024 til 2025
+          (trelast +13 %). Å dele opp arbeidet betyr dobbel rigg og stillas,
+          tapt volumrabatt, og prisstigning på utsatte deler. «Halvparten nå,
+          resten senere» anslås å koste 4–7 mill kr ekstra bare i prisstigning
+          om ~37 mill utsettes 3–4 år.
         </div>
       </section>
 
@@ -333,6 +356,61 @@ export default function Bakgrunn() {
             (31,4 MNOK) er tidsbegrenset og kan falle bort hvis vi ikke
             gjennomfører prosjektet innen fristen.
           </Faq>
+          <Faq q="Hva er IN-ordning, og hvorfor stemmer vi over det?">
+            <strong>IN-ordning</strong> (Individuell Nedbetaling av fellesgjeld)
+            lar deg som andelseier betale ned hele eller deler av din andel av
+            borettslagets felleslån raskere enn den ordinære planen. På EGF
+            15. juni 2026 (sak 7) skal generalforsamlingen ta stilling til om
+            borettslaget skal søke OBOS om å etablere en slik ordning. Styret
+            har ikke en anbefaling — saken legges frem til avstemming.
+            <br />
+            <br />
+            <strong>Fordeler:</strong> Lavere månedlige felleskostnader (du
+            slipper å betale renter+avdrag på din nedbetalte del), større
+            fleksibilitet, økt egenkapital i boligen og potensielt høyere
+            salgspris. Du kan også finansiere nedbetalingen via egen bank.
+            <br />
+            <br />
+            <strong>Ulemper:</strong> Du er fortsatt solidarisk ansvarlig for
+            hele fellesgjelden. Du får mindre rentefradrag (siden du betaler
+            mindre renter via FK), og det påløper administrasjonsgebyrer.
+            Individuelt boliglån i egen bank er ofte dyrere enn borettslagets
+            kollektive rente — og nedbetalingen er irreversibel. Ordningen
+            øker også administrasjonskostnaden for hele borettslaget. Krever
+            vanlig flertall (50 %).
+          </Faq>
+          <Faq q="Hva slags møte er det 15. juni 2026?">
+            Fysisk ekstraordinær generalforsamling kl. 18:00 på{" "}
+            <strong>Persbråten videregående skole</strong>. Hver andelseier
+            har én stemme. Du kan møte personlig, sende fullmektig (én
+            fullmakt per fullmektig), eller la noen i husstanden være til
+            stede med tale-/spørsmålsrett. Saker som skal behandles: 1) Valg
+            av møteleder, 2) Stemmeberettigede, 3) Protokollvitner, 4)
+            Møteinnkalling, 5) Rehabilitering Pakke 1 (50 %), 6) Låneopptak
+            190 mill med prioritet foran innskudd (2/3), 7) IN-ordning
+            (50 %).
+          </Faq>
+          <Faq q="Hvorfor stemmer vi ikke over Pakke 2 samtidig?">
+            Pakke 2 (bergvarme, varmtvannssentraler, radiatorer og solceller)
+            må behandles på <strong>egen ekstraordinær generalforsamling</strong>
+            {" "}— forventet i slutten av august eller start september 2026 —
+            av to grunner. (1) Tilbud (priser) på bergvarme og solceller er
+            ikke ferdigforhandlet. (2) Vi venter på svar på den andre Enova-
+            søknaden for de resterende 9 blokkene; svaret forventes slutten
+            av juni. Pakke 2 krever 2/3 flertall fordi det er fornyelse, ikke
+            sedvanlig vedlikehold. Eget beslutningsunderlag sendes ut før
+            den GF-en.
+          </Faq>
+          <Faq q="Hvorfor må vinduene måles opp 19.–29. juni?">
+            Vindusarbeidene er det mest omfattende i Pakke 1 (ca. 500
+            arbeidsdager). For å holde byggestart 1. august må vinduene
+            bestilles umiddelbart etter generalforsamlingen. Takst & Vindu
+            Spesialisten AS er engasjert for oppmåling — ca. 10 min per
+            leilighet i tidsrommet kl. 07–16. Passer ikke tidspunktet, kan
+            beboer avtale med nabo, vaktmester eller styret. Hvis
+            generalforsamlingen ikke vedtar Pakke 1, gjennomføres ikke
+            oppmålingen.
+          </Faq>
         </div>
       </section>
 
@@ -344,14 +422,22 @@ export default function Bakgrunn() {
         <div className="mt-5">
           <Timeline
             items={[
-              { kind: "done", date: "2024–2026", text: "Tilstandskartlegging og tilbud innhentet · OBOS Prosjekt bistår" },
-              { kind: "done", date: "April 2026", text: "Enova-støtte bekreftet: 31,4 MNOK · endelig tilsagn for 4 blokker" },
-              { kind: "done", date: "Innen 10. mai", text: "Dialogmøte med beboere · lytte til bekymringer og spørsmål" },
-              { kind: "key", date: "15. mai 2026", text: "Beslutningsunderlag sendes alle andelseiere" },
-              { kind: "now", date: "Ca. 22. mai", text: "Open Office på Storstua · still spørsmål til styret" },
-              { kind: "now", date: "Ca. 28. mai", text: "Open Office på Storstua · andre mulighet til å møte styret" },
-              { kind: "key", date: "1. juni 2026", text: "Ekstraordinær generalforsamling · digital gjennomføring" },
-              { kind: "now", date: "2.–4. juni 2026", text: "Elektronisk avstemning · stem i din egen tid" },
+              { kind: "done", date: "1972", text: "Borettslaget bygget — 13 blokker, 430 andeler" },
+              { kind: "done", date: "1999–2000", text: "Omtekking av alle tak" },
+              { kind: "done", date: "2001–2014", text: "Balkong- og betongrehab + nytt parkeringshus (2014)" },
+              { kind: "done", date: "2020", text: "Generell tilstandsrapport (OPAK)" },
+              { kind: "done", date: "2023", text: "Tilstandsrapport tak + vindusbefaring — 45 vinduer i «rød sone»" },
+              { kind: "done", date: "April 2024", text: "Tilstandsrapport og energikartlegging (Multiconsult)" },
+              { kind: "done", date: "2025", text: "Beboermøter om fasaderehab og energitiltak" },
+              { kind: "done", date: "27. feb 2026", text: "Tilbudsåpning tak/fasade (NS 8407) · åtte gyldige tilbud" },
+              { kind: "done", date: "April 2026", text: "Enova-støtte bekreftet: 31,4 MNOK for 4 av 13 blokker" },
+              { kind: "done", date: "12. juni 2026", text: "Likviditetsanalyse fra OBOS Banken (rev. 4)" },
+              { kind: "now", date: "19.–29. juni 2026", text: "Oppmåling av vinduer og balkongdører (Takst & Vindu Spesialisten)" },
+              { kind: "key", date: "15. juni 2026 kl. 18:00", text: "Ekstraordinær GF om PAKKE 1 · Persbråten vgs · vanlig flertall" },
+              { kind: "now", date: "1. august 2026", text: "Tilbudt byggestart (forutsatt vedtak)" },
+              { kind: "key", date: "Slutten av juni 2026", text: "Forventet Enova-svar for resterende 9 blokker (Pakke 2)" },
+              { kind: "key", date: "Aug/sept 2026", text: "EGEN ekstraordinær GF om PAKKE 2 (bergvarme + solceller) · 2/3 flertall" },
+              { kind: "now", date: "30. juni 2028", text: "Forventet prosjektslutt Pakke 1" },
             ]}
           />
         </div>

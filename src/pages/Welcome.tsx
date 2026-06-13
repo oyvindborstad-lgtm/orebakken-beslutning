@@ -23,18 +23,20 @@ export default function Welcome() {
         <div className="relative">
           <div className="chip">
             <Calendar size={12} />
-            Ekstraordinær generalforsamling 1. juni 2026
+            Ekstraordinær generalforsamling 15. juni 2026 · Persbråten vgs
           </div>
           <h1 className="display mt-5 max-w-3xl text-[32px] font-semibold leading-[1.05] tracking-tightest text-ink sm:text-[44px] lg:text-[58px]">
             Hva betyr rehabiliteringen for{" "}
             <span className="text-brand">akkurat din leilighet?</span>
           </h1>
           <p className="mt-5 max-w-2xl text-[15px] leading-relaxed text-ink/70 sm:text-[16.5px] lg:text-[17px]">
-            Du skal stemme over om Orebakken BRL skal rehabilitere bygningene
-            fra 1971–1974, og hvilken pakke vi velger. Dette verktøyet viser
-            tallene som er beregnet for din andel — ny felleskostnad,
-            strømbesparelse, skattefradrag og netto endring per måned. Tre
-            rentebaner vises per pakke (5,04 / 5,54 / 6,04 %).
+            På den ekstraordinære generalforsamlingen 15. juni 2026 skal
+            andelseierne stemme over <strong>Pakke 1 — nødvendig
+            vedlikehold</strong> av borettslaget bygget i 1972. Pakke 2
+            (bergvarme og solceller) avgjøres på egen GF i slutten av
+            august/start september 2026 — når Enova-svaret er klart.
+            Verktøyet viser tallene per andel og tre rentebaner
+            (5,04 / 5,54 / 6,04 %).
           </p>
           <div className="mt-7 flex flex-wrap items-center gap-3">
             <Link href="/finn" className="btn-primary">
@@ -49,16 +51,16 @@ export default function Welcome() {
             <PakkeIntro
               tone="brand"
               icon={<Hammer size={16} />}
-              navn="Pakke 1"
-              tittel="Tak, fasader, betong og vinduer"
-              tekst="Nye tak på alle 13 blokker, fasader med etterisolering og nye vinduer (U=0,80), reparasjon av betongskader, og oppgradering av oppganger og kjellerdører. Nytt lån 190 mill."
+              navn="Pakke 1 · vedtas 15. juni"
+              tittel="Nødvendig vedlikehold"
+              tekst="Nye tak på alle 13 blokker (~8 400 m²), nye vinduer og balkongdører (U=0,80) i 430 leiligheter, etterisolering av veggfelt, betongrehabilitering, oppussing av oppganger, nye inngangs- og kjellerdører, rens av ventilasjon og reparasjon av garasjehus. Prosjektkostnad 192 mill (lån 190 mill etter Enova 2 mill). Vanlig flertall (50 %)."
             />
             <PakkeIntro
               tone="warm"
               icon={<Sun size={16} />}
-              navn="Pakke 2"
-              tittel="Pakke 1 + bergvarme og solceller"
-              tekst="Alt i Pakke 1, pluss bergvarmeanlegg som felles oppvarming fra bakken og solcelleanlegg på takene i alle 13 blokker. Nytt lån 341,7 mill (mulig redusert til 308 mill om Enova innvilger for resterende 9 blokker)."
+              navn="Pakke 2 · egen GF aug/sept"
+              tittel="Bergvarme og solceller"
+              tekst="Bygger oppå Pakke 1: bergvarmeanlegg, varmtvannssentraler, radiatorer og solcelleanlegg på takene i alle 13 blokker. Sparer ca 3,7 mill kWh/år (mot 0,5 mill for Pakke 1). Lån 341,7 mill (308 mill med full Enova-pott). Krever 2/3 flertall — egen GF når Enova-svaret kommer."
             />
           </div>
 
@@ -66,7 +68,7 @@ export default function Welcome() {
             <Metric label="Andelseiere" value="430" />
             <Metric label="Boligblokker" value="13" />
             <Metric label="Bekreftet Enova-støtte" value="31,4 mill" sub="kr · 4 av 13 blokker" />
-            <Metric label="Avstemning" value="1. juni" sub="2026 · digital GF" />
+            <Metric label="Avstemning Pakke 1" value="15. juni" sub="2026 · Persbråten vgs" />
           </dl>
         </div>
       </section>
@@ -106,16 +108,19 @@ export default function Welcome() {
       {/* Pakke-kort */}
       <section id="pakkene" className="space-y-5 sm:space-y-6">
         <div>
-          <div className="label">To pakker</div>
+          <div className="label">To pakker — to generalforsamlinger</div>
           <h2 className="display mt-2 text-[24px] font-semibold leading-tight text-ink sm:text-[28px] lg:text-[34px]">
-            Pakke 1 eller Pakke 2
+            Pakke 1 nå (15. juni) — Pakke 2 senere
           </h2>
           <p className="mt-3 max-w-3xl text-[14.5px] leading-relaxed text-muted sm:text-[15px]">
-            Pakke 1 (tak, fasader, betong og vinduer) kan vedtas alene og
-            krever 50 % flertall. Pakke 2 omfatter alt i Pakke 1 pluss
-            bergvarme og solceller, og krever 2/3-flertall. Begge pakker
-            finansieres som grønt lån med rente 5,04 % i hovedscenarioet —
-            tabellen lengre ned viser også 5,54 % og 6,04 %.
+            <strong>Pakke 1</strong> (nødvendig vedlikehold) vedtas på den
+            ekstraordinære generalforsamlingen 15. juni 2026 — vanlig flertall
+            (50 %). <strong>Pakke 2</strong> (bergvarme og solceller) bygger
+            oppå Pakke 1 og avgjøres på en egen generalforsamling i slutten
+            av august eller start september 2026 når Enova-svaret er klart —
+            krever 2/3 flertall. Begge pakker finansieres som grønt lån.
+            Rente i hovedscenarioet er 5,04 %; tabellen viser også 5,54 % og
+            6,04 %.
           </p>
         </div>
         <div className="grid gap-4 sm:gap-5 lg:grid-cols-2">

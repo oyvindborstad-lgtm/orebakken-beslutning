@@ -15,15 +15,20 @@ export default function Grunnlag() {
           Investeringsoversikt og forutsetninger
         </h1>
         <p className="mt-4 max-w-2xl text-[15px] leading-relaxed text-ink/75 sm:mt-5 sm:text-[16.5px]">
-          Styrets komplette grunnlag for vedtaket 1. juni 2026. Alle tall er
-          oppdatert pr. april 2026.
+          Styrets komplette grunnlag for vedtaket på den ekstraordinære
+          generalforsamlingen 15. juni 2026 kl. 18:00 på Persbråten
+          videregående skole. Tall er basert på OBOS Banken-analyse rev. 4
+          (12.06.2026).
         </p>
         <div className="mt-6 rounded-2xl border-l-4 border-brand bg-brand-50 px-5 py-4 text-[14.5px] leading-relaxed text-ink/85">
-          <strong>Flertallskrav:</strong> Vedtakspunkt 1 (Pakke 1) krever
-          simpelt flertall (over 50 %). Vedtakspunkt 2 (Pakke 2 — bergvarme og
-          solceller) krever kvalifisert 2/3 flertall, jf. borettslagsloven §
-          8-9 og § 8-10. Vedtakspunkt 2 forutsetter at Vedtakspunkt 1 er
-          vedtatt.
+          <strong>Det skal kun stemmes over Pakke 1 (nødvendig vedlikehold)
+          på dette møtet.</strong> Sak 5 (rehab-tiltakene) vedtas med vanlig
+          flertall (50 %). Sak 6 (låneopptak 190 mill med prioritet foran
+          innskuddene) krever 2/3 flertall jf. borettslagsloven § 8-9. Sak 7
+          (IN-ordning) krever vanlig flertall. <strong>Pakke 2 (bergvarme og
+          solceller)</strong> behandles på egen ekstraordinær GF i slutten av
+          august eller start september 2026 når Enova-svaret er klart — den
+          krever 2/3 flertall.
         </div>
       </section>
 
@@ -213,6 +218,42 @@ export default function Grunnlag() {
           <Row label="Forventet tilleggsstøtte (svar slutten av juni 2026)" v1="+ 33 781 024" v2={`ca. +${pakke2.utvidetEnova.nettoSnittKrMnd} kr`} />
           <Row label="Sum hvis innvilget" v1="65 081 024" v2={`ca. +${pakke2.utvidetEnova.nettoSnittKrMnd} kr`} total />
         </div>
+      </section>
+
+      {/* 3b. Tilbudsprosess */}
+      <section className="card">
+        <div className="flex items-start gap-3">
+          <div className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-brand-50 text-brand">
+            <FileText size={20} />
+          </div>
+          <div>
+            <div className="label">Avsnitt 3b</div>
+            <h2 className="display mt-1.5 text-xl font-semibold text-ink sm:text-2xl">
+              Tilbudsprosess og byggeplan (Pakke 1)
+            </h2>
+          </div>
+        </div>
+        <p className="mt-3 leading-relaxed text-ink/80">
+          Tak, vinduer/dører og oppganger ble lyst ut som totalentreprise
+          etter NS 8407 i tre delentrepriser. Tilbudsåpning fant sted{" "}
+          <strong>27. februar 2026</strong> hos OBOS Prosjekt
+          (Construction City) under ledelse av prosjektleder Hans-Olav Malm.
+          Ti firmaer ga tilbud; åtte leverte gyldig tilbud.
+        </p>
+        <div className="mt-5 overflow-hidden rounded-2xl border border-line/70">
+          <Row header label="Delentreprise" v1="Antall tilbud" v2="Pris-spenn (inkl. mva)" />
+          <Row label="Vinduer og dører" v1="3" v2="71,0 – 77,5 mill" />
+          <Row label="Tak (alle 13 blokker, ~8 400 m²)" v1="5" v2="13,4 – 28,0 mill" />
+          <Row label="Oppganger" v1="5" v2="4,8 – 7,2 mill" />
+          <Row label="Konservativt budsjett (samlet)" v1="—" v2="105 mill" total />
+        </div>
+        <p className="mt-4 text-[13.5px] leading-relaxed text-muted sm:text-[14px]">
+          Tilbudt byggestart: 1. august 2026. Vindusarbeidene er det mest
+          omfattende (ca. 500 arbeidsdager). Oppmåling 19.–29. juni 2026
+          (Takst & Vindu Spesialisten AS, ca. 10 min per leilighet).
+          Forventet prosjektslutt: 30. juni 2028. Avdragsfrihet på lånet 24
+          måneder ut prosjektperioden.
+        </p>
       </section>
 
       {/* 4. Energi */}
