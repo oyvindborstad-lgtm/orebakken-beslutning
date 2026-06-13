@@ -1,8 +1,9 @@
 import { Link } from "wouter";
-import { ArrowRight, FileText, Sparkles } from "lucide-react";
+import { ArrowRight, FileText, Sparkles, Sun } from "lucide-react";
 import { FORUTSETNINGER } from "../data/forutsetninger";
 import { kr } from "../lib/format";
 import EnergiChart from "../components/EnergiChart";
+import EnergiFlyt from "../components/EnergiFlyt";
 
 const { pakke1, pakke2, felles } = FORUTSETNINGER;
 
@@ -287,6 +288,29 @@ export default function Grunnlag() {
           <Row label="Reduksjon i oppvarmingsstrøm" v1="ca. 75 %" v2="bergvarme COP ≈ 4–5" rightLast />
           <Row label="Strømpris (beregningsgrunnlag)" v1="1,20 kr/kWh" v2="konservativt anslag" rightLast />
         </div>
+      </section>
+
+      {/* 4b. Pakke 2 — sol-fordeling og varmtvann-lager */}
+      <section>
+        <div className="mb-4 flex items-start gap-3">
+          <div className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-warm-bg text-warm-deep">
+            <Sun size={20} />
+          </div>
+          <div className="min-w-0">
+            <div className="label !text-warm-deep">Avsnitt 4b · Pakke 2-forberedelse</div>
+            <h2 className="display mt-1.5 text-xl font-semibold text-ink sm:text-2xl">
+              Solenergi-flyt og varmtvann som energilager
+            </h2>
+            <p className="mt-2 max-w-3xl text-[14px] leading-relaxed text-muted sm:text-[14.5px]">
+              Denne seksjonen er forberedelse til den ekstraordinære
+              generalforsamlingen om Pakke 2 (slutten av august / start
+              september 2026). På møtet 15. juni skal det kun stemmes over
+              Pakke 1. Underlaget her finpusses fram mot Enova-svaret og
+              endelige tilbud.
+            </p>
+          </div>
+        </div>
+        <EnergiFlyt />
       </section>
 
       {/* 5. Forutsetninger */}
