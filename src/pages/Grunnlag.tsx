@@ -30,6 +30,13 @@ export default function Grunnlag() {
           august eller start september 2026 når Enova-svaret er klart — den
           krever 2/3 flertall.
         </div>
+        <div className="mt-3 rounded-2xl border-l-4 border-warm bg-warm-bg/50 px-5 py-4 text-[13.5px] leading-relaxed text-ink/80 sm:text-[14px]">
+          <strong>Merk:</strong> Denne siden oppsummerer styrets grunnlag,
+          men erstatter ikke det offisielle beslutningsunderlaget til
+          generalforsamlingen. Innkallingen med vedlegg og OBOS Bankens
+          likviditetsanalyse er det som gjelder — sjekk alltid disse for
+          helhetskontekst før du tar stilling.
+        </div>
       </section>
 
       {/* 1. Investering */}

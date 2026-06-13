@@ -100,8 +100,14 @@ export default function Layout({ children }: { children: ReactNode }) {
 
       <footer className="no-print mx-auto max-w-6xl px-4 pb-10 sm:px-6 sm:pb-12 lg:px-8 lg:pb-14">
         <div className="border-t border-line/70 pt-5 text-[11.5px] leading-relaxed text-muted sm:text-xs">
-          Vedlegg til beslutningsunderlag for rehabiliteringsprosjektet · Tall hentet fra vedtatt budsjettgrunnlag (21.04.2026) · Nettoendring inkluderer
-          arealfordelt strømbesparelse og 22 % rentefradrag på nytt felleslån.
+          <strong className="text-ink/80">Hjelpemiddel — ikke vedtaksgrunnlag.</strong>{" "}
+          Dette verktøyet hjelper deg å forstå helheten i rehabiliterings-
+          prosjektet for din andel. Det offisielle beslutningsunderlaget til
+          generalforsamlingen 15. juni 2026 (innkalling, vedlegg og OBOS
+          Banken sin likviditetsanalyse) er det som gjelder — sjekk alltid
+          dette for helhetskontekst før du tar stilling. Tall i appen er
+          basert på OBOS Banken rev. 4 (12.06.2026), vedtatt budsjettgrunnlag
+          (21.04.2026) og styrets beslutningsunderlag for Pakke 1.
         </div>
       </footer>
     </div>

@@ -47,6 +47,15 @@ export default function Welcome() {
             </a>
           </div>
 
+          <div className="mt-6 max-w-3xl rounded-2xl border-l-4 border-warm bg-warm-bg/50 px-5 py-4 text-[13.5px] leading-relaxed text-ink/80 sm:text-[14px]">
+            <strong>Dette er et hjelpemiddel.</strong> Verktøyet er laget for
+            å hjelpe deg å forstå helheten i prosjektet og hva det betyr for
+            din andel. Det offisielle beslutningsunderlaget til
+            generalforsamlingen (innkalling, vedlegg og OBOS Bankens
+            likviditetsanalyse) er det som gjelder — les alltid dette i tillegg
+            for helhetskonteksten før du tar stilling.
+          </div>
+
           <div className="mt-9 grid max-w-4xl gap-3 sm:gap-4 md:grid-cols-2">
             <PakkeIntro
               tone="brand"
