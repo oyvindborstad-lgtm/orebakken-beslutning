@@ -11,6 +11,13 @@ function formatNumberInput(s: string): string {
   return s.replace(/[^\d\s,.]/g, "");
 }
 
+/** Heltall med tusenskille (norsk) mens brukeren skriver: «6000000» → «6 000 000». */
+function formatTusenskille(s: string): string {
+  const digits = s.replace(/\D/g, "");
+  if (!digits) return "";
+  return Number(digits).toLocaleString("nb-NO");
+}
+
 function parseNumber(s: string): number {
   const cleaned = s.replace(/\s/g, "").replace(",", ".");
   const n = Number(cleaned);
@@ -104,9 +111,9 @@ export default function GrontLanKalkulator() {
                 inputMode="numeric"
                 type="text"
                 value={lanInput}
-                onChange={(e) => setLanInput(formatNumberInput(e.target.value))}
+                onChange={(e) => setLanInput(formatTusenskille(e.target.value))}
                 placeholder="3 000 000"
-                className="num block w-full rounded-xl border border-line/80 bg-white px-4 py-3 pr-14 text-lg font-semibold tracking-tight focus:border-save focus:ring-2 focus:ring-save/20 sm:text-xl"
+                className="num block w-full rounded-xl border border-line/80 bg-white px-4 py-3 pr-14 text-lg font-semibold tabular-nums tracking-tight focus:border-save focus:ring-2 focus:ring-save/20 sm:text-xl"
               />
               <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-[12px] font-medium text-muted sm:text-[13px]">
                 kr
@@ -127,7 +134,7 @@ export default function GrontLanKalkulator() {
                   value={renteInput}
                   onChange={(e) => setRenteInput(formatNumberInput(e.target.value))}
                   placeholder="5,5"
-                  className="num block w-full rounded-xl border border-line/80 bg-white px-3.5 py-3 pr-9 text-base font-semibold tracking-tight focus:border-save focus:ring-2 focus:ring-save/20"
+                  className="num block w-full rounded-xl border border-line/80 bg-white px-3.5 py-3 pr-9 text-base font-semibold tabular-nums tracking-tight text-ink focus:border-save focus:ring-2 focus:ring-save/20"
                 />
                 <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-[12px] font-medium text-muted">
                   %
@@ -150,7 +157,7 @@ export default function GrontLanKalkulator() {
                       ? defaultGrontRentePct.toFixed(1).replace(".", ",")
                       : "5,2"
                   }
-                  className="num block w-full rounded-xl border border-line/80 bg-white px-3.5 py-3 pr-9 text-base font-semibold tracking-tight focus:border-save focus:ring-2 focus:ring-save/20"
+                  className="num block w-full rounded-xl border border-line/80 bg-white px-3.5 py-3 pr-9 text-base font-semibold tabular-nums tracking-tight text-ink focus:border-save focus:ring-2 focus:ring-save/20"
                 />
                 <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-[12px] font-medium text-muted">
                   %
