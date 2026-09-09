@@ -315,6 +315,19 @@ export default function Bakgrunn() {
             som dermed reduseres fra 373 mill til 307,9 mill. Det gir lavere
             felleskostnader for alle andelseiere.
           </Faq>
+          <Faq q="Får vi bedre lånevilkår om vi velger Pakke 2?">
+            Ja — når vi velger Pakke 2 (og tar opp et større, grønt lån)
+            åpner det for at <strong>hele borettslagets gjeld</strong>{" "}
+            (nytt lån + eksisterende lån) refinansieres samlet på{" "}
+            <strong>40 år som grønt lån</strong>. Det gir tre effekter:
+            (1) Lavere månedlig termin i overgangsperioden fordi
+            eksisterende lån får lengre løpetid, (2) Grønt lån-rente kan
+            være lavere enn ordinær rente på eksisterende lån, og
+            (3) Én samlet gjeldsstruktur er enklere å styre for styret.
+            Endelig lånetilbud innhentes fra minst tre banker — OBOS Banken
+            har bekreftet at rammene i mai-analysen (5,04 % grønt lån)
+            fortsatt gjelder som anslag.
+          </Faq>
           <Faq q="Hva om renten stiger etter at vi tar opp lånet?">
             Borettslaget vil sannsynligvis ta opp lån med flytende rente. Det
             betyr at rentekostnaden kan endre seg over tid, akkurat som med et

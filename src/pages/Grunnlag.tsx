@@ -18,8 +18,10 @@ export default function Grunnlag() {
         <p className="mt-4 max-w-2xl text-[15px] leading-relaxed text-ink/75 sm:mt-5 sm:text-[16.5px]">
           Styrets komplette grunnlag for vedtaket på den ekstraordinære
           generalforsamlingen 15. juni 2026 kl. 18:00 på Persbråten
-          videregående skole. Tall er basert på OBOS Banken-analyse rev. 4
-          (12.06.2026).
+          videregående skole. Tall for Pakke 1 er fra OBOS Banken
+          likviditetsanalyse rev. 3 (08.06.2026) og rev. 4 (12.06.2026 med
+          tre rentebaner). Tall for Pakke 2 bygger på analyse 13.05.2026
+          justert for full Enova-innvilgelse (65,16 mill) september 2026.
         </p>
         <div className="mt-6 rounded-2xl border-l-4 border-brand bg-brand-50 px-5 py-4 text-[14.5px] leading-relaxed text-ink/85">
           <strong>Det skal kun stemmes over Pakke 1 (nødvendig vedlikehold)
@@ -187,6 +189,17 @@ export default function Grunnlag() {
           solceller — som reduserer Pakke 2-lånet fra 373 mill til{" "}
           <strong>307,9 mill</strong>. Snitt netto FK-økning ved 5,04 % er
           nå +{pakke2.rentebaner.r1.nettoSnittKrMnd} kr/mnd.
+        </div>
+
+        <div className="mt-4 rounded-2xl border-l-4 border-warm bg-warm-bg/50 px-5 py-4 text-[14px] leading-relaxed text-ink/85">
+          <strong>Finansieringsfordel ved Pakke 2:</strong> Ved vedtak av
+          Pakke 2 refinansieres <strong>hele borettslagets gjeld</strong>
+          {" "}(nytt lån + eksisterende lån) samlet på 40 år som grønt lån.
+          Dette gir lavere månedlig belastning i overgangsperioden
+          sammenlignet med Pakke 1 alene (30 år). Grønt lån-vilkår kan
+          i tillegg gi lavere rente enn OBOS-anslag 5,04 %. Endelig
+          lånetilbud innhentes når finansieringsbehovet er avklart —
+          OBOS Banken henter tilbud fra minst tre banker.
         </div>
       </section>
 
@@ -361,13 +374,16 @@ export default function Grunnlag() {
         </h3>
         <div className="mt-3 overflow-hidden rounded-2xl border border-line/70">
           <Row header label="Forutsetning" v1="Verdi" v2="Merknad" rightLast />
+          <Row label="Kilde Pakke 1" v1="OBOS Banken rev. 3/4" v2="08.06.2026 (basis) og 12.06.2026 (tre rentebaner)" rightLast />
+          <Row label="Kilde Pakke 2" v1="OBOS Banken 13.05.2026" v2="justert for 65,16 mill Enova sept 2026" rightLast />
           <Row label="Hovedrente (grønt lån) P1 / P2" v1="5,04 % / 5,04 %" v2="hovedscenario" rightLast />
           <Row label="Rentebaner (sensitivitet)" v1="5,04 / 5,54 / 6,04 %" v2="grønt lån, P1 30 år / P2 40 år" rightLast />
+          <Row label="Refinansiering ved P2" v1="Hele gjelden 40 år" v2="nytt + eksisterende lån samlet, grønt lån" rightLast />
           <Row label="Avdragsfri periode" v1="24 mnd" v2="til prosjektslutt 30.06.2028" rightLast />
           <Row label="Strømpris" v1="1,20 kr/kWh" v2="konservativt anslag" rightLast />
           <Row label="Strømbesparelse P1 (input)" v1="500 000 kWh/år" v2="vinduer + fasadeisolasjon" rightLast />
           <Row label="Skattesats rentefradrag" v1="22 %" v2="RF-1215" rightLast />
-          <Row label="Inflasjonsjustering FK" v1="3 % 01.07.2029 og 01.07.2030" v2="iht. OBOS-analyse 12.06.2026" rightLast />
+          <Row label="Inflasjonsjustering FK" v1="3 % 01.07.2029 og 01.07.2030" v2="iht. OBOS-analyse" rightLast />
           <Row label="Dagens budsjetterte FK 2026" v1="27 810 829 kr/år" v2="referanseverdi" rightLast />
         </div>
       </section>
@@ -459,11 +475,13 @@ export default function Grunnlag() {
           </div>
         </div>
         <p className="mt-3 leading-relaxed text-ink/80">
-          Pakke 1+2 forutsetter at Pakke 1 vedtas. Den{" "}
+          Pakke 2 forutsetter at Pakke 1 vedtas. Den{" "}
           <strong>marginale</strong> kostnaden av å velge tilleggspakken
-          (bergvarme + solceller + ekstra prosjektering og Enova) over Pakke
-          1 alene — er forskjellen i netto FK-økning. Dette er det reelle
-          beløpet andelseiere bør vurdere når de avgjør om P2 lønner seg.
+          (bergvarme + solceller + refinansiering av hele gjelden på 40 år) over
+          Pakke 1 alene — er forskjellen i netto FK-økning. Dette er det
+          reelle beløpet andelseiere bør vurdere. NB: modellen tar ikke med
+          effekten av at eksisterende lån ved Pakke 2 refinansieres på 40 år
+          med grønt lån-rente — den fordelen kommer i tillegg.
         </p>
         <div className="mt-5 overflow-hidden rounded-2xl border border-line/70">
           <Row header label="Differanse P2 vs P1 (ved 5,04 %)" v1="Snitt per andel" v2="Per år" />

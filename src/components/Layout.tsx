@@ -103,11 +103,13 @@ export default function Layout({ children }: { children: ReactNode }) {
           <strong className="text-ink/80">Hjelpemiddel — ikke vedtaksgrunnlag.</strong>{" "}
           Dette verktøyet hjelper deg å forstå helheten i rehabiliterings-
           prosjektet for din andel. Det offisielle beslutningsunderlaget til
-          generalforsamlingen 15. juni 2026 (innkalling, vedlegg og OBOS
-          Banken sin likviditetsanalyse) er det som gjelder — sjekk alltid
-          dette for helhetskontekst før du tar stilling. Tall i appen er
-          basert på OBOS Banken rev. 4 (12.06.2026), vedtatt budsjettgrunnlag
-          (21.04.2026) og styrets beslutningsunderlag for Pakke 1.
+          generalforsamlingen (innkalling, vedlegg og OBOS Banken sine
+          likviditetsanalyser) er det som gjelder — sjekk alltid dette for
+          helhetskontekst før du tar stilling. Kilder: OBOS Banken rev. 3
+          (08.06.2026) og rev. 4 (12.06.2026) for Pakke 1, OBOS Banken
+          13.05.2026 for Pakke 2 justert for Enova-innvilgelse 65,16 mill
+          (sept 2026), styrets beslutningsunderlag Pakke 1 (EOGF 15.06.2026),
+          og vedtatt budsjettgrunnlag (21.04.2026).
         </div>
       </footer>
     </div>

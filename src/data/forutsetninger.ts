@@ -85,6 +85,8 @@ export const FORUTSETNINGER = {
       "Rehab-kostnad 379,8 mill + finanskost 23,7 mill = 403,5 mill total",
       "− ENØK-støtte 65,16 mill (Enova, alle 13 blokker innvilget)",
       "= Nytt lån 307,9 mill",
+      "Hele finansieringen (nytt + eksisterende lån) refinansieres på 40 år grønt lån — gir lavere månedlig belastning",
+      "Frampek: grønt lån-vilkår kan gi lavere rente enn OBOS-anslag 5,04 %",
     ],
     /** P1 fasade (500k) + bergvarme (2 591 753 = 75 % × privat oppvarming). */
     energibesparelseKWh: 3_091_753,
