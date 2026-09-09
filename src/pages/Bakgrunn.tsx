@@ -127,18 +127,15 @@ export default function Bakgrunn() {
             <br />
             <br />
             Borettslaget tar opp totalt{" "}
-            <strong>341,7 millioner kroner</strong> over 40 år til 5,04 % rente
-            (etter 31,3 mill ENØK-støtte bekreftet for 4 blokker). Brutto
-            økning i felleskostnad er <strong>+3 007 kr/mnd</strong> i snitt.
-            Netto økning er <strong>+1 577 kr/mnd</strong> i snitt —
-            inkludert strømbesparelse fra bergvarme/isolasjon (719 kr/mnd),
-            solenergi areal-fordelt (227 kr/mnd), og skattefradrag snitt
-            (483 kr/mnd år 1). Dersom Enova innvilger forventet tilleggsstøtte
-            på 33,78 mill (svar slutten av juni 2026), reduseres lånet til
-            307,9 mill og netto FK-økning faller til ca.{" "}
-            <strong>+1 245 kr/mnd</strong> i snitt. Tre rentebaner vises
-            (5,04 / 5,54 / 6,04 %). Basert på OBOS Banken 13.05.2026
-            forholdsmessig overført til ny per-andel-struktur.
+            <strong>307,9 millioner kroner</strong> over 40 år til 5,04 %
+            rente (etter <strong>65,16 mill Enova-støtte</strong> bekreftet
+            for alle 13 blokker — september 2026). Brutto økning i
+            felleskostnad er <strong>+2 664 kr/mnd</strong> i snitt. Netto
+            økning er <strong>+1 282 kr/mnd</strong> i snitt — inkludert
+            strømbesparelse fra bergvarme/isolasjon (719 kr/mnd), solenergi
+            areal-fordelt (227 kr/mnd), og skattefradrag snitt (436 kr/mnd).
+            Tre rentebaner vises (5,04 / 5,54 / 6,04 %). Basert på OBOS
+            Banken 13.05.2026 justert for full Enova-innvilgelse.
           </Pakke>
         </div>
 
@@ -243,11 +240,12 @@ export default function Bakgrunn() {
               {kr(felles.enovaBekreftet)} bekreftet
             </h3>
             <p className="mt-3 max-w-3xl text-[14px] leading-relaxed text-white/85 sm:text-[15px]">
-              Enova ga endelig tilsagn på {kr(felles.enovaBekreftet)} til
-              bergvarme og solceller i 4 av 13 blokker. Beløpet er allerede
-              trukket fra lånebeløpet for Pakke 1+2. Styret søker for de
-              resterende 9 blokkene innen mai 2026 — all støtte som innvilges,
-              reduserer borettslagets lån.
+              Enova har innvilget totalt {kr(felles.enovaBekreftet)} til
+              bergvarme og solceller for <strong>alle 13 blokker</strong>.
+              Første tilsagn (31,3 mill for 4 blokker) kom i april 2026,
+              andre tilsagn (33,78 mill for resterende 9 blokker) i september
+              2026. Beløpet trekkes direkte fra Pakke 2-lånet — som nå er
+              307,9 mill.
             </p>
           </div>
         </div>
@@ -301,22 +299,21 @@ export default function Bakgrunn() {
             leiligheter får mer (lineært med areal).
             <br />
             <br />
-            Brutto FK gir en økning på ca. 3 007 kr/mnd (Pakke 2 snitt ved
+            Brutto FK gir en økning på ca. 2 664 kr/mnd (Pakke 2 snitt ved
             5,04 %), men oppvarmingsbesparelse fra bergvarme (719 kr/mnd) +
-            solenergi (227 kr/mnd) + skattefradrag snitt (483 kr/mnd år 1)
-            reduserer netto til ca. <strong>1 577 kr/mnd</strong>. Pakke 2
+            solenergi (227 kr/mnd) + skattefradrag snitt (436 kr/mnd)
+            reduserer netto til ca. <strong>1 282 kr/mnd</strong>. Pakke 2
             ender altså opp med å koste deg{" "}
-            <strong>ca. 585 kr/mnd mer</strong> enn Pakke 1 alene. Med
-            forventet Enova-tilleggsstøtte (33,78 mill) reduseres marginalen
-            til ca. 253 kr/mnd.
+            <strong>ca. 290 kr/mnd mer</strong> enn Pakke 1 alene, gitt full
+            Enova-støtte på 65,16 mill.
           </Faq>
-          <Faq q="Hva med de 9 blokkene som ikke har fått Enova-støtte ennå?">
-            Styret har bestemt seg for å installere bergvarme og solceller i{" "}
-            <strong>alle 13 blokker</strong>. Vi søker Enova om støtte for de
-            resterende 9 blokkene i slutten av mai 2026. Basert på poengsummen
-            vi fikk i de fire godkjente søknadene, er vi trygge på at vi vil få
-            mer støtte. All tilleggsstøtte vi får, reduserer borettslagets lån
-            — og dermed felleskostnadene for alle andelseiere.
+          <Faq q="Hvor mye Enova-støtte har vi fått?">
+            Enova har innvilget totalt <strong>65,16 mill</strong> til
+            bergvarme og solceller for alle 13 blokker: 31,3 mill i fase 1
+            (april 2026, 4 blokker) og 33,78 mill i fase 2 (september 2026,
+            resterende 9 blokker). Hele beløpet trekkes fra Pakke 2-lånet,
+            som dermed reduseres fra 373 mill til 307,9 mill. Det gir lavere
+            felleskostnader for alle andelseiere.
           </Faq>
           <Faq q="Hva om renten stiger etter at vi tar opp lånet?">
             Borettslaget vil sannsynligvis ta opp lån med flytende rente. Det
@@ -394,12 +391,12 @@ export default function Bakgrunn() {
             Pakke 2 (bergvarme, varmtvannssentraler, radiatorer og solceller)
             må behandles på <strong>egen ekstraordinær generalforsamling</strong>
             {" "}— forventet i slutten av august eller start september 2026 —
-            av to grunner. (1) Tilbud (priser) på bergvarme og solceller er
-            ikke ferdigforhandlet. (2) Vi venter på svar på den andre Enova-
-            søknaden for de resterende 9 blokkene; svaret forventes slutten
-            av juni. Pakke 2 krever 2/3 flertall fordi det er fornyelse, ikke
-            sedvanlig vedlikehold. Eget beslutningsunderlag sendes ut før
-            den GF-en.
+            fordi tilbud (priser) på bergvarme og solceller da er
+            ferdigforhandlet. Enova-svaret er nå innvilget for alle 13
+            blokker (totalt 65,16 mill, senest sept 2026), så den
+            usikkerheten er lagt bak oss. Pakke 2 krever 2/3 flertall fordi
+            det er fornyelse, ikke sedvanlig vedlikehold. Eget
+            beslutningsunderlag sendes ut før den GF-en.
           </Faq>
           <Faq q="Hvorfor må vinduene måles opp 19.–29. juni?">
             Vindusarbeidene er det mest omfattende i Pakke 1 (ca. 500
@@ -435,7 +432,7 @@ export default function Bakgrunn() {
               { kind: "now", date: "19.–29. juni 2026", text: "Oppmåling av vinduer og balkongdører (Takst & Vindu Spesialisten)" },
               { kind: "key", date: "15. juni 2026 kl. 18:00", text: "Ekstraordinær GF om PAKKE 1 · Persbråten vgs · vanlig flertall" },
               { kind: "now", date: "1. august 2026", text: "Tilbudt byggestart (forutsatt vedtak)" },
-              { kind: "key", date: "Slutten av juni 2026", text: "Forventet Enova-svar for resterende 9 blokker (Pakke 2)" },
+              { kind: "done", date: "September 2026", text: "Enova-tilsagn 33,78 mill for resterende 9 blokker (samlet 65,16 mill for alle 13)" },
               { kind: "key", date: "Aug/sept 2026", text: "EGEN ekstraordinær GF om PAKKE 2 (bergvarme + solceller) · 2/3 flertall" },
               { kind: "now", date: "30. juni 2028", text: "Forventet prosjektslutt Pakke 1" },
             ]}

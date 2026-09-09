@@ -177,7 +177,7 @@ export default function ComparisonTable({ andel }: { andel: Andel }) {
                 <div className="mt-0.5 text-[10.5px] text-muted">tre rentebaner (grønt lån)</div>
               </div>
               <div className="col-span-3 border-l border-line/70 bg-warm-bg/60 px-3 py-3 text-center">
-                <div className="label !text-warm-deep">Pakke 2 — 341,7 mill, 40 år</div>
+                <div className="label !text-warm-deep">Pakke 2 — 307,9 mill, 40 år</div>
                 <div className="mt-0.5 text-[10.5px] text-muted">tre rentebaner (grønt lån)</div>
               </div>
             </div>

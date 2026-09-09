@@ -5,7 +5,7 @@ import {
 } from "../data/forbruk";
 import type { Andel, PakkeId, RenteBaneId, RenteBaneTall } from "./types";
 
-const { felles, pakke1, pakke2 } = FORUTSETNINGER;
+const { felles, pakke1 } = FORUTSETNINGER;
 
 const P1_REDUKSJONS_FAKTOR = pakke1.energibesparelseKWh / felles.oppvarmingTotalKWh;
 
@@ -147,13 +147,3 @@ export function beregnFkP2(
   return { brutto, stromBesp, skattefradrag, netto: brutto - stromBesp - skattefradrag };
 }
 
-/** Pakke 2 m/utvidet Enova-støtte 33,78 mill: lån ned til 307,9 mill, kun 5,04 %. */
-export function beregnFkP2Utvidet(andel: Andel): FkBeregning {
-  const r = andel.p2.r1;
-  const reduksjonsAndel = (pakke2.laneSum - pakke2.laneSumUtvidet) / pakke2.laneSum;
-  const arligTerminDiff = pakke2.rentebaner.r1.arligTermin - pakke2.utvidetEnova.arligTermin;
-  const brutto = r.nyFu - (arligTerminDiff * andel.brok) / 12;
-  const stromBesp = Math.abs(r.stromBesp) + solenergiKrMndForAndel(andel.brok, andel.areal);
-  const skattefradrag = Math.abs(r.skfrAr1) * (1 - reduksjonsAndel);
-  return { brutto, stromBesp, skattefradrag, netto: brutto - stromBesp - skattefradrag };
-}

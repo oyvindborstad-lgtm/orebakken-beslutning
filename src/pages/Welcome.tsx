@@ -30,12 +30,13 @@ export default function Welcome() {
             <span className="text-brand">akkurat din leilighet?</span>
           </h1>
           <p className="mt-5 max-w-2xl text-[15px] leading-relaxed text-ink/70 sm:text-[16.5px] lg:text-[17px]">
-            På den ekstraordinære generalforsamlingen 15. juni 2026 skal
-            andelseierne stemme over <strong>Pakke 1 — nødvendig
-            vedlikehold</strong> av borettslaget bygget i 1972. Pakke 2
-            (bergvarme og solceller) avgjøres på egen GF i slutten av
-            august/start september 2026 — når Enova-svaret er klart.
-            Verktøyet viser tallene per andel og tre rentebaner
+            På den ekstraordinære generalforsamlingen 15. juni 2026 stemte
+            andelseierne over <strong>Pakke 1 — nødvendig vedlikehold</strong>{" "}
+            av borettslaget bygget i 1972. Pakke 2 (bergvarme og solceller)
+            avgjøres på egen GF i slutten av august/start september 2026.
+            Enova har nå bekreftet <strong>65,2 mill</strong> i støtte for
+            alle 13 blokker — Pakke 2-lånet blir 307,9 mill.
+            Verktøyet viser tall per andel og tre rentebaner
             (5,04 / 5,54 / 6,04 %).
           </p>
           <div className="mt-7 flex flex-wrap items-center gap-3">
@@ -69,14 +70,14 @@ export default function Welcome() {
               icon={<Sun size={16} />}
               navn="Pakke 2 · egen GF aug/sept"
               tittel="Bergvarme og solceller"
-              tekst="Bygger oppå Pakke 1: bergvarmeanlegg, varmtvannssentraler, radiatorer og solcelleanlegg på takene i alle 13 blokker. Sparer ca 3,7 mill kWh/år (mot 0,5 mill for Pakke 1). Lån 341,7 mill (308 mill med full Enova-pott). Krever 2/3 flertall — egen GF når Enova-svaret kommer."
+              tekst="Bygger oppå Pakke 1: bergvarmeanlegg, varmtvannssentraler, radiatorer og solcelleanlegg på takene i alle 13 blokker. Sparer ca 3,7 mill kWh/år (mot 0,5 mill for Pakke 1). Full Enova-støtte 65 mill innvilget → lån 307,9 mill. Krever 2/3 flertall."
             />
           </div>
 
           <dl className="mt-10 grid max-w-3xl grid-cols-2 gap-y-5 gap-x-4 sm:grid-cols-4 sm:gap-y-6 lg:mt-12">
             <Metric label="Andelseiere" value="430" />
             <Metric label="Boligblokker" value="13" />
-            <Metric label="Bekreftet Enova-støtte" value="31,4 mill" sub="kr · 4 av 13 blokker" />
+            <Metric label="Bekreftet Enova-støtte" value="65,2 mill" sub="kr · alle 13 blokker" />
             <Metric label="Avstemning Pakke 1" value="15. juni" sub="2026 · Persbråten vgs" />
           </dl>
         </div>
@@ -126,10 +127,11 @@ export default function Welcome() {
             ekstraordinære generalforsamlingen 15. juni 2026 — vanlig flertall
             (50 %). <strong>Pakke 2</strong> (bergvarme og solceller) bygger
             oppå Pakke 1 og avgjøres på en egen generalforsamling i slutten
-            av august eller start september 2026 når Enova-svaret er klart —
-            krever 2/3 flertall. Begge pakker finansieres som grønt lån.
-            Rente i hovedscenarioet er 5,04 %; tabellen viser også 5,54 % og
-            6,04 %.
+            av august eller start september 2026 — krever 2/3 flertall. Enova
+            har innvilget full støtte på 65,2 mill for alle 13 blokker, som
+            reduserer Pakke 2-lånet til 307,9 mill. Begge pakker finansieres
+            som grønt lån. Rente i hovedscenarioet er 5,04 %; tabellen viser
+            også 5,54 % og 6,04 %.
           </p>
         </div>
         <div className="grid gap-4 sm:gap-5 lg:grid-cols-2">
@@ -152,11 +154,11 @@ export default function Welcome() {
               {kr(felles.enovaBekreftet)} bekreftet
             </h3>
             <p className="mt-3 max-w-3xl text-[14px] leading-relaxed text-white/85 sm:text-[15px]">
-              Enova ga endelig tilsagn på {kr(felles.enovaBekreftet)} til
-              bergvarme og solceller i 4 av 13 blokker. Styret søker for de
-              resterende 9 blokkene — forventet svar slutten av juni 2026 kan
-              gi ytterligere {kr(felles.enovaForventetTillegg)} (Pakke 2-lån
-              ned til 307,9 mill).
+              Enova har innvilget totalt {kr(felles.enovaBekreftet)} til
+              bergvarme og solceller for <strong>alle 13 blokker</strong>.
+              Fase 1 (31,3 mill for 4 blokker) kom i april 2026, og fase 2
+              (33,78 mill for resterende 9 blokker) ble innvilget i september
+              2026. Pakke 2-lånet reduseres fra 373 mill til 307,9 mill.
             </p>
           </div>
         </div>
@@ -359,15 +361,15 @@ function DiffBox() {
 
       <div className="mt-4 grid gap-4 lg:grid-cols-2">
         <PakkeBox tone="brand" navn="Pakke 1 · 190 mill · 30 år" pakke={pakke1} />
-        <PakkeBox tone="warm" navn="Pakke 2 · 341,7 mill · 40 år" pakke={pakke2} />
+        <PakkeBox tone="warm" navn="Pakke 2 · 307,9 mill · 40 år" pakke={pakke2} />
       </div>
 
       <div className="mt-4 rounded-2xl border border-save/30 bg-save-bg/40 p-4 text-[13px] leading-relaxed text-ink/85 sm:text-[13.5px]">
-        <strong>Forventet tilleggsstøtte Enova:</strong> Hvis Enova innvilger
-        søknad for de 9 resterende blokkene (svar slutten av juni 2026), kan
-        Pakke 2-lånet reduseres med {kr(felles.enovaForventetTillegg)} —
-        til 307,9 mill. Det reduserer netto FK-økning for Pakke 2 fra +1 577
-        kr/mnd snitt til ca. +1 245 kr/mnd snitt (ved 5,04 %).
+        <strong>Enova-støtte 65,2 mill innvilget:</strong> Alle 13 blokker
+        har fått Enova-tilsagn for bergvarme og solceller. Pakke 2-lånet er
+        redusert fra 373 mill til <strong>307,9 mill</strong>, og netto
+        FK-økning for Pakke 2 ved 5,04 % er nå ca. +{pakke2.rentebaner.r1.nettoSnittKrMnd} kr/mnd i
+        snitt (mot +1 577 kr/mnd med kun fase 1-støtte).
       </div>
     </div>
   );

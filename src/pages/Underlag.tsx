@@ -58,28 +58,28 @@ export default function Underlag() {
 
       <Section icon={<FileSpreadsheet size={20} />} avsnitt="Avsnitt 3" tittel="Investeringskostnader (lånegrunnlag)">
         <Tabell
-          headers={["Post", "Pakke 1", "Pakke 1+2"]}
+          headers={["Post", "Pakke 1", "Pakke 2"]}
           rows={[
-            ["Rehabiliteringskostnad", "193 254 000", "379 753 000"],
-            ["Finanskostnader byggeperiode", "11 844 000", "23 738 400"],
-            ["Totalprosjektkostnad", "205 098 000", "403 491 400"],
-            ["(−) ENØK-støtte (Alt 1: 10 mill / Alt 2: 31,3 mill)", "−10 000 000", "−31 300 000"],
+            ["Rehabiliteringskostnad", "192 000 000", "379 753 000"],
+            ["Finanskostnader byggeperiode", "12 247 200", "23 738 400"],
+            ["Totalprosjektkostnad", "204 247 200", "403 491 400"],
+            ["(−) ENØK-støtte (P1: 2 mill Oslo / P2: 65,16 mill Enova)", "−2 000 000", "−65 156 024"],
           ]}
-          sumRow={["Nytt lån (etter Enova)", "176 000 000", "341 700 000"]}
+          sumRow={["Nytt lån (etter Enova)", "190 000 000", "307 918 976"]}
         />
         <div className="mt-3 grid gap-3 sm:grid-cols-2">
-          <Stat label="Pakke 1 (Alt 1): rente / løpetid" value="5,14 % / 30 år" sub="24 mnd avdragsfritt" />
-          <Stat label="Pakke 1+2 (Alt 2): rente / løpetid" value="5,04 % / 40 år" sub="24 mnd avdragsfritt" />
+          <Stat label="Pakke 1: rente / løpetid" value="5,04 % / 30 år" sub="24 mnd avdragsfritt, grønt lån" />
+          <Stat label="Pakke 2: rente / løpetid" value="5,04 % / 40 år" sub="24 mnd avdragsfritt, grønt lån" />
         </div>
         <div className="mt-3 grid gap-3 sm:grid-cols-2">
-          <Stat label="Halvårlig termin P1 (BRL totalt)" value="5 871 110 kr" sub="årlig 11 742 220 kr" />
-          <Stat label="Halvårlig termin P1+2 Alt 2 (BRL totalt)" value="10 105 486 kr" sub="årlig 20 210 972 kr" />
+          <Stat label="Årlig termin P1 (BRL totalt)" value="12 295 331 kr" sub="ved 5,04 %" />
+          <Stat label="Årlig termin P2 (BRL totalt)" value="17 915 299 kr" sub="ved 5,04 %, etter full Enova" />
         </div>
-        <div className="mt-3 rounded-xl bg-warm-bg/40 px-5 py-4 text-[13.5px] leading-relaxed text-ink/85">
-          <strong>Alt 3 — utvidet ENØK-støtte (60 mill):</strong> Hvis Enova
-          innvilger støtte for de 9 gjenstående blokkene tilsvarende
-          ~60 mill totalt, blir nytt lån etter Enova 313 000 000 kr og
-          halvårlig termin 9 256 708 kr (årlig 18 513 416 kr).
+        <div className="mt-3 rounded-xl bg-save-bg/40 px-5 py-4 text-[13.5px] leading-relaxed text-ink/85">
+          <strong>Enova-støtte 65,16 mill innvilget:</strong> Alle 13 blokker
+          er innvilget. Fase 1 (31,3 mill, 4 blokker) i april 2026; fase 2
+          (33,78 mill, 9 blokker) i september 2026. Pakke 2-lånet er redusert
+          til 307,9 mill.
         </div>
       </Section>
 
@@ -94,14 +94,14 @@ export default function Underlag() {
           rows={[
             ["Driftskostnader normalisert (post-rehab)", "17 686 079"],
             ["Eksisterende lån (renter + avdrag)", "2 000 000"],
-            ["Ny annuitet Pakke 1 (Alt 1)", "11 742 220"],
-            ["Ny annuitet Pakke 1+2 (Alt 2)", "20 210 972"],
+            ["Ny annuitet Pakke 1", "12 295 331"],
+            ["Ny annuitet Pakke 2 (etter full Enova)", "17 915 299"],
             ["Ønsket likviditetsoverskudd", "1 500 000"],
             ["(−) Renteinntekter bank", "−220 000"],
             ["(−) Andre driftsinntekter (lade, leil., trim)", "−1 050 000"],
             ["(−) Solar-effekt på FK (forbruk + salg)", `−${TOTAL_SOLAR_VERDI_KR_AR.toLocaleString("nb-NO")}`],
           ]}
-          sumRow={["Nødvendig FK Pakke 1+2 (etter solar)", `${(32_380_146 + 19_245_798 - 12_014_068 - TOTAL_SOLAR_VERDI_KR_AR).toLocaleString("nb-NO")}`]}
+          sumRow={["Nødvendig FK Pakke 2 (etter solar)", `${(17_686_079 + 2_000_000 + 17_915_299 + 1_500_000 - 220_000 - 1_050_000 - TOTAL_SOLAR_VERDI_KR_AR).toLocaleString("nb-NO")}`]}
         />
         <div className="mt-3 text-[12.5px] text-muted">
           NB: Tallene tilsvarer modellen i kildearket; solar-effekten er lagt til

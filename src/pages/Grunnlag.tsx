@@ -60,9 +60,9 @@ export default function Grunnlag() {
           <Row label="Finanskostnader byggeperiode" v1="12 247 200" v2="23 738 400" />
           <Row label="Totalprosjektkostnad" v1="204 247 200" v2="403 491 400" total />
           <Row
-            label="(−) ENØK-støtte (P1: 2 mill etter prosjektslutt / P2: 31,3 mill bekreftet)"
+            label="(−) ENØK-støtte (P1: 2 mill Oslo kommune / P2: 65,16 mill Enova alle 13 blokker)"
             v1="−2 000 000"
-            v2="−31 300 000"
+            v2="−65 156 024"
             tone="muted"
           />
           <Row
@@ -150,27 +150,27 @@ export default function Grunnlag() {
         />
 
         <h3 className="display mt-8 text-lg font-semibold text-ink">
-          2.2 Pakke 2 — 341,7 mill, 40 år (per leilighet, forholdsmessig fra mai-analysen)
+          2.2 Pakke 2 — 307,9 mill, 40 år (per leilighet, med 65 mill Enova bekreftet)
         </h3>
         <p className="mt-1 text-[13px] text-muted">
           Tre rentebaner ved samme leilighetsstørrelser. Cum.-økninger:
-          5,04 % → +53,7 %, 5,54 % → +58,6 %, 6,04 % → +63,7 %.
+          5,04 % → +47,6 %, 5,54 % → +52,4 %, 6,04 % → +57,4 %.
         </p>
         <PdfFkTabell
           rows={[
-            ["1 – 54,7 m²", "3 836", "5 895", "6 084", "6 281"],
-            ["2 – 54,7 m²", "4 329", "6 653", "6 866", "7 088"],
-            ["3 – 66,9 m²", "4 490", "6 900", "7 121", "7 351"],
-            ["4 – 66,9 m²", "4 937", "7 587", "7 830", "8 083"],
-            ["5 – 78,5 m²", "5 000", "7 684", "7 930", "8 186"],
-            ["6 – 85,6 m²", "5 221", "8 023", "8 281", "8 548"],
-            ["7 – 74,6 m²", "5 364", "8 243", "8 508", "8 783"],
-            ["8 – 85,5 m²", "5 436", "8 354", "8 622", "8 901"],
-            ["9 – 78,5 m²", "5 551", "8 531", "8 804", "9 089"],
-            ["10 – 81,3 m²", "5 648", "8 680", "8 957", "9 248"],
-            ["11 – 83,6 m²", "5 745", "8 829", "9 111", "9 407"],
-            ["12 – 85,5 m²", "5 856", "8 999", "9 287", "9 588"],
-            ["13 – 91,5 m²", "5 946", "9 138", "9 430", "9 736"],
+            ["1 – 54,7 m²", "3 836", "5 660", "5 846", "6 037"],
+            ["2 – 54,7 m²", "4 329", "6 388", "6 597", "6 813"],
+            ["3 – 66,9 m²", "4 490", "6 625", "6 843", "7 066"],
+            ["4 – 66,9 m²", "4 937", "7 285", "7 524", "7 770"],
+            ["5 – 78,5 m²", "5 000", "7 378", "7 620", "7 869"],
+            ["6 – 85,6 m²", "5 221", "7 704", "7 957", "8 217"],
+            ["7 – 74,6 m²", "5 364", "7 915", "8 175", "8 442"],
+            ["8 – 85,5 m²", "5 436", "8 021", "8 284", "8 555"],
+            ["9 – 78,5 m²", "5 551", "8 191", "8 460", "8 736"],
+            ["10 – 81,3 m²", "5 648", "8 334", "8 608", "8 889"],
+            ["11 – 83,6 m²", "5 745", "8 477", "8 755", "9 041"],
+            ["12 – 85,5 m²", "5 856", "8 641", "8 925", "9 216"],
+            ["13 – 91,5 m²", "5 946", "8 774", "9 062", "9 358"],
           ]}
           snitt={[
             "Vektet snitt — 430 andeler",
@@ -182,12 +182,11 @@ export default function Grunnlag() {
         />
 
         <div className="mt-5 rounded-2xl border-l-4 border-save bg-save-bg/40 px-5 py-4 text-[14px] leading-relaxed text-ink/85">
-          <strong>Pakke 2 med forventet tilleggsstøtte fra Enova:</strong>{" "}
-          Hvis Enova innvilger søknad for de 9 resterende blokkene (svar
-          slutten av juni 2026), kan ytterligere {kr(felles.enovaForventetTillegg)} bli
-          innvilget. Pakke 2-lånet reduseres da til 307,9 mill, og snitt netto
-          FK-økning faller fra +{pakke2.rentebaner.r1.nettoSnittKrMnd} kr/mnd
-          til ca. +{pakke2.utvidetEnova.nettoSnittKrMnd} kr/mnd (ved 5,04 %).
+          <strong>Enova-støtte 65,16 mill bekreftet (september 2026):</strong>{" "}
+          Enova har innvilget støtte for alle 13 blokker — bergvarme og
+          solceller — som reduserer Pakke 2-lånet fra 373 mill til{" "}
+          <strong>307,9 mill</strong>. Snitt netto FK-økning ved 5,04 % er
+          nå +{pakke2.rentebaner.r1.nettoSnittKrMnd} kr/mnd.
         </div>
       </section>
 
@@ -205,26 +204,30 @@ export default function Grunnlag() {
           </div>
         </div>
         <p className="mt-3 leading-relaxed text-ink/80">
-          Enova innvilget i april 2026 et endelig tilsagn på{" "}
+          Enova har nå innvilget totalt{" "}
           <strong>{kr(felles.enovaBekreftet)}</strong> til bergvarme og
-          solceller i fire av borettslagets 13 blokker. Tilsagnet er
-          rettskraftig og kan ikke trekkes tilbake. Styret søker for de
-          resterende ni blokkene innen mai 2026, og forventet svar er slutten
-          av juni 2026.
+          solceller — for <strong>alle 13 blokker</strong>. Første tilsagn (31,3
+          mill for 4 blokker) kom i april 2026. Andre tilsagn (33,78 mill for
+          resterende 9 blokker) ble innvilget i september 2026. Tilsagnene er
+          rettskraftige og kan ikke trekkes tilbake. Full Enova-støtte
+          reduserer Pakke 2-lånet fra 373 mill til <strong>307,9 mill</strong>.
         </p>
 
         <div className="mt-5 rounded-2xl border-l-4 border-save bg-save-bg/60 px-5 py-4 text-[14.5px] leading-relaxed text-ink/85">
-          <strong>Strategi:</strong> Styret har besluttet å prosjektere og
-          gjennomføre bergvarme og solceller for alle 13 blokker samlet. Alle
-          andelseiere skal ha samme løsning. All Enova-støtte som innvilges —
-          uavhengig av tidspunkt — reduserer borettslagets samlede lån direkte.
+          <strong>Konsekvens:</strong> Styret har fra starten prosjektert
+          bergvarme og solceller for alle 13 blokker samlet — samme løsning
+          for alle andelseiere. Med full Enova-pott innvilget er den
+          finansielle risikoen for Pakke 2 vesentlig redusert, og
+          beslutningsunderlaget til EGF i slutten av august/start september
+          2026 baseres nå på det bekreftede lånenivået 307,9 mill.
         </div>
 
         <div className="mt-5 overflow-hidden rounded-2xl border border-line/70">
-          <Row header label="Scenario" v1="Enova totalt" v2="Pakke 2 netto økning/mnd snitt" />
-          <Row label="Bekreftet (4 blokker)" v1="31 300 000" v2={`+${pakke2.rentebaner.r1.nettoSnittKrMnd} kr`} />
-          <Row label="Forventet tilleggsstøtte (svar slutten av juni 2026)" v1="+ 33 781 024" v2={`ca. +${pakke2.utvidetEnova.nettoSnittKrMnd} kr`} />
-          <Row label="Sum hvis innvilget" v1="65 081 024" v2={`ca. +${pakke2.utvidetEnova.nettoSnittKrMnd} kr`} total />
+          <Row header label="Enova-tilsagn (bekreftet sept 2026)" v1="Beløp" v2="Effekt på Pakke 2" />
+          <Row label="Fase 1 (4 blokker, april 2026)" v1="31 300 000" v2="Startet prosessen" />
+          <Row label="Fase 2 (resterende 9 blokker, sept 2026)" v1="33 781 024" v2="Reduserte lånet ytterligere" />
+          <Row label="Sum innvilget Enova-støtte" v1={kr(felles.enovaBekreftet)} v2={`Nytt lån ${kr(pakke2.laneSum).replace(" kr", "")} kr`} total />
+          <Row label="Netto FK-økning Pakke 2 (snitt 5,04 %)" v1="—" v2={`+${pakke2.rentebaner.r1.nettoSnittKrMnd} kr/mnd`} />
         </div>
       </section>
 
@@ -347,10 +350,10 @@ export default function Grunnlag() {
           <Row label="Rehabiliteringskostnad" v1="379 753 000 kr" v2="P1 + bergvarme + solceller m.m." rightLast />
           <Row label="Finanskostnader byggeperiode" v1="23 738 400 kr" v2="2 års byggetid" rightLast />
           <Row label="Totalprosjektkostnad" v1="403 491 400 kr" v2="brutto investering" rightLast />
-          <Row label="(−) ENØK-støtte (bekreftet)" v1="−31 300 000 kr" v2="4 blokker (april 2026)" tone="muted" rightLast />
-          <Row label="Nytt lån (etter bekreftet Enova)" v1="341 700 000 kr" v2="basis-scenario Pakke 2" total rightLast />
-          <Row label="(−) Forventet tilleggsstøtte" v1="−33 781 024 kr" v2="svar slutten av juni 2026" tone="muted" rightLast />
-          <Row label="Nytt lån m/ tilleggsstøtte" v1="307 918 976 kr" v2="dersom innvilget" total rightLast />
+          <Row label="(−) ENØK-støtte fase 1" v1="−31 300 000 kr" v2="4 blokker (april 2026)" tone="muted" rightLast />
+          <Row label="(−) ENØK-støtte fase 2" v1="−33 781 024 kr" v2="9 blokker (sept 2026)" tone="muted" rightLast />
+          <Row label="Sum Enova-støtte innvilget" v1="−65 156 024 kr" v2="alle 13 blokker" tone="muted" rightLast />
+          <Row label="Nytt lån Pakke 2 (bekreftet)" v1="307 918 976 kr" v2="etter full Enova-støtte" total rightLast />
         </div>
 
         <h3 className="display mt-7 text-lg font-semibold text-ink">
@@ -395,8 +398,8 @@ export default function Grunnlag() {
             v2="Per andel / mnd"
           />
           <Row label="Pakke 1 (190 MNOK)" v1="23 760 000 kr" v2="+1 535 kr/mnd" />
-          <Row label="Pakke 2-tillegg (151,7 MNOK over P1)" v1="18 962 000 kr" v2="+1 224 kr/mnd" />
-          <Row label="Samlet Pakke 2 (341,7 MNOK)" v1="42 722 000 kr" v2="+2 759 kr/mnd" total />
+          <Row label="Pakke 2-tillegg (117,9 MNOK over P1)" v1="14 738 000 kr" v2="+952 kr/mnd" />
+          <Row label="Samlet Pakke 2 (307,9 MNOK)" v1="38 498 000 kr" v2="+2 487 kr/mnd" total />
         </div>
       </section>
 
@@ -429,7 +432,7 @@ export default function Grunnlag() {
           <Row label="Strømpris opp 50 % (1,80 kr/kWh)" v1="−" v2="ca. −473 kr/mnd lavere" />
           <Row label="Bergvarme COP 3 (vs. forutsatt 4–5)" v1="−" v2="ca. +180 kr/mnd høyere" />
           <Row label="Byggekostnader +10 % (uforutsett)" v1="−" v2="ca. +175 kr/mnd høyere" />
-          <Row label="Forventet Enova-tilleggsstøtte (33,78 MNOK)" v1="−" v2={`ca. −${pakke2.rentebaner.r1.nettoSnittKrMnd - pakke2.utvidetEnova.nettoSnittKrMnd} kr/mnd lavere`} />
+          <Row label="Full Enova-støtte 65 MNOK (bekreftet sept 2026)" v1="✓ innvilget" v2="Allerede inkludert i tallene" />
         </div>
 
         <div className="mt-5 rounded-2xl border-l-4 border-warm bg-warm-bg/60 px-5 py-4 text-[14px] leading-relaxed text-ink/85">
@@ -467,8 +470,7 @@ export default function Grunnlag() {
           <Row label="Brutto FK-økning" v1={`+${pakke2.rentebaner.r1.bruttoSnittKrMnd - pakke1.rentebaner.r1.bruttoSnittKrMnd} kr/mnd`} v2={`+${((pakke2.rentebaner.r1.bruttoSnittKrMnd - pakke1.rentebaner.r1.bruttoSnittKrMnd) * 12).toLocaleString("nb-NO")} kr`} />
           <Row label="Ekstra strømbesparelse (bergvarme + solar)" v1={`−${(pakke2.rentebaner.r1.stromBespSnittKrMnd + pakke2.rentebaner.r1.solenergiSnittKrMnd - pakke1.rentebaner.r1.stromBespSnittKrMnd)} kr/mnd`} v2={`−${((pakke2.rentebaner.r1.stromBespSnittKrMnd + pakke2.rentebaner.r1.solenergiSnittKrMnd - pakke1.rentebaner.r1.stromBespSnittKrMnd) * 12).toLocaleString("nb-NO")} kr`} />
           <Row label="Ekstra skattefradrag" v1={`−${pakke2.rentebaner.r1.skattefradragSnittKrMnd - pakke1.rentebaner.r1.skattefradragSnittKrMnd} kr/mnd`} v2={`−${((pakke2.rentebaner.r1.skattefradragSnittKrMnd - pakke1.rentebaner.r1.skattefradragSnittKrMnd) * 12).toLocaleString("nb-NO")} kr`} />
-          <Row label="Marginal netto merkostnad" v1={`+${pakke2.rentebaner.r1.nettoSnittKrMnd - pakke1.rentebaner.r1.nettoSnittKrMnd} kr/mnd`} v2={`+${((pakke2.rentebaner.r1.nettoSnittKrMnd - pakke1.rentebaner.r1.nettoSnittKrMnd) * 12).toLocaleString("nb-NO")} kr`} total />
-          <Row label="Marginal netto m/utvidet Enova" v1={`+${pakke2.utvidetEnova.nettoSnittKrMnd - pakke1.rentebaner.r1.nettoSnittKrMnd} kr/mnd`} v2={`+${((pakke2.utvidetEnova.nettoSnittKrMnd - pakke1.rentebaner.r1.nettoSnittKrMnd) * 12).toLocaleString("nb-NO")} kr`} total />
+          <Row label="Marginal netto merkostnad (bekreftet Enova)" v1={`+${pakke2.rentebaner.r1.nettoSnittKrMnd - pakke1.rentebaner.r1.nettoSnittKrMnd} kr/mnd`} v2={`+${((pakke2.rentebaner.r1.nettoSnittKrMnd - pakke1.rentebaner.r1.nettoSnittKrMnd) * 12).toLocaleString("nb-NO")} kr`} total />
         </div>
         <div className="mt-4 text-[13.5px] leading-relaxed text-muted sm:text-[14px]">
           For andelseiere med stort eget boliglån kan den marginale gevinsten
@@ -492,10 +494,11 @@ export default function Grunnlag() {
           strømbesparelse oppvarming ({pakke2.rentebaner.r1.stromBespSnittKrMnd} kr/mnd snitt
           for P2), solenergi ({pakke2.rentebaner.r1.solenergiSnittKrMnd} kr/mnd
           snitt — areal-fordelt) og skattefradrag ({pakke2.rentebaner.r1.skattefradragSnittKrMnd} kr/mnd
-          snitt for P2). Tallene er basert på OBOS Banken likviditetsanalyse
-          12.06.2026 (Pakke 1) og 13.05.2026 (Pakke 2) sammen med Elvia-totalen
-          5,57 mill kWh og Istad-data 2024–2026. Tre rentebaner er vist
-          (5,04 / 5,54 / 6,04 %).
+          snitt for P2). Pakke 2-tallene er nå oppdatert med bekreftet Enova-
+          støtte på {kr(felles.enovaBekreftet)} for alle 13 blokker — det
+          reduserer lånet fra 373 til <strong>307,9 mill</strong> og senker
+          netto FK-økning med ca. 300 kr/mnd sammenlignet med tidligere
+          basis-scenario. Tre rentebaner vises (5,04 / 5,54 / 6,04 %).
         </p>
         <div className="mt-5 rounded-2xl border-l-4 border-warm bg-paper px-5 py-4 text-[14.5px] leading-relaxed text-ink/85">
           <strong>Styrets rolle:</strong> Styret fremmer begge pakker som
