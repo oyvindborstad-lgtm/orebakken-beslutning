@@ -363,10 +363,10 @@ export default function Grunnlag() {
           <Row label="Rehabiliteringskostnad" v1="379 753 000 kr" v2="P1 + bergvarme + solceller m.m." rightLast />
           <Row label="Finanskostnader byggeperiode" v1="23 738 400 kr" v2="2 års byggetid" rightLast />
           <Row label="Totalprosjektkostnad" v1="403 491 400 kr" v2="brutto investering" rightLast />
-          <Row label="(−) ENØK-støtte fase 1" v1="−31 300 000 kr" v2="4 blokker (april 2026)" tone="muted" rightLast />
-          <Row label="(−) ENØK-støtte fase 2" v1="−33 781 024 kr" v2="9 blokker (sept 2026)" tone="muted" rightLast />
-          <Row label="Sum Enova-støtte innvilget" v1="−65 156 024 kr" v2="alle 13 blokker" tone="muted" rightLast />
-          <Row label="Nytt lån Pakke 2 (bekreftet)" v1="307 918 976 kr" v2="etter full Enova-støtte" total rightLast />
+          <Row label="Nytt lån før Enova-støtte" v1="373 075 000 kr" v2="etter egenkapital-bidrag" rightLast />
+          <Row label="(−) ENØK-støtte fase 1" v1="−31 300 000 kr" v2="Enova, 4 blokker (april 2026)" tone="muted" rightLast />
+          <Row label="(−) ENØK-støtte fase 2" v1="−33 781 024 kr" v2="Enova, 9 blokker (sept 2026)" tone="muted" rightLast />
+          <Row label="Nytt lån Pakke 2 (bekreftet)" v1="307 918 976 kr" v2="etter samlet Enova-støtte 65,16 mill" total rightLast />
         </div>
 
         <h3 className="display mt-7 text-lg font-semibold text-ink">
